@@ -24,6 +24,19 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+
+QuoteSocialNetworkAPI/[Dd]ebug/
+QuoteSocialNetworkAPI/[Dd]ebugPublic/
+QuoteSocialNetworkAPI/[Rr]elease/
+QuoteSocialNetworkAPI/[Rr]eleases/
+QuoteSocialNetworkAPI/x64/
+QuoteSocialNetworkAPI/x86/
+QuoteSocialNetworkAPI/bld/
+QuoteSocialNetworkAPI/[Bb]in/
+QuoteSocialNetworkAPI/[Oo]bj/
+QuoteSocialNetworkAPI/[Ll]og/
+QuoteSocialNetworkAPI/.vscode/
+
 # User-specific files
 *.suo
 *.user
@@ -44,6 +57,7 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+
 
 # Visual Studio 2015 cache/options directory
 .vs/
