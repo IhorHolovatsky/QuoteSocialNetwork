@@ -25,18 +25,17 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() { 
-    this.subscriptions.push(this.firebase.authState.subscribe(user => {
-                              this.isLoggedIn = user && !user.isAnonymous;
+    this.subscriptions.push(
+      this.firebase.authState.subscribe(
+        user => { this.isLoggedIn = user && !user.isAnonymous; }
+      )
+    );      
 
-                              if (this.isLoggedIn){
-                                this.userService.getUserProfile(user.uid)
-                                                .then(result => {                                                  
-                                                    this.userProfile = result;
-                                                });
-                              } else {
-                                this.userProfile = null;
-                              }                             
-                            }));                                              
+    this.subscriptions.push(
+      this.userService.CurrentUserState.subscribe(
+        userProfile => { this.userProfile = userProfile; }
+      )
+    );
   }
 
   ngOnDestroy(){
@@ -51,12 +50,9 @@ export class NavbarComponent implements OnInit {
   }
 
   getUserFullName(){    
-    if (this.isLoggedIn){
-      if (this.userProfile){
-        return this.userProfile.getDisplayName();
-      }
-
-      return this.firebase.auth.currentUser.displayName;
+    if (this.isLoggedIn
+        && this.userProfile){
+      return this.userProfile.getDisplayName();
     }
 
     return null;

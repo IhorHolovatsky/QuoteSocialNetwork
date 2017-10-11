@@ -5,7 +5,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MzToastService } from 'ng2-materialize'
 import { AngularFireAuth } from 'angularfire2/auth';
 
-import { LoginModel } from './login-model'
 import { UserService } from '../../services/user.service'
 
 @Component({
@@ -14,7 +13,7 @@ import { UserService } from '../../services/user.service'
 
 export class LoginComponent {
     private loginForm: FormGroup;
-    private loginModel: LoginModel = { email: '', password: '' };
+    private loginModel = { email: '', password: '' };
     private subscription: Subscription;
     private brandNew: boolean;
 
@@ -61,7 +60,7 @@ export class LoginComponent {
         this.subscription.unsubscribe();
     };
 
-    login(credentials: LoginModel) {
+    login() {
         this.loginModel = Object.assign({}, this.loginForm.value);
 
         this.userService.login(this.loginModel.email, this.loginModel.password)

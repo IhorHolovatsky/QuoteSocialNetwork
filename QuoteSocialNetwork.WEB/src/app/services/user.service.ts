@@ -16,10 +16,8 @@ import { Constants } from '../shared/constants'
 
 @Injectable()
 export class UserService extends BaseService {
+  public CurrentUserState: BehaviorSubject<User> = new BehaviorSubject<User>(null);
   
-  private currentUser : firebase.UserInfo;
-  private subscription : Subscription;
-
   constructor(
     private http: Http,
     private firebase: AngularFireAuth,
@@ -43,29 +41,21 @@ export class UserService extends BaseService {
   }
 
   register(newUser : RegisterModel) : Promise<any> {
-      
-    let body = JSON.stringify(newUser);
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    
     return this.firebase.auth.createUserWithEmailAndPassword(newUser.email, newUser.password)
+                             .then((success) => {
+                               delete newUser.password;
+                               delete newUser.confirmPassword; 
+                               return success;
+                             })
                              .then((success) => {
                                 //we don't want autologin after registration...
                                 this.firebase.auth.signOut();
-                                
-                                let user = {
-                                    firstName: newUser.firstName,
-                                    lastName: newUser.lastName
-                                };
+                                newUser.uid = success.uid;
 
-                                //Save user to database
-                                return this.afDatabase.object(`users/${success.uid}`)
-                                                      .set(user)
-                                                      .then(success => {
-                                                        return true;
-                                                      })
-                                                      .catch(error => {
-                                                        throw new Error(error);
-                                                      });
+                                return this.saveUserProfile(newUser as User)
+                                           .then(result => {
+                                             return true;
+                                           });                               
                              })
                              .catch((error) => {
                                 let errorMessage = Constants.FIREBASE_ERRORS_CODES.get(error.code);
@@ -81,6 +71,12 @@ export class UserService extends BaseService {
                                    throw new Error(Constants.FIREBASE_ERRORS[result.message])
                                  }     
                                  
+                                 this.getUserProfile(this.firebase.auth.currentUser.uid)
+                                     .then(userProfile => 
+                                      { 
+                                        this.CurrentUserState.next(userProfile); 
+                                      });
+
                                  return true;
                              })
                              .catch((error) => {
@@ -90,14 +86,77 @@ export class UserService extends BaseService {
   }
 
   loginFb() : Promise<any> {
-    return this.firebase.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
+    return this.firebase.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
+                             .then(signInResult => {
+                                this.getUserProfile(signInResult.user.uid)
+                                    .then(result => {
+                                        if (!result) {
+                                          let userProfile = new User();
+                                          userProfile.firstName = signInResult.additionalUserInfo.profile.first_name;
+                                          userProfile.lastName = signInResult.additionalUserInfo.profile.last_name;
+                                          userProfile.providerId = signInResult.additionalUserInfo.providerId;
+                                          userProfile.photoURL = signInResult.user.photoURL;
+                                          userProfile.uid = signInResult.user.uid;
+                                        
+                                          this.saveUserProfile(userProfile)
+                                              .then(userProfile => {
+                                                 return this.CurrentUserState.next(userProfile);
+                                              });
+
+                                          return;
+                                        }
+
+                                        this.CurrentUserState.next(result);
+                                    });                             
+                                
+                                return true;
+                             });
   }
 
   loginGoogle() : Promise<any> {
-    return this.firebase.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    return this.firebase.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
+                             .then(signInResult => {
+                                this.getUserProfile(signInResult.user.uid)
+                                    .then(result => {
+                                        if (!result) {
+                                          let userProfile = new User();
+                                          userProfile.firstName = signInResult.additionalUserInfo.profile.given_name;
+                                          userProfile.lastName = signInResult.additionalUserInfo.profile.family_name;
+                                          userProfile.providerId = signInResult.additionalUserInfo.providerId;
+                                          userProfile.photoURL = signInResult.user.photoURL;
+                                          userProfile.uid = signInResult.user.uid;
+                                        
+                                          this.saveUserProfile(userProfile)
+                                              .then(userProfile => {
+                                                 return this.CurrentUserState.next(userProfile);
+                                              });
+
+                                          return;
+                                        }
+
+                                        this.CurrentUserState.next(result);
+                                    });                   
+                                return true;
+                             });
   }
 
   logout() : Promise<any> {
-    return this.firebase.auth.signOut();
+    return this.firebase.auth.signOut()
+                             .then(result => {
+                               this.CurrentUserState.next(null);
+                               return result;
+                             });
+  }
+
+  saveUserProfile(user : User) : Promise<User>{
+    //Save user to database
+    return this.afDatabase.object(`users/${user.uid}`)
+                          .set(user)
+                          .then(success => {
+                             return user;
+                          })
+                          .catch(error => {
+                              throw new Error(error);
+                          });
   }
 }
