@@ -1,0 +1,50 @@
+   <div class="section">
+        <div class="row">
+            <div class="col s6">
+                <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
+                    <h5>Авторизуйтесь</h5>
+                    <div class="row">
+                        <mz-input-container class="col s12 m8">
+                                <i mz-icon-mdi mz-input-prefix
+                                    [icon]="'account-box'">
+                                 </i>
+                               <input mz-input mz-validation required
+                                   formControlName="email" 
+                                   type="text" 
+                                   [errorMessageResource]="errorMessageResources.email"
+                                   id="input-email"                        
+                                   [label]="'Імейл'" />
+                        </mz-input-container> 
+                    </div>
+                    <div class="row">
+                        <mz-input-container class="col s12 m8">
+                            <i mz-icon-mdi mz-input-prefix
+                                [icon]="'key'">
+                            </i>
+                            <input mz-input mz-validation required
+                                   id="input-password" 
+                                   formControlName="password" 
+                                   type="password" 
+                                   [errorMessageResource]="errorMessageResources.password"
+                                   [label]="'Пароль'" />
+                        </mz-input-container>
+                    </div>
+                    <button mz-button [disabled]="!loginForm.valid" type="submit">Увійти</button>
+                    <br/><br/>
+                </form>
+            </div>
+            <div class="col s4">
+                <h5 style="margin-left: -11.250px; margin-bottom: 20px;">Через соціальні мережі:</h5>
+                <div class="row">
+                   <a class="waves-effect waves-light btn-large social facebook"
+                      (click)="loginFb()">
+                   <i class="fa fa-facebook"></i> Увійти через Facebook</a>
+                </div>
+                <div class="row">
+                   <a class="waves-effect waves-light btn-large social google"
+                      (click)="loginGoogle()">
+                   <i class="fa fa-google"></i> Увійти через Google</a>
+                </div>               
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,58 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+  <div class="section">
+      <h5>Реєстрація</h5>
+      <div class="row">
+            <mz-input-container class="col s12 m4">
+                    <input mz-input mz-validation required 
+                           formControlName="firstName" 
+                           type="text" 
+                           [errorMessageResource]="errorMessageResources.firstName"
+                           id="input-firstName" 
+                           [label]="'Ім\'я'" />
+            </mz-input-container>
+      </div>
+      <div class="row">
+            <mz-input-container class="col s12 m4">
+                    <input mz-input mz-validation required 
+                           formControlName="lastName" 
+                           type="text" 
+                           [errorMessageResource]="errorMessageResources.lastName"
+                           id="input-lastName" 
+                           [label]="'Фамілія'" />
+            </mz-input-container>
+      </div>
+      <div class="row">
+            <mz-input-container class="col s12 m4">
+                    <input mz-input mz-validation required 
+                           formControlName="email" 
+                           type="text" 
+                           [errorMessageResource]="errorMessageResources.email"
+                           id="input-email" 
+                           [label]="'Імейл'" />
+            </mz-input-container>
+      </div>
+      <div class="row">
+            <mz-input-container class="col s12 m4">
+                    <input mz-input mz-validation required minlength="6"
+                           id="input-password" 
+                           formControlName="password" 
+                           type="password" 
+                           [errorMessageResource]="errorMessageResources.password"
+                           [label]="'Пароль'" />
+            </mz-input-container>
+      </div>
+      <div class="row">
+            <mz-input-container class="col s12 m4">
+                    <input mz-input mz-validation required 
+                           id="input-confirmPassword" 
+                           formControlName="confirmPassword" 
+                           type="password" 
+                           [errorMessageResource]="errorMessageResources.confirmPassword"
+                           [label]="'Підтвердження паролю'" />
+            </mz-input-container>
+      </div>
+  </div>
+  
+  <button mz-button [disabled]="!registerForm.valid" type="submit">Зареєструватись</button>
+  <br/><br/>
+</form>

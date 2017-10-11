@@ -1,0 +1,12 @@
+<mz-navbar [navbarClass]="'light-blue lighten-1'">
+    <mz-navbar-item-container [align]="'left'">
+        <mz-navbar-item *ngIf="isLoggedIn"><a [routerLink]="['home']">Dashboard</a></mz-navbar-item>
+    </mz-navbar-item-container>
+    <a href="#" class="brand-logo center">Лого</a>
+    <mz-navbar-item-container [align]="'right'">
+      <mz-navbar-item *ngIf="isLoggedIn"><a [routerLink]="['user/details']">Привіт {{getUserFullName()}}!</a></mz-navbar-item>
+      <mz-navbar-item *ngIf="!isLoggedIn"><a [routerLink]="['login']">Ввійти</a></mz-navbar-item>
+      <mz-navbar-item *ngIf="!isLoggedIn"><a [routerLink]="['register']">Зареєструватись</a></mz-navbar-item>
+      <mz-navbar-item *ngIf="isLoggedIn"><a (click)="logout()">Вийти</a></mz-navbar-item>
+    </mz-navbar-item-container>
+</mz-navbar>
