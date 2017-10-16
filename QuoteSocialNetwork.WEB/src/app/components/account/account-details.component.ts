@@ -12,17 +12,17 @@ import { Constants } from '../../shared/constants';
 })
 
 
-export class AccountDetailsComponent implements OnInit {
+export class AccountDetailsComponent implements OnInit, OnDestroy {
 
   private userProfileForm: FormGroup;
   private errorMessageResources = Constants.ERROR_MESSAGE_RESOURCES;
   private currentUser: User = new User();
   private subscriptions: Subscription[] = new Array<Subscription>();
-  
+
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-  ) { 
+  ) {
 
   }
 
@@ -34,9 +34,9 @@ export class AccountDetailsComponent implements OnInit {
     );
 
     this.buildForm();
-  };
-  
-  ngOnDestroy(){
+  }
+
+  ngOnDestroy() {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
@@ -47,7 +47,7 @@ export class AccountDetailsComponent implements OnInit {
         firstName: [this.currentUser.firstName, Validators.compose([Validators.required])],
         lastName: [this.currentUser.lastName, Validators.compose([Validators.required])]
       }
-    )
-  };
+    );
+  }
 
 }

@@ -1,17 +1,17 @@
-import { Subscription } from 'rxjs';
-import { Component, OnInit, OnDestroy } from '@angular/core'
-import { Router, ActivatedRoute } from '@angular/router'
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { MzToastService } from 'ng2-materialize'
+import { Subscription } from 'rxjs/Subscription';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MzToastService } from 'ng2-materialize';
 import { AngularFireAuth } from 'angularfire2/auth';
 
-import { UserService } from '../../services/user.service'
+import { UserService } from '../../services/user.service';
 
 @Component({
     templateUrl: './login.component.html'
 })
 
-export class LoginComponent {
+export class LoginComponent implements OnInit {
     private loginForm: FormGroup;
     private loginModel = { email: '', password: '' };
     private subscription: Subscription;
@@ -48,17 +48,17 @@ export class LoginComponent {
             password: [this.loginModel.password, Validators.compose([Validators.required])]
         });
 
-        if (this.brandNew){
+        if (this.brandNew) {
             this.toastService.show(
                 'Все готово! Увійдіть будь-ласка в свій аккаунт.',
-                4000, 
-                'green')
+                4000,
+                'green');
         }
-    };
+    }
 
     ngOnDestoy() {
         this.subscription.unsubscribe();
-    };
+    }
 
     login() {
         this.loginModel = Object.assign({}, this.loginForm.value);
@@ -67,13 +67,13 @@ export class LoginComponent {
                         .then(result => {
                                this.parseLoginResult(result);
                             },
-                            error  => {                                
+                            error  => {
                                this.parseLoginErrorResult(error.message);
                             }
                         );
     }
 
-    loginFb(){
+    loginFb() {
         this.userService.loginFb()
                         .then(result => {
                             this.parseLoginResult(result);
@@ -83,7 +83,17 @@ export class LoginComponent {
                         });
     }
 
-    loginGoogle(){
+    loginTwitter() {
+        this.userService.loginTwitter()
+                        .then(result => {
+                            this.parseLoginResult(result);
+                        })
+                        .catch(error => {
+                            this.parseLoginErrorResult(error.message);
+                        });
+    }
+
+    loginGoogle() {
         this.userService.loginGoogle()
                         .then(result => {
                             this.parseLoginResult(result);
@@ -93,20 +103,20 @@ export class LoginComponent {
                         });
     }
 
-    private parseLoginResult(success : Boolean){
+    private parseLoginResult(success: Boolean) {
         if (success) {
             this.router.navigate(['/home']);
             this.toastService.show(
-                "Ви успішно ввійшли в сисетему!",
-                4000, 
-                'green')
+                'Ви успішно ввійшли в сисетему!',
+                4000,
+                'green');
         }
     }
 
-    private parseLoginErrorResult(errorMessage : string){
+    private parseLoginErrorResult(errorMessage: string) {
         this.toastService.show(
             errorMessage,
-            4000, 
-            'red')
+            4000,
+            'red');
     }
-};
+}

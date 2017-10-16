@@ -118,6 +118,44 @@ export class UserService extends BaseService {
                              });
   }
 
+  loginTwitter(): Promise<any> {
+    return this.firebase.auth.signInWithPopup(new firebase.auth.TwitterAuthProvider())
+                             .then(signInResult => {
+                                this.getUserProfile(signInResult.user.uid)
+                                    .then(result => {
+                                        if (!result) {
+                                          const userProfile = new User();
+                                          const username = signInResult.additionalUserInfo.profile.name.split(' ');
+
+                                          if (username.length === 2) {
+                                            userProfile.firstName = username[0];
+                                            userProfile.lastName = username[1];
+                                          } else {
+                                            userProfile.firstName = signInResult.additionalUserInfo.profile.name;
+                                          }
+
+                                          userProfile.providerId = signInResult.additionalUserInfo.providerId;
+                                          userProfile.photoURL = signInResult.additionalUserInfo.profile.profile_image_url || '';
+                                          userProfile.uid = signInResult.user.uid;
+
+                                          this.saveUserProfile(userProfile)
+                                              .then(savedUserProfile => {
+                                                localStorage.setItem(Constants.USER_STORAGE_NAME, JSON.stringify(userProfile));
+                                                this.CurrentUserState.next(savedUserProfile);
+                                                return savedUserProfile;
+                                              });
+
+                                          return;
+                                        }
+
+                                        localStorage.setItem(Constants.USER_STORAGE_NAME, JSON.stringify(result));
+                                        this.CurrentUserState.next(result);
+                                    });
+                                    console.dir(signInResult);
+                                return true;
+                             });
+  }
+
   loginGoogle(): Promise<any> {
     return this.firebase.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
                              .then(signInResult => {
