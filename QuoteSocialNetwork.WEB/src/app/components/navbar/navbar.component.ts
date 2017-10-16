@@ -6,6 +6,7 @@ import * as firebase from 'firebase/app';
 import { User } from '../account/user';
 import { UserService } from '../../services/user.service';
 import { Subscription } from 'rxjs/Subscription';
+import { Constants } from '../../shared/constants';
 
 @Component({
   selector: 'app-navbar',
@@ -17,6 +18,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   private userProfile: User;
   private isLoggedIn: Boolean;
   private subscriptions: Subscription[] = new Array<Subscription>();
+  private defaultImageUrl: String = 'assets/images/userPlaceholder.png';
 
   constructor(
     private userService: UserService,
@@ -32,9 +34,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
       )
     );
 
+    // subscripe to load logged in user after login
     this.subscriptions.push(
       this.userService.CurrentUserState.subscribe(
-        userProfile => { this.userProfile = userProfile; }
+        userProfile => {
+          this.userProfile = userProfile || new User();
+        }
       )
     );
   }
@@ -50,22 +55,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
                     });
   }
 
-  getUserFullName() {
-    if (this.isLoggedIn
-        && this.userProfile) {
-      return this.userProfile.getDisplayName();
-    }
-
-    return null;
-  }
-
-  getUserPhotoUrl() {
-    if (this.isLoggedIn
-      && this.userProfile) {
-      return this.userProfile.photoURL;
-    }
-
-    return null;
+  getUserDisplayName() {
+    return `${this.userProfile.firstName || ''} ${this.userProfile.lastName || ''}`;
   }
 
 }

@@ -23,6 +23,8 @@ export class UserService extends BaseService {
     private firebase: AngularFireAuth,
     private afDatabase: AngularFireDatabase) {
     super();
+
+    this.CurrentUserState.next(JSON.parse(localStorage.getItem(Constants.USER_STORAGE_NAME)));
   }
 
   getUserProfile(userId: string): Promise<User> {
@@ -73,6 +75,7 @@ export class UserService extends BaseService {
 
                                  this.getUserProfile(this.firebase.auth.currentUser.uid)
                                      .then(userProfile => {
+                                        localStorage.setItem(Constants.USER_STORAGE_NAME, JSON.stringify(userProfile));
                                         this.CurrentUserState.next(userProfile);
                                       });
 
@@ -99,12 +102,15 @@ export class UserService extends BaseService {
 
                                           this.saveUserProfile(userProfile)
                                               .then(savedUserProfile => {
-                                                 return this.CurrentUserState.next(savedUserProfile);
+                                                localStorage.setItem(Constants.USER_STORAGE_NAME, JSON.stringify(userProfile));
+                                                this.CurrentUserState.next(savedUserProfile);
+                                                return savedUserProfile;
                                               });
 
                                           return;
                                         }
 
+                                        localStorage.setItem(Constants.USER_STORAGE_NAME, JSON.stringify(result));
                                         this.CurrentUserState.next(result);
                                     });
                                     console.dir(signInResult);
@@ -127,12 +133,14 @@ export class UserService extends BaseService {
 
                                           this.saveUserProfile(userProfile)
                                               .then(savedUserProfile => {
-                                                 return this.CurrentUserState.next(savedUserProfile);
+                                                localStorage.setItem(Constants.USER_STORAGE_NAME, JSON.stringify(savedUserProfile));
+                                                this.CurrentUserState.next(savedUserProfile);
                                               });
 
                                           return;
                                         }
 
+                                        localStorage.setItem(Constants.USER_STORAGE_NAME, JSON.stringify(result));
                                         this.CurrentUserState.next(result);
                                     });
                                 return true;
@@ -142,6 +150,7 @@ export class UserService extends BaseService {
   logout(): Promise<any> {
     return this.firebase.auth.signOut()
                              .then(result => {
+                               localStorage.removeItem(Constants.USER_STORAGE_NAME);
                                this.CurrentUserState.next(null);
                                return result;
                              });
