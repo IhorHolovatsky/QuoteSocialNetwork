@@ -6,7 +6,7 @@ export class User implements firebase.UserInfo {
     providerId: string;
     uid: string;
     firstName: string;
-    lastName : string;
+    lastName: string;
     email: string;
 
     getDisplayName() {

@@ -5,6 +5,7 @@ import { MzToastService } from 'ng2-materialize'
 
 import { RegisterModel } from './register-model'
 import { UserService } from '../../services/user.service'
+import { Constants } from '../../shared/constants';
 
 @Component({
   selector: 'app-registration-form',
@@ -14,27 +15,8 @@ export class RegistrationFormComponent implements OnInit {
 
   registerForm: FormGroup;
   registerModel: RegisterModel = new RegisterModel();
+  errorMessageResources = Constants.ERROR_MESSAGE_RESOURCES;
   
-  // error messages
-  errorMessageResources = {
-    email: {
-      email: 'Invalid email format.',
-      required: 'Email is required.',
-    },
-    password: {
-      minlength: 'Password length should be minimum 6 characters.',
-      required: 'Password is required.',
-    },
-    confirmPassword: {
-      required: 'Confirm password is required.'
-    },
-    firstName: {
-      required: 'First name is required.'
-    },
-    lastName: {
-      required: 'Last name is required.'
-    },
-  };
 
   submitted : boolean = false;
   isRequesting : boolean;
