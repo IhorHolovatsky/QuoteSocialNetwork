@@ -1,9 +1,8 @@
-import * as firebase from 'firebase/app';
-export class User implements firebase.UserInfo {
+export class User {
     displayName: string;
     phoneNumber: string;
     photoURL: string;
-    providerId: string;
+    providers: Array<string> = [];
     uid: string;
     firstName: string;
     lastName: string;

@@ -53,6 +53,7 @@ export class UserService extends BaseService {
                                 // we don't want autologin after registration...
                                 this.firebase.auth.signOut();
                                 newUser.uid = success.uid;
+                                newUser.providers.push('password');
 
                                 return this.saveUserProfile(newUser as User)
                                            .then(result => {
@@ -96,7 +97,7 @@ export class UserService extends BaseService {
                                           const userProfile = new User();
                                           userProfile.firstName = signInResult.additionalUserInfo.profile.first_name;
                                           userProfile.lastName = signInResult.additionalUserInfo.profile.last_name;
-                                          userProfile.providerId = signInResult.additionalUserInfo.providerId;
+                                          userProfile.providers.push(signInResult.additionalUserInfo.providerId);
                                           userProfile.photoURL = signInResult.user.photoURL;
                                           userProfile.uid = signInResult.user.uid;
 
@@ -134,7 +135,7 @@ export class UserService extends BaseService {
                                             userProfile.firstName = signInResult.additionalUserInfo.profile.name;
                                           }
 
-                                          userProfile.providerId = signInResult.additionalUserInfo.providerId;
+                                          userProfile.providers.push(signInResult.additionalUserInfo.providerId);
                                           userProfile.photoURL = signInResult.additionalUserInfo.profile.profile_image_url || '';
                                           userProfile.uid = signInResult.user.uid;
 
@@ -165,7 +166,7 @@ export class UserService extends BaseService {
                                           const userProfile = new User();
                                           userProfile.firstName = signInResult.additionalUserInfo.profile.given_name;
                                           userProfile.lastName = signInResult.additionalUserInfo.profile.family_name;
-                                          userProfile.providerId = signInResult.additionalUserInfo.providerId;
+                                          userProfile.providers.push(signInResult.additionalUserInfo.providerId);
                                           userProfile.photoURL = signInResult.user.photoURL;
                                           userProfile.uid = signInResult.user.uid;
 

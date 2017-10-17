@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 
 import { User } from './user';
 import { UserService } from '../../services/user.service';
 import { Constants } from '../../shared/constants';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   selector: 'app-account-details',
@@ -15,21 +16,24 @@ import { Constants } from '../../shared/constants';
 export class AccountDetailsComponent implements OnInit, OnDestroy {
 
   private userProfileForm: FormGroup;
+  private userProfile: User = new User();
   private errorMessageResources = Constants.ERROR_MESSAGE_RESOURCES;
-  private currentUser: User = new User();
   private subscriptions: Subscription[] = new Array<Subscription>();
 
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
+    private firebase: AngularFireAuth
   ) {
-
+    console.dir(firebase.auth.currentUser);
   }
 
   ngOnInit() {
     this.subscriptions.push(
       this.userService.CurrentUserState.subscribe(
-        userProfile => { this.currentUser = userProfile; }
+        userProfile => {
+          this.userProfile = userProfile;
+        }
       )
     );
 
@@ -43,9 +47,9 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
   buildForm() {
     this.userProfileForm = this.formBuilder.group(
       {
-        email: [this.currentUser.email, Validators.compose([Validators.required, Validators.email])],
-        firstName: [this.currentUser.firstName, Validators.compose([Validators.required])],
-        lastName: [this.currentUser.lastName, Validators.compose([Validators.required])]
+        email: [this.userProfile.email, Validators.compose([Validators.required, Validators.email])],
+        firstName: [this.userProfile.firstName, Validators.compose([Validators.required])],
+        lastName: [this.userProfile.lastName, Validators.compose([Validators.required])]
       }
     );
   }
