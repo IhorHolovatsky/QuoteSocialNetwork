@@ -6,26 +6,19 @@ import { MzToastService } from 'ng2-materialize';
 import { AngularFireAuth } from 'angularfire2/auth';
 
 import { UserService } from '../../services/user.service';
+import { Constants } from '../../shared/constants';
 
 @Component({
     templateUrl: './login.component.html'
 })
 
 export class LoginComponent implements OnInit {
-    private loginForm: FormGroup;
+    loginForm: FormGroup;
+    errorMessageResources = Constants.ERROR_MESSAGE_RESOURCES;
+
     private loginModel = { email: '', password: '' };
     private subscription: Subscription;
     private brandNew: boolean;
-
-    // error messages
-    errorMessageResources = {
-        email: {
-            required: 'Email is required.',
-        },
-        password: {
-            required: 'Password is required.',
-        }
-    };
 
     constructor(
         private userService: UserService,

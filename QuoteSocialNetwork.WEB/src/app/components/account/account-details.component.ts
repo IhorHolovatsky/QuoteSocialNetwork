@@ -15,9 +15,9 @@ import { AngularFireAuth } from 'angularfire2/auth';
 
 export class AccountDetailsComponent implements OnInit, OnDestroy {
 
-  private userProfileForm: FormGroup;
+  userProfileForm: FormGroup;
+  errorMessageResources = Constants.ERROR_MESSAGE_RESOURCES;
   private userProfile: User = new User();
-  private errorMessageResources = Constants.ERROR_MESSAGE_RESOURCES;
   private subscriptions: Subscription[] = new Array<Subscription>();
 
   constructor(
@@ -54,4 +54,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     );
   }
 
+  saveUserProfile() {
+
+  }
 }

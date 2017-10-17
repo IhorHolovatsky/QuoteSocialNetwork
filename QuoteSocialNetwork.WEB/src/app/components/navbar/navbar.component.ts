@@ -15,10 +15,11 @@ import { Constants } from '../../shared/constants';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
 
-  private userProfile: User;
-  private isLoggedIn: Boolean;
+  userProfile: User;
+  isLoggedIn: Boolean;
+  defaultImageUrl: String = 'assets/images/userPlaceholder.png';
+
   private subscriptions: Subscription[] = new Array<Subscription>();
-  private defaultImageUrl: String = 'assets/images/userPlaceholder.png';
 
   constructor(
     private userService: UserService,
