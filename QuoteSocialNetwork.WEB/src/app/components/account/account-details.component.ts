@@ -1,23 +1,33 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
+import * as firebase from 'firebase/app';
 
-import { User } from './user';
 import { UserService } from '../../services/user.service';
 import { Constants } from '../../shared/constants';
 import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   selector: 'app-account-details',
-  templateUrl: './account-details.component.html'
+  templateUrl: './account-details.component.html',
+  styleUrls: ['./account-details.component.scss']
 })
 
 
 export class AccountDetailsComponent implements OnInit, OnDestroy {
 
   userProfileForm: FormGroup;
+  userProfileModel = {
+    displayName: '',
+    photoURL: '',
+    phoneNumber: '',
+  };
+  userProfile: firebase.UserInfo;
+
   errorMessageResources = Constants.ERROR_MESSAGE_RESOURCES;
-  private userProfile: User = new User();
+  hasNotInternalAccount = false;
+
+  private user: firebase.User;
   private subscriptions: Subscription[] = new Array<Subscription>();
 
   constructor(
@@ -25,14 +35,20 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private firebase: AngularFireAuth
   ) {
-    console.dir(firebase.auth.currentUser);
   }
 
   ngOnInit() {
+    this.user = this.firebase.auth.currentUser;
+    this.userProfile = this.firebase.auth.currentUser.providerData.find(provider => provider.providerId === 'password');
+    this.mapUserProfile(this.userProfile);
+    this.hasNotInternalAccount = !this.userProfile;
+
     this.subscriptions.push(
-      this.userService.CurrentUserState.subscribe(
-        userProfile => {
-          this.userProfile = userProfile;
+      this.firebase.authState.subscribe(
+        user => {
+          this.user = user;
+          this.userProfile = this.firebase.auth.currentUser.providerData.find(provider => provider.providerId === 'password');
+          this.mapUserProfile(this.userProfile);
         }
       )
     );
@@ -47,14 +63,37 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
   buildForm() {
     this.userProfileForm = this.formBuilder.group(
       {
-        email: [this.userProfile.email, Validators.compose([Validators.required, Validators.email])],
-        firstName: [this.userProfile.firstName, Validators.compose([Validators.required])],
-        lastName: [this.userProfile.lastName, Validators.compose([Validators.required])]
+        displayName: [this.userProfileModel.displayName, Validators.compose([Validators.required])],
+        phoneNumber: [this.userProfileModel.phoneNumber, Validators.compose([Validators.required])]
       }
     );
   }
 
   saveUserProfile() {
 
+  }
+
+  linkFb() {
+    this.userService.linkFb();
+  }
+
+  linkTwitter() {
+    this.userService.linkTwitter();
+  }
+
+  linkGoogle() {
+    this.userService.linkGoogle();
+  }
+
+  mapUserProfile(userProfile) {
+    if (userProfile) {
+      this.userProfileModel.displayName = userProfile.displayName;
+      this.userProfileModel.photoURL = userProfile.photoURL;
+      this.userProfileModel.phoneNumber = userProfile.phoneNumber;
+    }
+  }
+
+  hasMappedSocialAccount(providerId) {
+    return this.user.providerData.findIndex(provider => provider.providerId === providerId) !== -1;
   }
 }

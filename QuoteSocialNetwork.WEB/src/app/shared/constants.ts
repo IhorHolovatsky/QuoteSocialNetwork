@@ -29,12 +29,9 @@ export class Constants {
         confirmPassword: {
             required: 'Confirm password is required.'
         },
-        firstName: {
-            required: 'First name is required.'
-        },
-        lastName: {
-            required: 'Last name is required.'
-        },
+        displayName: {
+            required: 'Display name is required.'
+        }
     };
 
 }

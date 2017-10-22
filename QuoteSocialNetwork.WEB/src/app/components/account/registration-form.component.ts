@@ -1,40 +1,47 @@
-import { Component, OnInit, Renderer } from '@angular/core';
+import { Component, OnInit, Renderer, OnDestroy } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MzToastService } from 'ng2-materialize'
+import { MzToastService } from 'ng2-materialize';
 
-import { RegisterModel } from './register-model'
-import { UserService } from '../../services/user.service'
+import { RegisterModel } from './register-model';
+import { UserService } from '../../services/user.service';
 import { Constants } from '../../shared/constants';
+import { Subscription } from 'rxjs/Subscription';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   selector: 'app-registration-form',
   templateUrl: './registration-form.component.html'
 })
-export class RegistrationFormComponent implements OnInit {
-
+export class RegistrationFormComponent implements OnInit, OnDestroy {
   registerForm: FormGroup;
   registerModel: RegisterModel = new RegisterModel();
   errorMessageResources = Constants.ERROR_MESSAGE_RESOURCES;
-  
 
-  submitted : boolean = false;
-  isRequesting : boolean;
+  submitted = false;
+  isRequesting: boolean;
   errors: string;
 
   constructor(
     private formBuilder: FormBuilder,
+    private firebase: AngularFireAuth,
     private renderer: Renderer,
-    private userServer: UserService,
+    private userService: UserService,
     private toastService: MzToastService,
     private router: Router
     ) {
-
-  };
+  }
 
   ngOnInit() {
+    if (this.firebase.auth.currentUser) {
+      Object.assign(this.registerModel, this.firebase.auth.currentUser.providerData[0]);
+    }
+
     this.buildForm();
-  };
+  }
+
+  ngOnDestroy() {
+  }
 
   buildForm() {
     this.registerForm = this.formBuilder.group(
@@ -42,11 +49,10 @@ export class RegistrationFormComponent implements OnInit {
         email: [this.registerModel.email, Validators.compose([Validators.required, Validators.email])],
         password: [this.registerModel.password, Validators.compose([Validators.required, Validators.minLength(6)])],
         confirmPassword: [this.registerModel.confirmPassword, Validators.compose([Validators.required])],
-        firstName: [this.registerModel.firstName, Validators.compose([Validators.required])],
-        lastName: [this.registerModel.lastName, Validators.compose([Validators.required])]
+        displayName: [this.registerModel.displayName, Validators.compose([Validators.required])]
       }
-    )
-  };
+    );
+  }
 
   onSubmit() {
     this.submitted = true;
@@ -55,16 +61,35 @@ export class RegistrationFormComponent implements OnInit {
 
     this.registerModel = Object.assign({}, this.registerForm.value);
 
-    this.userServer.register(this.registerModel)
-                   .then(result => {
+
+    if (this.firebase.auth.currentUser) {
+      this.userService.createLogin(this.registerModel.email, this.registerModel.password)
+                      .then(result => {
+                        if (result) {
+                          this.toastService.show('Аккаунт був успішно створений!',
+                                                 4000,
+                                                 'green');
+                          this.router.navigate(['/account/details']);
+                        }
+                      })
+                      .catch(error => {
+                        this.toastService.show(error.message,
+                                               4000,
+                                               'red');
+                      });
+      return;
+    }
+
+    this.userService.register(this.registerModel)
+                    .then(result => {
                           this.isRequesting = false;
-                          if (result){
-                            this.router.navigate(['/login'], { queryParams: {email: this.registerModel.email, brandNew: true }})
+                          if (result) {
+                            this.router.navigate(['/login'], { queryParams: {email: this.registerModel.email, brandNew: true }});
                           }
                         },
                          errors => {
                           this.toastService.show(errors.message,
-                                                 4000, 
+                                                 4000,
                                                  'red');
                       });
   }

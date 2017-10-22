@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
-import { User } from '../account/user';
 import { UserService } from '../../services/user.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Constants } from '../../shared/constants';
@@ -15,7 +14,7 @@ import { Constants } from '../../shared/constants';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
 
-  userProfile: User;
+  userProfile: firebase.User;
   isLoggedIn: Boolean;
   defaultImageUrl: String = 'assets/images/userPlaceholder.png';
 
@@ -31,16 +30,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscriptions.push(
       this.firebase.authState.subscribe(
-        user => { this.isLoggedIn = user && !user.isAnonymous; }
-      )
-    );
-
-    // subscripe to load logged in user after login
-    this.subscriptions.push(
-      this.userService.CurrentUserState.subscribe(
-        userProfile => {
-          this.userProfile = userProfile || new User();
-        }
+        user => {
+          this.userProfile = user;
+          this.isLoggedIn = user && !user.isAnonymous; }
       )
     );
   }
@@ -55,9 +47,4 @@ export class NavbarComponent implements OnInit, OnDestroy {
                         this.router.navigate(['/login']);
                     });
   }
-
-  getUserDisplayName() {
-    return `${this.userProfile.firstName || ''} ${this.userProfile.lastName || ''}`;
-  }
-
 }

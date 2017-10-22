@@ -4,21 +4,11 @@
       <div class="row">
             <mz-input-container class="col s12 m4">
                     <input mz-input mz-validation required 
-                           formControlName="firstName" 
+                           formControlName="displayName" 
                            type="text" 
-                           [errorMessageResource]="errorMessageResources.firstName"
-                           id="input-firstName" 
-                           [label]="'Ім\'я'" />
-            </mz-input-container>
-      </div>
-      <div class="row">
-            <mz-input-container class="col s12 m4">
-                    <input mz-input mz-validation required 
-                           formControlName="lastName" 
-                           type="text" 
-                           [errorMessageResource]="errorMessageResources.lastName"
-                           id="input-lastName" 
-                           [label]="'Фамілія'" />
+                           [errorMessageResource]="errorMessageResources.displayName"
+                           id="input-displayName" 
+                           [label]="'Повне ім\'я'" />
             </mz-input-container>
       </div>
       <div class="row">

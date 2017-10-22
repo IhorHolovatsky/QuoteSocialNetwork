@@ -13,7 +13,7 @@
                         <mz-sidenav-header>
                           <div class="user-view">
                               <img class="circle avatar" [src]="userProfile.photoURL ? userProfile.photoURL : defaultImageUrl">
-                              <div class="white-text name">{{getUserDisplayName()}}</div>
+                              <div class="white-text name">{{userProfile.displayName}}</div>
                               <div class="white-text email">{{userProfile.email}}</div>
                           </div>
                         </mz-sidenav-header>
@@ -34,7 +34,7 @@
         </mz-navbar-item-container>
         <a href="#" class="brand-logo center"><a [routerLink]="['home']">Лого</a></a>
         <mz-navbar-item-container [align]="'right'">
-        <mz-navbar-item *ngIf="isLoggedIn"><a [routerLink]="['account/details']">Привіт {{getUserDisplayName()}}!</a></mz-navbar-item>
+        <mz-navbar-item *ngIf="isLoggedIn"><a [routerLink]="['account/details']">Привіт {{userProfile.displayName}}!</a></mz-navbar-item>
         <mz-navbar-item *ngIf="!isLoggedIn"><a [routerLink]="['login']">Ввійти</a></mz-navbar-item>
         <mz-navbar-item *ngIf="!isLoggedIn"><a [routerLink]="['register']">Зареєструватись</a></mz-navbar-item>
         <mz-navbar-item *ngIf="isLoggedIn"><a (click)="logout()">Вийти</a></mz-navbar-item>

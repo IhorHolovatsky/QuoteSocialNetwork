@@ -4,39 +4,31 @@
               <form [formGroup]="userProfileForm" (ngSubmit)="saveUserProfile()" novalidate>
                   <div class="section">
                       <h5>Ваш профіль</h5>
-                      <div class="row">
+                      <div class="alertText" *ngIf="hasNotInternalAccount">У вас ще не створенний аккаунт в QuoteSocialNetwork. <br> Заповніть дані нижче, щоб створити внутрішній логін.</div>
+                      <div class="row" *ngIf="!hasNotInternalAccount">
                             <mz-input-container class="col s12 m9">
                                     <input mz-input mz-validation required 
-                                           formControlName="firstName" 
+                                           formControlName="displayName" 
                                            type="text" 
-                                           [errorMessageResource]="errorMessageResources.firstName"
-                                           id="input-firstName" 
-                                           [label]="'Ім\'я'" />
+                                           [errorMessageResource]="errorMessageResources.displayName"
+                                           id="input-displayName" 
+                                           [label]="'Повне ім\'я'" />
                             </mz-input-container>
                       </div>
-                      <div class="row">
+                      <div class="row" *ngIf="!hasNotInternalAccount">
                             <mz-input-container class="col s12 m9">
                                     <input mz-input mz-validation required 
-                                           formControlName="lastName" 
+                                           formControlName="phoneNumber" 
                                            type="text" 
-                                           [errorMessageResource]="errorMessageResources.lastName"
-                                           id="input-lastName" 
-                                           [label]="'Фамілія'" />
-                            </mz-input-container>
-                      </div>
-                      <div class="row">
-                            <mz-input-container class="col s12 m9">
-                                    <input mz-input mz-validation required 
-                                           formControlName="email" 
-                                           type="text" 
-                                           [errorMessageResource]="errorMessageResources.email"
-                                           id="input-email" 
-                                           [label]="'Імейл'" />
+                                           [errorMessageResource]="errorMessageResources.phoneNumber"
+                                           id="input-phoneNumber" 
+                                           [label]="'Номер телефону'" />
                             </mz-input-container>
                       </div>
                   </div>
                   
-                  <button mz-button [disabled]="!userProfileForm.valid" type="submit">Зберегти</button>
+                  <button *ngIf="!hasNotInternalAccount" mz-button [disabled]="!userProfileForm.valid" type="submit">Зберегти</button>
+                  <button *ngIf="hasNotInternalAccount" mz-button type="button" [routerLink]="['/register']">Створити аккаунт</button>
                   <br/><br/>
                 </form>
           </div>
@@ -44,16 +36,49 @@
           <div class="col s4">
               <h5 style="margin-left: -11.250px; margin-bottom: 20px;">Соціальні мережі:</h5>
               <div class="row">
-                 <a class="waves-effect waves-light btn-large social facebook">
-                 <i class="fa fa-facebook"></i> Прив'язати Facebook</a>
+                 <div *ngIf="!hasMappedSocialAccount('facebook.com')">
+                    <a class="waves-effect waves-light btn-large social facebook"
+                       (click)="linkFb()">
+                    <i class="fa fa-facebook"></i> Прив'язати Facebook</a>
+                 </div>
+                 <div *ngIf="hasMappedSocialAccount('facebook.com')">
+                    <div class="col s12 m8 social-account-linked">
+                        <i mz-icon-mdi mz-input-prefix
+                            [icon]="'check'">
+                        </i>
+                        <span>Facebook аккаунт під'єднаний</span>
+                    </div>     
+                 </div>
               </div>
               <div class="row">
-                    <a class="waves-effect waves-light btn-large social twitter">
-                    <i class="fa fa-twitter"></i> Прив'язати Twitter</a>
+                 <div *ngIf="!hasMappedSocialAccount('twitter.com')">
+                     <a class="waves-effect waves-light btn-large social twitter"
+                        (click)="linkTwitter()">
+                     <i class="fa fa-twitter"></i> Прив'язати Twitter</a>
+                 </div> 
+                 <div *ngIf="hasMappedSocialAccount('twitter.com')">
+                    <div class="col s12 m8 social-account-linked">
+                        <i mz-icon-mdi mz-input-prefix
+                            [icon]="'check'">
+                        </i>
+                        <span>Twitter аккаунт під'єднаний</span>
+                    </div>     
+                 </div>                     
               </div>
               <div class="row">
-                 <a class="waves-effect waves-light btn-large social google">
-                 <i class="fa fa-google"></i> Прив'язати Google</a>
+                 <div *ngIf="!hasMappedSocialAccount('google.com')">
+                     <a class="waves-effect waves-light btn-large social google"
+                        (click)="linkGoogle()">
+                     <i class="fa fa-google"></i> Прив'язати Google</a>
+                 </div>  
+                 <div *ngIf="hasMappedSocialAccount('google.com')">
+                    <div class="col s12 m8 social-account-linked">
+                        <i mz-icon-mdi mz-input-prefix
+                            [icon]="'check'">
+                        </i>
+                        <span>Google аккаунт під'єднаний</span>
+                    </div>                     
+                 </div>               
               </div>               
           </div>
       </div>
