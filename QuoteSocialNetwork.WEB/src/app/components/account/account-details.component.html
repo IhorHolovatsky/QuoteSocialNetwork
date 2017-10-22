@@ -17,12 +17,15 @@
                       </div>
                       <div class="row" *ngIf="!hasNotInternalAccount">
                             <mz-input-container class="col s12 m9">
-                                    <input mz-input mz-validation required 
-                                           formControlName="phoneNumber" 
-                                           type="text" 
-                                           [errorMessageResource]="errorMessageResources.phoneNumber"
-                                           id="input-phoneNumber" 
-                                           [label]="'Номер телефону'" />
+                                    <span class="profile-photoLabel">Фото: </span>
+                                    <div class="profile-photoLabelContainer">
+                                        <img class="profile-photoPreview" [src]="userProfileModel.photoURL">
+                                    </div>
+                                    <input formControlName="photo"
+                                           (change)="photoUpdloaded($event)" 
+                                           type="file" 
+                                           accept="image/*"
+                                           id="input-photo" />
                             </mz-input-container>
                       </div>
                   </div>

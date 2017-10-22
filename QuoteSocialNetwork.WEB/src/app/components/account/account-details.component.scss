@@ -4,6 +4,24 @@
     }
 }
 
+.profile {
+    &-photoLabel {
+        color: #9e9e9e;
+        height: 100%;
+        font-size: 0.9rem;
+        cursor: text;
+    }
+
+    &-photoLabelContainer {
+        margin-bottom: 5px;
+    }
+
+    &-photoPreview {
+        width: 150px;
+        margin-top: 15px;
+    }
+}
+
 .alertText {
     margin-bottom: 10px;
     color: orange;

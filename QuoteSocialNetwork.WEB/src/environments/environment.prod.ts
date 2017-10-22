@@ -6,6 +6,7 @@ export const environment = {
     authDomain: 'quotesocialnetwork.firebaseapp.com',
     databaseURL: 'https://quotesocialnetwork.firebaseio.com',
     storageBucket: 'quotesocialnetwork.appspot.com',
-    messagingSenderId: '15943729790'
+    messagingSenderId: '15943729790',
+    projectId: 'quotesocialnetwork'
   }
 };
