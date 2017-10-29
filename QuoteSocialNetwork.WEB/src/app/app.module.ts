@@ -20,6 +20,7 @@ import { UserService } from './services/user.service';
 import { AuthGuard} from './auth.guard';
 import { environment } from '../environments/environment';
 import { AccountDetailsComponent } from './components/account/account-details.component';
+import { QuotesModule } from './components/quotes/quotes.module';
 
 
 @NgModule({
@@ -28,7 +29,7 @@ import { AccountDetailsComponent } from './components/account/account-details.co
     HomeComponent,
     LoginComponent,
     RegistrationFormComponent,
-    NavbarComponent, AccountDetailsComponent,
+    NavbarComponent, AccountDetailsComponent
   ],
   entryComponents: [  ],
   imports: [
@@ -37,7 +38,8 @@ import { AccountDetailsComponent } from './components/account/account-details.co
     MaterializeModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    QuotesModule
   ],
   providers: [{ provide: APP_BASE_HREF, useValue: '/' },
               UserService,

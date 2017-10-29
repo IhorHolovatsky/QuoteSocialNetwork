@@ -21,6 +21,7 @@
     "@angular/platform-browser": "^4.2.4",
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
+    "@aspnet/signalr-client": "^1.0.0-alpha2-final",
     "angularfire2": "^5.0.0-rc.2",
     "core-js": "^2.4.1",
     "firebase": "^4.5.0",
@@ -29,7 +30,8 @@
     "materialize-css": "^0.100.2",
     "materialize-social": "^1.0.3",
     "mdi": "^2.0.46",
-    "ng2-materialize": "^1.6.0",
+    "ng2-materialize": "^1.6.0",    
+    "ngx-restangular": "^1.0.13",
     "rxjs": "^5.4.2",
     "zone.js": "^0.8.14"
   },

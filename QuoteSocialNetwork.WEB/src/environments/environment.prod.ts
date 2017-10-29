@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  baseApiUrl: 'http://localhost:25474/api',
+  baseApiUrl: 'http://localhost:5000',
   firebaseConfig: {
     apiKey: 'AIzaSyCwjP2n8zJutiF3fAcHL_02UUPfPmyybJU',
     authDomain: 'quotesocialnetwork.firebaseapp.com',

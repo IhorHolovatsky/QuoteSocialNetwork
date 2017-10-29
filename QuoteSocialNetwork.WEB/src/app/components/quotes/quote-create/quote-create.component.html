@@ -1,0 +1,21 @@
+<div class="section">
+  <div class="row">
+    <div class="col s6">
+      <form [formGroup]="createQuoteForm" (ngSubmit)="createQuote()" novalidate>
+        <div class="section">
+          <h5>Напишіть вашу цитату:</h5>
+          <div class="row">
+            <mz-textarea-container>
+              <i mz-icon-mdi mz-textarea-prefix [icon]="'message-reply-text'">
+              </i>
+              <textarea mz-textarea [label]="'Цитата'" id="quote-textarea" formControlName="quoteText"  placeholder="Напишіть вашу цитату">
+              </textarea>
+            </mz-textarea-container>
+          </div>
+        </div>
+        <button mz-button [disabled]="!createQuoteForm.valid" type="submit">Опублікувати</button>
+        <br/><br/>
+      </form>
+    </div>
+  </div>
+</div>

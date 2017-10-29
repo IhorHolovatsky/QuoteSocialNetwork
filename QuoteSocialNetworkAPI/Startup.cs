@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using QuoteSocialNetworkAPI.SignalRHubs;
 
 namespace QuoteSocialNetworkAPI
 {
@@ -38,7 +39,10 @@ namespace QuoteSocialNetworkAPI
                             ValidAudience = "quotesocialnetwork",
                             ValidateLifetime = true
                         };
-                    });          
+                    });
+
+            services.AddSignalR();
+            services.AddCors();         
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +55,18 @@ namespace QuoteSocialNetworkAPI
 
             app.UseAuthentication();
             app.UseMvc();
+            app.UseCors(options => options.AllowAnyOrigin()
+                                          .AllowAnyMethod()
+                                          .AllowAnyHeader()
+                                          .AllowCredentials());
+            ConfigureHubs(app);
+        }
+
+        public void ConfigureHubs(IApplicationBuilder app) {
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<QuoteHub>("quotes");
+            });
         }
     }
 }

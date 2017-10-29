@@ -9,25 +9,30 @@
                         [flat]="true">
                 <i mz-icon class="black-text" [icon]="'menu'"></i>
                 </button>    
-                <mz-sidenav [id]="'sidenav'" [collapseButtonId]="'btn-sidenav'">
+                <mz-sidenav [id]="'sidenav'" [collapseButtonId]="'btn-sidenav'" [closeOnClick]="true">
                         <mz-sidenav-header>
                           <div class="user-view">
-                              <img class="circle avatar" [src]="userProfile.photoURL ? userProfile.photoURL : defaultImageUrl">
-                              <div class="white-text name">{{userProfile.displayName}}</div>
-                              <div class="white-text email">{{userProfile.email}}</div>
+                              <a [routerLink]="['account/details']">
+                                <img class="circle avatar" [src]="userProfile.photoURL ? userProfile.photoURL : defaultImageUrl">
+                                <div class="white-text name">{{userProfile.displayName}}</div>
+                                <div class="white-text email">{{userProfile.email}}</div>
+                              </a>
                           </div>
                         </mz-sidenav-header>
-                        <mz-sidenav-subheader>Link Subheader</mz-sidenav-subheader>
+                        <mz-sidenav-subheader>Дії</mz-sidenav-subheader>
                         <mz-sidenav-link>
-                        <a href="#">First Link</a>
+                        <a [routerLink]="['quotes/create']" class="waves-effect">Написати цитату</a>
                         </mz-sidenav-link>
                         <mz-sidenav-divider></mz-sidenav-divider>
+                        <mz-sidenav-link>
+                        <a [routerLink]="['quotes']" class="waves-effect">Мої цитати</a>
+                        </mz-sidenav-link>
                         <mz-sidenav-link [active]="true">
-                        <a href="#">Active Link</a>
+                        <a href="#" class="waves-effect">Мої групи</a>
                         </mz-sidenav-link>
                         <mz-sidenav-divider></mz-sidenav-divider>
                         <mz-sidenav-link>
-                        <a href="#" class="waves-effect">Second Link With Waves</a>
+                        <a href="#" (click)="logout()" class="waves-effect">Вийти</a>
                         </mz-sidenav-link>
                 </mz-sidenav>
             </mz-navbar-item>
