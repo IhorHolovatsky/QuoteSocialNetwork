@@ -25,17 +25,29 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 
-QuoteSocialNetworkAPI/[Dd]ebug/
-QuoteSocialNetworkAPI/[Dd]ebugPublic/
-QuoteSocialNetworkAPI/[Rr]elease/
-QuoteSocialNetworkAPI/[Rr]eleases/
-QuoteSocialNetworkAPI/x64/
-QuoteSocialNetworkAPI/x86/
-QuoteSocialNetworkAPI/bld/
-QuoteSocialNetworkAPI/[Bb]in/
-QuoteSocialNetworkAPI/[Oo]bj/
-QuoteSocialNetworkAPI/[Ll]og/
-QuoteSocialNetworkAPI/.vscode/
+QuoteSocialNetwork.API/[Dd]ebug/
+QuoteSocialNetwork.API/[Dd]ebugPublic/
+QuoteSocialNetwork.API/[Rr]elease/
+QuoteSocialNetwork.API/[Rr]eleases/
+QuoteSocialNetwork.API/x64/
+QuoteSocialNetwork.API/x86/
+QuoteSocialNetwork.API/bld/
+QuoteSocialNetwork.API/[Bb]in/
+QuoteSocialNetwork.API/[Oo]bj/
+QuoteSocialNetwork.API/[Ll]og/
+QuoteSocialNetwork.API/.vscode/
+
+
+QuoteSocialNetwork.API/QuoteSocialNetwork.API/[Bb]in/
+QuoteSocialNetwork.API/QuoteSocialNetwork.API/[Oo]bj/
+
+
+QuoteSocialNetwork.API/QuoteSocialNetwork.BLL/[Bb]in/
+QuoteSocialNetwork.API/QuoteSocialNetwork.BLL/[Oo]bj/
+
+
+QuoteSocialNetwork.API/QuoteSocialNetwork.Data/[Bb]in/
+QuoteSocialNetwork.API/QuoteSocialNetwork.Data/[Oo]bj/
 
 # User-specific files
 *.suo

@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using QuoteSocialNetwork.Data;
 using QuoteSocialNetworkAPI.SignalRHubs;
 
 namespace QuoteSocialNetworkAPI
@@ -42,7 +44,9 @@ namespace QuoteSocialNetworkAPI
                     });
 
             services.AddSignalR();
-            services.AddCors();         
+            services.AddCors();        
+
+            services.AddDbContext<QuoteNetDatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString(nameof(QuoteNetDatabaseContext)))); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
