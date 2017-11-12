@@ -21,18 +21,21 @@
                         </mz-sidenav-header>
                         <mz-sidenav-subheader>Дії</mz-sidenav-subheader>
                         <mz-sidenav-link>
-                        <a [routerLink]="['quotes/create']" class="waves-effect">Написати цитату</a>
-                        </mz-sidenav-link>
-                        <mz-sidenav-divider></mz-sidenav-divider>
-                        <mz-sidenav-link>
-                        <a [routerLink]="['quotes']" class="waves-effect">Мої цитати</a>
+                            <a [routerLink]="['quotes/create']" class="waves-effect">Написати цитату</a>
                         </mz-sidenav-link>
                         <mz-sidenav-link [active]="true">
-                        <a href="#" class="waves-effect">Мої групи</a>
+                            <a href="#" class="waves-effect">Створити групу</a>
                         </mz-sidenav-link>
                         <mz-sidenav-divider></mz-sidenav-divider>
                         <mz-sidenav-link>
-                        <a href="#" (click)="logout()" class="waves-effect">Вийти</a>
+                            <a [routerLink]="['quotes']" class="waves-effect">Мої цитати</a>
+                        </mz-sidenav-link>
+                        <mz-sidenav-link [active]="true">
+                            <a href="#" class="waves-effect">Мої групи</a>
+                        </mz-sidenav-link>
+                        <mz-sidenav-divider></mz-sidenav-divider>
+                        <mz-sidenav-link>
+                         <a href="#" (click)="logout()" class="waves-effect">Вийти</a>
                         </mz-sidenav-link>
                 </mz-sidenav>
             </mz-navbar-item>

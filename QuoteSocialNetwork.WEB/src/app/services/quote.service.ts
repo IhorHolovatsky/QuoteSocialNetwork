@@ -12,19 +12,12 @@ export class QuoteService {
 
   quotes: string[] = [];
 
-  private actionUrl: string;
-  private headers: HttpHeaders;
   private hubConnection: HubConnection;
 
   constructor(
     private firebase: AngularFireAuth,
     private toastService: MzToastService
   ) {
-    this.actionUrl = `${environment.baseApiUrl}api/quotes/`;
-
-    this.headers = new HttpHeaders();
-    this.headers = this.headers.set('Content-Type', 'application/json');
-    this.headers = this.headers.set('Accept', 'application/json');
 
     this.init();
   }

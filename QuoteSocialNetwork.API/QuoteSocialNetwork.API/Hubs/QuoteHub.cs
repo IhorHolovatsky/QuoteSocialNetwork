@@ -7,7 +7,9 @@ namespace QuoteSocialNetworkAPI.SignalRHubs
     {
         public Task Send(string data)
         {
-            return Clients.All.InvokeAsync("Send", data);
+            return Clients.All.InvokeAsync("Send", new {
+                quote = data
+            });
         }
     }
 }
