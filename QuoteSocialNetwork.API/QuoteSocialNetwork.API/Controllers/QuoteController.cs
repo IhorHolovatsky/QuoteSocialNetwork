@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QuoteSocialNetwork.Data;
+using QuoteSocialNetwork.Data.Generated;
 
 namespace QuoteSocialNetworkAPI.Controllers
 {
@@ -17,12 +18,43 @@ namespace QuoteSocialNetworkAPI.Controllers
             _dbContext = dbContext;
         }
 
-        // GET api/values
+        // GET api/quotes
+        [Authorize] 
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Quote> Get(int itemsPerPage = 20, 
+                                      int pageNumber = 0)
         {
-            var userCount = _dbContext.Users.Count();
-            return new string[] { "value1", "value2", (_dbContext == null).ToString(), userCount.ToString() };
+            return _dbContext.Quotes.Skip(itemsPerPage * pageNumber)
+                                    .Take(itemsPerPage)
+                                    .OrderByDescending(q => q.CreatedAt)
+                                    .ToList();
+        }
+
+        // GET api/quotes/5
+        [Authorize] 
+        [HttpGet("{quoteId}")]
+        public Quote Get(Guid quoteId)
+        {
+            return _dbContext.Quotes.Find(quoteId);
+        }
+
+        // POST api/quotes
+        [Authorize] 
+        [HttpPost]
+        public Quote Post([FromBody]Quote value)
+        {
+            var quoteEntry = _dbContext.Quotes.Add(value);
+            _dbContext.SaveChanges();
+            return quoteEntry.Entity;
+        }
+
+        // DELETE api/quotes/5
+        [HttpDelete("{quoteId}")]
+        public Quote Delete(Guid quoteId)
+        {
+            var deletedQuote = _dbContext.Quotes.Remove(Get(quoteId));
+            _dbContext.SaveChanges();
+            return deletedQuote.Entity;
         }
     }
 }

@@ -13,13 +13,12 @@ export class QuoteService {
   quotes: string[] = [];
 
   private hubConnection: HubConnection;
+  private isSignalRInited: boolean;
 
   constructor(
     private firebase: AngularFireAuth,
     private toastService: MzToastService
   ) {
-
-    this.init();
   }
 
   public createQuote(quote): Promise<any> {
@@ -33,6 +32,7 @@ export class QuoteService {
   }
 
   private init() {
+    this.isSignalRInited = true;
     this.hubConnection = new HubConnection(environment.baseApiUrl + '/quotes');
 
     this.hubConnection.on('Send', (data: any) => {

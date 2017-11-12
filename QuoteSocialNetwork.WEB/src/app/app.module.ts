@@ -8,6 +8,7 @@ import { MaterializeModule } from 'ng2-materialize';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { RestangularModule } from 'ngx-restangular';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home.component';
@@ -21,6 +22,7 @@ import { AuthGuard} from './auth.guard';
 import { environment } from '../environments/environment';
 import { AccountDetailsComponent } from './components/account/account-details.component';
 import { QuotesModule } from './components/quotes/quotes.module';
+import { RestangularConfigFactory } from './shared/restangular-config';
 
 
 @NgModule({
@@ -39,7 +41,8 @@ import { QuotesModule } from './components/quotes/quotes.module';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    QuotesModule
+    QuotesModule,
+    RestangularModule.forRoot(RestangularConfigFactory),
   ],
   providers: [{ provide: APP_BASE_HREF, useValue: '/' },
               UserService,

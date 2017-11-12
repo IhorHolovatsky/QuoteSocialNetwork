@@ -1,12 +1,9 @@
 ﻿import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { AngularFireAuth, AUTH_PROVIDERS } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
-import { Observable, Subscription } from 'rxjs/Rx';
-import { BehaviorSubject } from 'rxjs/Rx';
+import { Restangular } from 'ngx-restangular';
 import 'rxjs/add/operator/toPromise';
-import { of } from 'rxjs/observable/of';
 
 import { RegisterModel } from '../components/account/register-model';
 import { BaseService } from './base.service';
@@ -16,11 +13,13 @@ import { Constants } from '../shared/constants';
 @Injectable()
 export class UserService extends BaseService {
 
+  private userRest;
   constructor(
-    private http: Http,
     private firebase: AngularFireAuth,
-    private afDatabase: AngularFireDatabase) {
+    private afDatabase: AngularFireDatabase,
+    private restAngular: Restangular) {
     super();
+    this.userRest = this.restAngular.one('user');
   }
 
   register(newUser: RegisterModel): Promise<any> {
@@ -67,6 +66,7 @@ export class UserService extends BaseService {
   loginFb(): Promise<any> {
     return this.firebase.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
                              .then(signInResult => {
+                                this.saveUserToLocalDb(signInResult.user);
                                 return true;
                              });
   }
@@ -84,6 +84,7 @@ export class UserService extends BaseService {
   loginTwitter(): Promise<any> {
     return this.firebase.auth.signInWithPopup(new firebase.auth.TwitterAuthProvider())
                              .then(signInResult => {
+                                this.saveUserToLocalDb(signInResult.user);
                                 return true;
                              });
   }
@@ -101,7 +102,13 @@ export class UserService extends BaseService {
   loginGoogle(): Promise<any> {
     return this.firebase.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
                              .then(signInResult => {
-                                return true;
+                                return this.saveUserToLocalDb(signInResult.user)
+                                           .then(result => {
+                                              return true;
+                                           });
+                             })
+                             .catch(error => {
+                               throw error;
                              });
   }
 
@@ -120,5 +127,21 @@ export class UserService extends BaseService {
                              .then(result => {
                                return result;
                              });
+  }
+
+  saveUserToLocalDb(user) {
+    return this.userRest.one('exists')
+                        .get({userId: user.uid})
+                        .toPromise()
+                        .then((result) => {
+                            console.log(result);
+                            if (!result) {
+                              this.userRest.post('add', {
+                                Id: user.uid,
+                                FullName: user.displayName,
+                                Email: user.email
+                              });
+                            }
+                        });
   }
 }
