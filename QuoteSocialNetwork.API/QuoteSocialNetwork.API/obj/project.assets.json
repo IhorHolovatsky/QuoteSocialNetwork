@@ -4978,6 +4978,32 @@
         "runtime": {
           "lib/netstandard1.3/Microsoft.WindowsAzure.Storage.dll": {}
         }
+      },
+      "QuoteSocialNetwork.BLL/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.SqlServer": "2.0.0"
+        },
+        "compile": {
+          "bin/placeholder/QuoteSocialNetwork.BLL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/QuoteSocialNetwork.BLL.dll": {}
+        }
+      },
+      "QuoteSocialNetwork.Data/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.SqlServer": "2.0.0"
+        },
+        "compile": {
+          "bin/placeholder/QuoteSocialNetwork.Data.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/QuoteSocialNetwork.Data.dll": {}
+        }
       }
     }
   },
@@ -12962,6 +12988,16 @@
         "windowsazure.storage.8.1.4.nupkg.sha512",
         "windowsazure.storage.nuspec"
       ]
+    },
+    "QuoteSocialNetwork.BLL/1.0.0": {
+      "type": "project",
+      "path": "../QuoteSocialNetwork.BLL/QuoteSocialNetwork.BLL.csproj",
+      "msbuildProject": "../QuoteSocialNetwork.BLL/QuoteSocialNetwork.BLL.csproj"
+    },
+    "QuoteSocialNetwork.Data/1.0.0": {
+      "type": "project",
+      "path": "../QuoteSocialNetwork.Data/QuoteSocialNetwork.Data.csproj",
+      "msbuildProject": "../QuoteSocialNetwork.Data/QuoteSocialNetwork.Data.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -12969,7 +13005,10 @@
       "Microsoft.AspNetCore.All >= 2.0.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 2.0.0",
       "Microsoft.AspNetCore.SignalR >= 1.0.0-alpha2-final",
-      "Microsoft.NETCore.App >= 2.0.0"
+      "Microsoft.EntityFrameworkCore.SqlServer >= 2.0.0",
+      "Microsoft.NETCore.App >= 2.0.0",
+      "QuoteSocialNetwork.BLL >= 1.0.0",
+      "QuoteSocialNetwork.Data >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -12999,7 +13038,14 @@
       },
       "frameworks": {
         "netcoreapp2.0": {
-          "projectReferences": {}
+          "projectReferences": {
+            "g:\\Diploma project\\QuoteSocialNetwork\\QuoteSocialNetwork.API\\QuoteSocialNetwork.BLL\\QuoteSocialNetwork.BLL.csproj": {
+              "projectPath": "g:\\Diploma project\\QuoteSocialNetwork\\QuoteSocialNetwork.API\\QuoteSocialNetwork.BLL\\QuoteSocialNetwork.BLL.csproj"
+            },
+            "g:\\Diploma project\\QuoteSocialNetwork\\QuoteSocialNetwork.API\\QuoteSocialNetwork.Data\\QuoteSocialNetwork.Data.csproj": {
+              "projectPath": "g:\\Diploma project\\QuoteSocialNetwork\\QuoteSocialNetwork.API\\QuoteSocialNetwork.Data\\QuoteSocialNetwork.Data.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -13025,6 +13071,10 @@
             "version": "1.0.0-alpha2-final"
           },
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
+            "target": "Package",
+            "version": "2.0.0"
+          },
+          "Microsoft.EntityFrameworkCore.SqlServer": {
             "target": "Package",
             "version": "2.0.0"
           }
