@@ -8,3 +8,7 @@ g:\Diploma project\QuoteSocialNetwork\QuoteSocialNetwork.API\QuoteSocialNetwork.
 g:\Diploma project\QuoteSocialNetwork\QuoteSocialNetwork.API\QuoteSocialNetwork.API\obj\Debug\netcoreapp2.0\QuoteSocialNetworkAPI.AssemblyInfo.cs
 g:\Diploma project\QuoteSocialNetwork\QuoteSocialNetwork.API\QuoteSocialNetwork.API\obj\Debug\netcoreapp2.0\QuoteSocialNetworkAPI.dll
 g:\Diploma project\QuoteSocialNetwork\QuoteSocialNetwork.API\QuoteSocialNetwork.API\obj\Debug\netcoreapp2.0\QuoteSocialNetworkAPI.pdb
+g:\Diploma project\QuoteSocialNetwork\QuoteSocialNetwork.API\QuoteSocialNetwork.API\bin\Debug\netcoreapp2.0\QuoteSocialNetwork.BLL.dll
+g:\Diploma project\QuoteSocialNetwork\QuoteSocialNetwork.API\QuoteSocialNetwork.API\bin\Debug\netcoreapp2.0\QuoteSocialNetwork.Data.dll
+g:\Diploma project\QuoteSocialNetwork\QuoteSocialNetwork.API\QuoteSocialNetwork.API\bin\Debug\netcoreapp2.0\QuoteSocialNetwork.BLL.pdb
+g:\Diploma project\QuoteSocialNetwork\QuoteSocialNetwork.API\QuoteSocialNetwork.API\bin\Debug\netcoreapp2.0\QuoteSocialNetwork.Data.pdb
