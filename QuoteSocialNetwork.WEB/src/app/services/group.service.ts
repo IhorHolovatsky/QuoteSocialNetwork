@@ -16,7 +16,24 @@ export class GroupService {
     this.groupRest = this.rest.all('group');
   }
 
-  public createGroup(group) {
+  public getGroup(groupId) {
+
+  }
+
+  public getUserGroups(): Promise<any> {
+    return this.groupRest.get('user')
+                         .toPromise()
+                         .then((result) => {
+                           return result;
+                         });
+  }
+
+  public createGroup(group): Promise<any> {
+    return this.groupRest.post(group)
+                         .toPromise()
+                         .then((result) => {
+                           return result;
+                         });
 
   }
 

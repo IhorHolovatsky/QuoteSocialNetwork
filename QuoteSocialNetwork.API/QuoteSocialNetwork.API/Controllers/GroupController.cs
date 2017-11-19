@@ -31,6 +31,29 @@ namespace QuoteSocialNetwork.API.Controllers
                                     .ToList();
         }
 
+        // GET api/group/user
+        [Authorize]
+        [HttpGet]
+        [Route("user")]
+        public IEnumerable<Group> GetUserGroups()
+        {
+            return _dbContext.Groups.Where(g => g.UserGroups.Any(ug => ug.UserId == UserId))
+                                    .OrderBy(q => q.Name)
+                                    .ToList();
+        }
+
+        // GET api/group/5
+        [Authorize]
+        [HttpGet("{groupId}")]
+        public Group Get(Guid groupId)
+        {
+            return _dbContext.Groups.Include(g => g.UserGroups)
+                                    .ThenInclude(ug => ug.Select(userGroup => userGroup.User))
+                                    .Include(g => g.Quotes)
+                                    .ThenInclude(q => q.Select(quote => quote.User))
+                                    .FirstOrDefault(g => g.Id == groupId);
+        }
+
         // POST api/group
         [Authorize]
         [HttpPost]

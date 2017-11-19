@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using QuoteSocialNetwork.Data;
 using QuoteSocialNetworkAPI.SignalRHubs;
 
@@ -29,7 +30,10 @@ namespace QuoteSocialNetworkAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();    
-            services.AddMvc();
+            services.AddMvc()
+                    .AddJsonOptions(opt => {
+                        opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                    });
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddJwtBearer(options =>
                     {

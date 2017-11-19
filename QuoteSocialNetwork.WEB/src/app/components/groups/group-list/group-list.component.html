@@ -1,3 +1,11 @@
-<p>
-  group-list works!
-</p>
+<h4>Групи:</h4>
+<br>
+
+<mz-collection class="groups-block">
+  <mz-collection-item [avatar]="true" *ngFor="let group of groups" (click)="goToGroup(group.id)">
+    <img class="group-image" mz-avatar [src]="defaultImageUrl">
+    <div class="title">{{group.name}}</div>
+    <div>{{ group.quotes.length > 0 ? group.quotes[0].text : 'Поки що немає цитат...' }}</div>
+    <a mz-secondary-content href="#!"><i mz-icon-mdi [icon]="'star'"></i></a>
+  </mz-collection-item>
+</mz-collection>

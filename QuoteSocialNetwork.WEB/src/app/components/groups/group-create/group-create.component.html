@@ -10,12 +10,6 @@
               </i>
               <input mz-input mz-validation required formControlName="Name" type="text" [label]="'Назва групи'" placeholder="Напишіть назву групи"/>
             </mz-input-container>
-            <mz-textarea-container>
-              <i mz-icon-mdi mz-textarea-prefix [icon]="'message-reply-text'">
-              </i>
-              <textarea mz-textarea [label]="'Цитата'" id="group-textarea" formControlName="Text" placeholder="Напишіть вашу цитату">
-                </textarea>
-            </mz-textarea-container>
           </div>
         </div>
         <button mz-button [disabled]="!createGroupForm.valid" type="submit">Створити</button>

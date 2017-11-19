@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { GroupService } from '../../../services/Group.service';
+import { GroupService } from '../../../services/group.service';
 import { Router } from '@angular/router';
 import { MzToastService } from 'ng2-materialize';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -36,7 +36,8 @@ export class GroupCreateComponent implements OnInit {
   }
 
   createGroup() {
-    // this.groupService.createGroup(this.createGroupModel)
+    const group = this.createGroupForm.value;
+    this.groupService.createGroup(group);
 
     // this.groupService
   }
