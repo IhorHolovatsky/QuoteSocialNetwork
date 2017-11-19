@@ -20,12 +20,15 @@
                                     <span class="profile-photoLabel">Фото: </span>
                                     <div class="profile-photoLabelContainer">
                                         <img class="profile-photoPreview" [src]="userProfileModel.photoURL">
+                                        <button class="profile-photoSelectButton" mz-button (click)="photoInput.click()" type="button">Обрати</button>
                                     </div>
-                                    <input formControlName="photo"
+                                    <input [style.display]="'none'"
+                                           formControlName="photo"
                                            (change)="photoUpdloaded($event)" 
                                            type="file" 
                                            accept="image/*"
-                                           id="input-photo" />
+                                           id="input-photo"
+                                           #photoInput />
                             </mz-input-container>
                       </div>
                   </div>

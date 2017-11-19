@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using QuoteSocialNetwork.API.Controllers;
 using QuoteSocialNetwork.Data;
 using QuoteSocialNetwork.Data.Generated;
@@ -21,16 +22,33 @@ namespace QuoteSocialNetworkAPI.Controllers
             _dbContext = dbContext;
         }
 
-        // GET api/values
+        // GET api/user
         [HttpGet]
         public IEnumerable<User> Get(int itemsPerPage = 20, 
                                      int pageNumber = 0)
         {
-            var a = User;
             return _dbContext.Users.Skip(itemsPerPage * pageNumber)
                                    .Take(itemsPerPage)
                                    .OrderBy(u => u.FullName)
                                    .ToList();
+        }
+
+        // PATCH api/user
+        [HttpPatch]
+        public User Patch([FromBody] User user) {
+            var userInDb = _dbContext.Users.FirstOrDefault(u => u.Id.Equals(user.Id));
+
+            if (userInDb == null) {
+                return null;
+            }
+
+            userInDb.FullName = user.FullName;
+            userInDb.PhotoUrl = user.PhotoUrl;
+
+            _dbContext.Entry(userInDb).State = EntityState.Modified;
+            _dbContext.SaveChanges();
+
+            return user;
         }
 
         [HttpGet]

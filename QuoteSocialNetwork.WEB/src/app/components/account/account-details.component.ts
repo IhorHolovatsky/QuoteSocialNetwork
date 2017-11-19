@@ -23,6 +23,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
     photo: null,
     photoURL: '',
     phoneNumber: '',
+    id: ''
   };
   userProfile: firebase.UserInfo;
 
@@ -72,6 +73,8 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
         photoURL: [this.userProfileModel.photoURL]
       }
     );
+
+    this.userProfileModel.id = this.user.uid;
   }
 
   saveUserProfile() {
@@ -108,6 +111,8 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
                     .catch(error => {
                       this.handleError(error);
                     });
+
+          this.userService.updateUserInLocalDb(this.userProfileModel);
       })
       .catch(error => {
         this.handleError(error);

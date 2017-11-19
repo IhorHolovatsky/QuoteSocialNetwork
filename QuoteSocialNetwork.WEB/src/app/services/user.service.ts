@@ -149,4 +149,18 @@ export class UserService extends BaseService {
                             }
                         });
   }
+
+  updateUserInLocalDb(user) {
+    return this.userRest.patch({
+                          Id: user.id,
+                          FullName: user.displayName,
+                          Email: user.email,
+                          PhotoUrl: user.photoURL
+                        })
+                        .toPromise()
+                        .then((result) => {
+                            console.log(result);
+                            return result;
+                        });
+  }
 }
