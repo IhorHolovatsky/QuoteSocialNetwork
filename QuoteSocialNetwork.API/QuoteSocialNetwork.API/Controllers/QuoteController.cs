@@ -4,13 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using QuoteSocialNetwork.API.Controllers;
 using QuoteSocialNetwork.Data;
 using QuoteSocialNetwork.Data.Generated;
 
 namespace QuoteSocialNetworkAPI.Controllers
 {
     [Route("api/[controller]")]
-    public class QuoteController : Controller
+    public class QuoteController : BaseApiController
     {
         private readonly QuoteNetDatabaseContext _dbContext;
 
@@ -38,6 +39,27 @@ namespace QuoteSocialNetworkAPI.Controllers
             return _dbContext.Quotes.Find(quoteId);
         }
 
+        
+        
+        // GET api/quotes/user
+        [Authorize] 
+        [HttpGet("user")]
+        public List<Quote> GetUsersQuotes() {
+            return _dbContext.Quotes.Where(q => q.UserId == UserId)
+                                    .OrderByDescending(q => q.CreatedAt)
+                                    .ToList();
+        }
+
+          
+        // GET api/user/quotes/5
+        [Authorize] 
+        [HttpGet("user/{userId}")]
+        public List<Quote> GetUsersQuotes(string userId) {
+            return _dbContext.Quotes.Where(q => q.UserId == (userId ?? UserId))
+                                    .ToList();
+        }
+
+
         // POST api/quotes
         [Authorize] 
         [HttpPost]
@@ -49,6 +71,7 @@ namespace QuoteSocialNetworkAPI.Controllers
         }
 
         // DELETE api/quotes/5
+        [Authorize] 
         [HttpDelete("{quoteId}")]
         public Quote Delete(Guid quoteId)
         {

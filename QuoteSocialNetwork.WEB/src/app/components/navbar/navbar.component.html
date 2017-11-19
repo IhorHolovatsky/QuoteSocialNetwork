@@ -23,19 +23,19 @@
                         <mz-sidenav-link>
                             <a [routerLink]="['quotes/create']" class="waves-effect">Написати цитату</a>
                         </mz-sidenav-link>
-                        <mz-sidenav-link [active]="true">
+                        <mz-sidenav-link>
                             <a href="#" class="waves-effect">Створити групу</a>
                         </mz-sidenav-link>
                         <mz-sidenav-divider></mz-sidenav-divider>
                         <mz-sidenav-link>
                             <a [routerLink]="['quotes']" class="waves-effect">Мої цитати</a>
                         </mz-sidenav-link>
-                        <mz-sidenav-link [active]="true">
+                        <mz-sidenav-link>
                             <a href="#" class="waves-effect">Мої групи</a>
                         </mz-sidenav-link>
                         <mz-sidenav-divider></mz-sidenav-divider>
                         <mz-sidenav-link>
-                         <a href="#" (click)="logout()" class="waves-effect">Вийти</a>
+                         <a (click)="logout()" class="waves-effect">Вийти</a>
                         </mz-sidenav-link>
                 </mz-sidenav>
             </mz-navbar-item>

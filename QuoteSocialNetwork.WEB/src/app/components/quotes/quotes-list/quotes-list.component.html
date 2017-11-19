@@ -4,8 +4,14 @@
   <div>
   </div>  
   <div>
-    <div *ngFor="let quote of quotes">
-        {{quote}}
+    <div class="quote-block" *ngFor="let quote of quotes">
+        <div class="quote-text">
+          <span [innerHTML]="quote.text"></span>
+        </div>
+        <div class="quote-time">
+          <span>{{quote.createdAt | date: 'dd/MM/yyyy hh:mm' }}</span>
+          <a class="quote-remove-link" (click)="removeQuote(quote)">Видалити</a>
+        </div>
     </div>
   </div>
 </div>

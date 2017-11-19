@@ -5,6 +5,7 @@ import { HubConnection } from '@aspnet/signalr-client';
 import { environment } from '../../environments/environment';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { MzToastService } from 'ng2-materialize';
+import { Restangular } from 'ngx-restangular/dist/esm/src/ngx-restangular';
 
 @Injectable()
 export class QuoteService {
@@ -14,11 +15,33 @@ export class QuoteService {
 
   private hubConnection: HubConnection;
   private isSignalRInited: boolean;
+  private quoteRest: any;
 
   constructor(
     private firebase: AngularFireAuth,
-    private toastService: MzToastService
+    private toastService: MzToastService,
+    private rest: Restangular
   ) {
+    this.quoteRest = this.rest.all('quote');
+  }
+
+  public postQuote(quote): Promise<any> {
+    // replace new lines
+    quote.Text = quote.Text.replace(/\n/ig, '<br>');
+
+    return this.quoteRest.post(quote)
+                         .toPromise()
+                         .then((result) => {
+                            return result;
+                         });
+  }
+
+  public getQuotes(userId): Promise<any> {
+    return this.quoteRest.get('user', {userId: userId})
+                         .toPromise()
+                         .then((result) => {
+                             return result;
+                         });
   }
 
   public createQuote(quote): Promise<any> {
@@ -29,6 +52,15 @@ export class QuoteService {
                                  this.quotes.push(data);
                                  return data;
                                });
+  }
+
+  public deteleQuote(quoteId): Promise<any> {
+    return this.quoteRest.one(quoteId)
+                         .remove()
+                         .toPromise()
+                         .then((result) => {
+                           return result;
+                         });
   }
 
   private init() {

@@ -18,5 +18,6 @@
   <ItemGroup>
     <ProjectReference Include="..\QuoteSocialNetwork.BLL\QuoteSocialNetwork.BLL.csproj" />
     <ProjectReference Include="..\QuoteSocialNetwork.Data\QuoteSocialNetwork.Data.csproj" />
+    <ProjectReference Include="..\QuoteSocialNetwork.UTIL\QuoteSocialNetwork.UTIL.csproj" />
   </ItemGroup>
 </Project>

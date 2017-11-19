@@ -1,16 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using QuoteSocialNetwork.API.Controllers;
 using QuoteSocialNetwork.Data;
 using QuoteSocialNetwork.Data.Generated;
 
 namespace QuoteSocialNetworkAPI.Controllers
 {
     [Route("api/[controller]")]
-    public class UserController : Controller
+    public class UserController : BaseApiController
     {
         private readonly QuoteNetDatabaseContext _dbContext;
         

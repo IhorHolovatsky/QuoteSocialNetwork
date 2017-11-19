@@ -55,6 +55,7 @@ export class UserService extends BaseService {
                                    throw new Error(Constants.FIREBASE_ERRORS[result.message]);
                                  }
 
+                                 localStorage.setItem('token', resultJson.He);
                                  return true;
                              })
                              .catch((error) => {
@@ -67,6 +68,7 @@ export class UserService extends BaseService {
     return this.firebase.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
                              .then(signInResult => {
                                 this.saveUserToLocalDb(signInResult.user);
+                                localStorage.setItem('token', signInResult.credential.accessToken);
                                 return true;
                              });
   }
@@ -85,6 +87,7 @@ export class UserService extends BaseService {
     return this.firebase.auth.signInWithPopup(new firebase.auth.TwitterAuthProvider())
                              .then(signInResult => {
                                 this.saveUserToLocalDb(signInResult.user);
+                                localStorage.setItem('token', signInResult.credential.accessToken);
                                 return true;
                              });
   }
@@ -102,10 +105,9 @@ export class UserService extends BaseService {
   loginGoogle(): Promise<any> {
     return this.firebase.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
                              .then(signInResult => {
-                                return this.saveUserToLocalDb(signInResult.user)
-                                           .then(result => {
-                                              return true;
-                                           });
+                                this.saveUserToLocalDb(signInResult.user);
+                                localStorage.setItem('token', signInResult.credential.accessToken);
+                                return true;
                              })
                              .catch(error => {
                                throw error;
@@ -125,6 +127,7 @@ export class UserService extends BaseService {
   logout(): Promise<any> {
     return this.firebase.auth.signOut()
                              .then(result => {
+                               localStorage.removeItem('token');
                                return result;
                              });
   }

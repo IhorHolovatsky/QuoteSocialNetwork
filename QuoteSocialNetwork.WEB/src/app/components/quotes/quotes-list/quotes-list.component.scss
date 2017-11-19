@@ -1,0 +1,28 @@
+.quote-block {
+    position: relative;
+    border-radius: 15px;
+    background-color: rgba(33, 150, 243, 0.09);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.22);
+    padding: 10px;
+    text-align: left;
+    color: #4f4f4f;
+    margin: 20px 0;
+
+    .quote-text {
+        margin-bottom: 20px;
+        word-wrap: break-word;
+    }
+
+    .quote-time {
+        font-size: 12px;
+        color: rgba(0, 0, 0, 0.4);
+        position: absolute;
+        bottom: 0;
+        left: 10px;
+    }
+
+    .quote-remove-link {
+        padding-left: 10px;
+        cursor: pointer;
+    }
+}

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { QuoteService } from '../../../services/quote.service';
 import { MzToastService } from 'ng2-materialize';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-quote-create',
@@ -11,28 +13,35 @@ import { MzToastService } from 'ng2-materialize';
 export class QuoteCreateComponent implements OnInit {
   createQuoteForm: FormGroup;
   createQuoteModel = {
-    text: ''
+    Text: ''
   };
+  currentUser;
+
   constructor(
     private formBuilder: FormBuilder,
     private quoteService: QuoteService,
-    private toastService: MzToastService
+    private router: Router,
+    private toastService: MzToastService,
+    private firebase: AngularFireAuth
   ) { }
 
   ngOnInit() {
     this.createQuoteForm = this.formBuilder.group(
       {
-        quoteText: [this.createQuoteModel.text, Validators.compose([Validators.required])]
+        Text: [this.createQuoteModel.Text, Validators.compose([Validators.required])]
       }
     );
+    this.currentUser = this.firebase.auth.currentUser;
   }
 
   createQuote() {
     const quote = this.createQuoteForm.value;
+    quote.UserId = this.currentUser.uid;
+    quote.CreatedAt = new Date();
 
-    this.quoteService.createQuote(quote.quoteText)
+    this.quoteService.postQuote(quote)
                      .then(data => {
-
+                        this.router.navigate(['/quotes']);
                      })
                      .catch(err => {
                      });

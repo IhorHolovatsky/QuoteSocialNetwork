@@ -8,7 +8,7 @@ export function RestangularConfigFactory(RestangularProvider) {
     const bearerToken = localStorage.getItem('token');
 
     return {
-      headers: Object.assign({}, headers, { 'Authorization': `${bearerToken}` })
+      headers: Object.assign({}, headers, { 'Authorization': `Bearer ${bearerToken}` })
     };
   });
 }

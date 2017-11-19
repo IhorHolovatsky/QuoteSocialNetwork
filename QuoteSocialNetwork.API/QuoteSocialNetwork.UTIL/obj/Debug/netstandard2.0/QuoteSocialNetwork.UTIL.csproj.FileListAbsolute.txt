@@ -1,0 +1,8 @@
+G:\Diploma project\QuoteSocialNetwork\QuoteSocialNetwork.API\QuoteSocialNetwork.UTIL\bin\Debug\netstandard2.0\QuoteSocialNetwork.UTIL.deps.json
+G:\Diploma project\QuoteSocialNetwork\QuoteSocialNetwork.API\QuoteSocialNetwork.UTIL\bin\Debug\netstandard2.0\QuoteSocialNetwork.UTIL.dll
+G:\Diploma project\QuoteSocialNetwork\QuoteSocialNetwork.API\QuoteSocialNetwork.UTIL\bin\Debug\netstandard2.0\QuoteSocialNetwork.UTIL.pdb
+G:\Diploma project\QuoteSocialNetwork\QuoteSocialNetwork.API\QuoteSocialNetwork.UTIL\obj\Debug\netstandard2.0\QuoteSocialNetwork.UTIL.csproj.CoreCompileInputs.cache
+G:\Diploma project\QuoteSocialNetwork\QuoteSocialNetwork.API\QuoteSocialNetwork.UTIL\obj\Debug\netstandard2.0\QuoteSocialNetwork.UTIL.AssemblyInfoInputs.cache
+G:\Diploma project\QuoteSocialNetwork\QuoteSocialNetwork.API\QuoteSocialNetwork.UTIL\obj\Debug\netstandard2.0\QuoteSocialNetwork.UTIL.AssemblyInfo.cs
+G:\Diploma project\QuoteSocialNetwork\QuoteSocialNetwork.API\QuoteSocialNetwork.UTIL\obj\Debug\netstandard2.0\QuoteSocialNetwork.UTIL.dll
+G:\Diploma project\QuoteSocialNetwork\QuoteSocialNetwork.API\QuoteSocialNetwork.UTIL\obj\Debug\netstandard2.0\QuoteSocialNetwork.UTIL.pdb
