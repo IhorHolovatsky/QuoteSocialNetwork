@@ -12,6 +12,7 @@ export class QuotesListComponent implements OnInit {
 
   quotes = [];
   currentUser;
+  defaultImageUrl: String = 'assets/images/userPlaceholder.png';
 
   constructor(
     private quoteService: QuoteService,

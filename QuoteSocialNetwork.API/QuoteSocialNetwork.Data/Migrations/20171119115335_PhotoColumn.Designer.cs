@@ -11,9 +11,10 @@ using System;
 namespace QuoteSocialNetwork.Data.Migrations
 {
     [DbContext(typeof(QuoteNetDatabaseContext))]
-    partial class QuoteNetDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20171119115335_PhotoColumn")]
+    partial class PhotoColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -1,12 +1,19 @@
+.quote-line {
+    margin: 20px 0;
+}
+
 .quote-block {
+    display: inline-block;
+    width: 80%;
     position: relative;
     border-radius: 15px;
     background-color: rgba(33, 150, 243, 0.09);
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.22);
     padding: 10px;
     text-align: left;
+    vertical-align: top;
     color: #4f4f4f;
-    margin: 20px 0;
+    margin-left: 15px;
 
     .quote-text {
         margin-bottom: 20px;
@@ -21,8 +28,29 @@
         left: 10px;
     }
 
+    .quote-share {
+        float: right;
+        position: absolute;
+        bottom: 0;
+        right: 20px;
+
+        .fa {
+            margin: 0 5px;
+            cursor: pointer;
+        }
+    }
+
     .quote-remove-link {
         padding-left: 10px;
         cursor: pointer;
+    }
+}
+
+.user-block {
+    display: inline-block;
+
+    .avatar {
+        width: 60px;
+        height: 60px;
     }
 }

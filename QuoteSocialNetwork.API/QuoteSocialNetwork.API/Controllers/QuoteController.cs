@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using QuoteSocialNetwork.API.Controllers;
 using QuoteSocialNetwork.Data;
 using QuoteSocialNetwork.Data.Generated;
@@ -46,6 +47,7 @@ namespace QuoteSocialNetworkAPI.Controllers
         [HttpGet("user")]
         public List<Quote> GetUsersQuotes() {
             return _dbContext.Quotes.Where(q => q.UserId == UserId)
+                                    .Include(q => q.User)
                                     .OrderByDescending(q => q.CreatedAt)
                                     .ToList();
         }

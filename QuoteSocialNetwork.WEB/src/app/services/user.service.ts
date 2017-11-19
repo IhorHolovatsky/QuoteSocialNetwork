@@ -55,6 +55,7 @@ export class UserService extends BaseService {
                                    throw new Error(Constants.FIREBASE_ERRORS[result.message]);
                                  }
 
+                                 this.saveUserToLocalDb(resultJson);
                                  localStorage.setItem('token', resultJson.He);
                                  return true;
                              })
@@ -142,7 +143,8 @@ export class UserService extends BaseService {
                               this.userRest.post('add', {
                                 Id: user.uid,
                                 FullName: user.displayName,
-                                Email: user.email
+                                Email: user.email,
+                                PhotoUrl: user.photoURL
                               });
                             }
                         });
