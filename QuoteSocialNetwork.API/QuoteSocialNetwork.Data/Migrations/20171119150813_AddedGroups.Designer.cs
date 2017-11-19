@@ -11,9 +11,10 @@ using System;
 namespace QuoteSocialNetwork.Data.Migrations
 {
     [DbContext(typeof(QuoteNetDatabaseContext))]
-    partial class QuoteNetDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20171119150813_AddedGroups")]
+    partial class AddedGroups
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,8 +44,6 @@ namespace QuoteSocialNetwork.Data.Migrations
 
                     b.Property<DateTime?>("CreatedAt");
 
-                    b.Property<Guid?>("GroupId");
-
                     b.Property<DateTime?>("ModifiedAt");
 
                     b.Property<string>("Text");
@@ -52,8 +51,6 @@ namespace QuoteSocialNetwork.Data.Migrations
                     b.Property<string>("UserId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("GroupId");
 
                     b.HasIndex("UserId");
 
@@ -95,10 +92,6 @@ namespace QuoteSocialNetwork.Data.Migrations
 
             modelBuilder.Entity("QuoteSocialNetwork.Data.Generated.Quote", b =>
                 {
-                    b.HasOne("QuoteSocialNetwork.Data.Generated.Group", "Group")
-                        .WithMany("Quotes")
-                        .HasForeignKey("GroupId");
-
                     b.HasOne("QuoteSocialNetwork.Data.Generated.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
