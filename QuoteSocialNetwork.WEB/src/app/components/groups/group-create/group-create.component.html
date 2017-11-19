@@ -1,3 +1,27 @@
-<p>
-  group-create works!
-</p>
+<div class="section">
+  <div class="row">
+    <div class="col s6">
+      <form [formGroup]="createGroupForm" (ngSubmit)="createGroup()" novalidate>
+        <div class="section">
+          <h5>Напишіть назву нової групи:</h5>
+          <div class="row" [style.margin-top]="'35px'">
+            <mz-input-container class="col s12 m9">
+              <i mz-icon-mdi mz-textarea-prefix [icon]="'message-reply-text'">
+              </i>
+              <input mz-input mz-validation required formControlName="Name" type="text" [label]="'Назва групи'" placeholder="Напишіть назву групи"/>
+            </mz-input-container>
+            <mz-textarea-container>
+              <i mz-icon-mdi mz-textarea-prefix [icon]="'message-reply-text'">
+              </i>
+              <textarea mz-textarea [label]="'Цитата'" id="group-textarea" formControlName="Text" placeholder="Напишіть вашу цитату">
+                </textarea>
+            </mz-textarea-container>
+          </div>
+        </div>
+        <button mz-button [disabled]="!createGroupForm.valid" type="submit">Створити</button>
+        <br/>
+        <br/>
+      </form>
+    </div>
+  </div>
+</div>

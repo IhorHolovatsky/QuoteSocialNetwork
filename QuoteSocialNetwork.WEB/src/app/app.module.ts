@@ -23,6 +23,7 @@ import { environment } from '../environments/environment';
 import { AccountDetailsComponent } from './components/account/account-details.component';
 import { QuotesModule } from './components/quotes/quotes.module';
 import { RestangularConfigFactory } from './shared/restangular-config';
+import { GroupsModule } from './components/groups/groups.module';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { RestangularConfigFactory } from './shared/restangular-config';
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     QuotesModule,
+    GroupsModule,
     RestangularModule.forRoot(RestangularConfigFactory),
   ],
   providers: [{ provide: APP_BASE_HREF, useValue: '/' },

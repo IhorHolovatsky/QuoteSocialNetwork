@@ -13,7 +13,7 @@
               <span [innerHTML]="quote.text"></span>
             </div>
             <div class="quote-time">
-              <span>{{quote.createdAt | date: 'dd/MM/yyyy hh:mm' }}</span>
+              <span>{{quote.createdAt | date: 'dd/MM/yyyy HH:mm' }}</span>
               <a class="quote-remove-link" (click)="removeQuote(quote)">Видалити</a>            
             </div>
             <div class="quote-share">
