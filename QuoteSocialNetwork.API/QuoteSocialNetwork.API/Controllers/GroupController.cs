@@ -36,6 +36,11 @@ namespace QuoteSocialNetwork.API.Controllers
         [HttpPost]
         public Group Post([FromBody] Group group)
         {
+            group.UserGroups.Add(new UserGroup{
+                Group = group,
+                UserId = UserId
+            });
+
             var savedGroup = _dbContext.Groups.Add(group);
             _dbContext.SaveChanges();
 

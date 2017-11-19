@@ -183,11 +183,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "G:\\Diploma project\\QuoteSocialNetwork\\QuoteSocialNetwork.API\\QuoteSocialNetwork.UTIL\\QuoteSocialNetwork.UTIL.csproj",
+      "projectUniqueName": "g:\\Diploma project\\QuoteSocialNetwork\\QuoteSocialNetwork.API\\QuoteSocialNetwork.UTIL\\QuoteSocialNetwork.UTIL.csproj",
       "projectName": "QuoteSocialNetwork.UTIL",
-      "projectPath": "G:\\Diploma project\\QuoteSocialNetwork\\QuoteSocialNetwork.API\\QuoteSocialNetwork.UTIL\\QuoteSocialNetwork.UTIL.csproj",
+      "projectPath": "g:\\Diploma project\\QuoteSocialNetwork\\QuoteSocialNetwork.API\\QuoteSocialNetwork.UTIL\\QuoteSocialNetwork.UTIL.csproj",
       "packagesPath": "C:\\Users\\Ihor\\.nuget\\packages\\",
-      "outputPath": "G:\\Diploma project\\QuoteSocialNetwork\\QuoteSocialNetwork.API\\QuoteSocialNetwork.UTIL\\obj\\",
+      "outputPath": "g:\\Diploma project\\QuoteSocialNetwork\\QuoteSocialNetwork.API\\QuoteSocialNetwork.UTIL\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
