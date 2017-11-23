@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace QuoteSocialNetwork.Data.Generated
 {
@@ -15,6 +16,7 @@ namespace QuoteSocialNetwork.Data.Generated
         public Guid? GroupId { get; set; }
 
         [ForeignKey("UserId")]
+        [Required]
         public virtual User User { get; set; }
 
         public virtual Group Group { get; set; }

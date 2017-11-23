@@ -75,6 +75,14 @@ namespace QuoteSocialNetwork.Data
                 .HasOne(ug => ug.Group)
                 .WithMany(g => g.Quotes)
                 .HasForeignKey(ug => ug.GroupId);;
+
+            modelBuilder.Entity<Group>()
+                        .HasMany(g => g.Quotes)
+                        .WithOne(q => q.Group)
+                        .OnDelete(DeleteBehavior.Cascade);
+
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
