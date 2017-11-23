@@ -16,8 +16,12 @@ export class GroupService {
     this.groupRest = this.rest.all('group');
   }
 
-  public getGroup(groupId) {
-
+  public getGroup(groupId): Promise<any> {
+    return this.groupRest.get(groupId)
+                         .toPromise()
+                         .then((result) => {
+                           return result;
+                         });
   }
 
   public getUserGroups(): Promise<any> {
@@ -35,6 +39,15 @@ export class GroupService {
                            return result;
                          });
 
+  }
+
+  public deleteGroup(groupId): Promise<any> {
+    return this.groupRest.one(groupId)
+                         .remove()
+                         .toPromise()
+                         .then((result) => {
+                           return result;
+                         });
   }
 
   public joinToGroup(groupId) {

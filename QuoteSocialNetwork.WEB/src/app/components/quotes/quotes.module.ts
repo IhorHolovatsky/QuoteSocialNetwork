@@ -25,6 +25,7 @@ import { QuoteService } from '../../services/quote.service';
       }])
   ],
   providers: [QuoteService],
-  declarations: [QuotesListComponent, QuoteCreateComponent, QuotesComponent]
+  declarations: [QuotesListComponent, QuoteCreateComponent, QuotesComponent],
+  exports: [QuotesListComponent]
 })
 export class QuotesModule { }

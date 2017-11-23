@@ -37,7 +37,6 @@ export class QuoteCreateComponent implements OnInit {
   createQuote() {
     const quote = this.createQuoteForm.value;
     quote.UserId = this.currentUser.uid;
-    quote.CreatedAt = new Date();
 
     this.quoteService.postQuote(quote)
                      .then(data => {

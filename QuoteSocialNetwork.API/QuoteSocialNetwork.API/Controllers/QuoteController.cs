@@ -69,6 +69,7 @@ namespace QuoteSocialNetworkAPI.Controllers
         {
             var quoteEntry = _dbContext.Quotes.Add(value);
             _dbContext.SaveChanges();
+            _dbContext.Entry(quoteEntry.Entity).Reference(q => q.User).Load();
             return quoteEntry.Entity;
         }
 

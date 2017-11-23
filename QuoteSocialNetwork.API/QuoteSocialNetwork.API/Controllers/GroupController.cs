@@ -37,9 +37,15 @@ namespace QuoteSocialNetwork.API.Controllers
         [Route("user")]
         public IEnumerable<Group> GetUserGroups()
         {
-            return _dbContext.Groups.Where(g => g.UserGroups.Any(ug => ug.UserId == UserId))
-                                    .OrderBy(q => q.Name)
-                                    .ToList();
+            var groups = from g in _dbContext.Groups
+                         join ug in _dbContext.UserGroups on g.Id equals ug.GroupId
+                         where ug.UserId == UserId
+                         orderby g.Name
+                         select g;
+
+            groups.Include(g => g.Quotes).Load();
+
+            return groups.ToList();
         }
 
         // GET api/group/5
@@ -48,9 +54,9 @@ namespace QuoteSocialNetwork.API.Controllers
         public Group Get(Guid groupId)
         {
             return _dbContext.Groups.Include(g => g.UserGroups)
-                                    .ThenInclude(ug => ug.Select(userGroup => userGroup.User))
+                                    .ThenInclude(ug => ug.User)
                                     .Include(g => g.Quotes)
-                                    .ThenInclude(q => q.Select(quote => quote.User))
+                                    .ThenInclude(q => q.User)
                                     .FirstOrDefault(g => g.Id == groupId);
         }
 
@@ -117,6 +123,16 @@ namespace QuoteSocialNetwork.API.Controllers
             _dbContext.SaveChanges();
 
             return userGroup;
+        }
+
+        // DELETE api/group/5
+        [Authorize] 
+        [HttpDelete("{groupId}")]
+        public Group Delete(Guid groupId)
+        {
+            var deletedQuote = _dbContext.Groups.Remove(Get(groupId));
+            _dbContext.SaveChanges();
+            return deletedQuote.Entity;
         }
     }
 }

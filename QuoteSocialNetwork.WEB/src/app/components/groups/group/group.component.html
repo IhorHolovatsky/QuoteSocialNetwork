@@ -1,3 +1,50 @@
-<p>
-  group works!
-</p>
+<div class="return-back">
+  <button mz-button class="return-back-button" [routerLink]="['/groups']">
+    <i mz-icon [icon]="'keyboard_backspace'" [align]="'left'"></i>
+    Повернутись до списку груп
+  </button>
+</div>
+<div class="group-container">
+  <div class="group-title-container">
+    <img class="group-image" [src]="defaultImageUrl">
+    <div class="title">{{group.name}}</div>
+    <div class="members-count">Кількість учасників: {{group.users.length}}</div>
+    <button class="group-menu" id="btn-group-menu">
+      <i mz-icon-mdi [icon]="'dots-vertical'"></i>
+    </button>
+  </div>
+
+  <div class="group-content-container">
+    <div *ngIf="group.quotes.length === 0" class="no-quotes">{{ group.quotes.length > 0 ? group.quotes[0].text : 'Поки що немає цитат...' }}</div>
+
+    <app-quotes-list [quotes]="group.quotes"></app-quotes-list>
+
+  </div>
+  <div class="group-quote-container">
+    <mz-textarea-container>
+      <textarea mz-textarea [(ngModel)]="quoteText" placeholder="Напишіть вашу цитату" length="1024" (keydown)="postQuote($event)"></textarea>
+      <i mz-icon-mdi mz-textarea-prefix [icon]="'send'">
+      </i>
+    </mz-textarea-container>
+  </div>
+
+</div>
+
+<mz-dropdown class="group-menu-container" [id]="'group-menu'" [align]="'left'" [belowOrigin]="true" [dropdownButtonId]="'btn-group-menu'" [gutter]="true"
+  [inDuration]="300" [outDuration]="300" [stopPropagation]="true">
+  <mz-dropdown-item>
+    <span>
+        <i class="menu-icon" mz-icon-mdi mz-textarea-prefix [icon]="'content-copy'">
+        </i>Copy invite link</span>
+  </mz-dropdown-item>
+  <mz-dropdown-item>
+    <span style="color:red" (click)="deleteGroup()">
+        <i class="menu-icon"  mz-icon-mdi mz-textarea-prefix [icon]="'delete'">
+        </i>Delete group</span>
+  </mz-dropdown-item>
+  <mz-dropdown-item>
+    <span style="color:gray">
+        <i class="menu-icon" mz-icon-mdi mz-textarea-prefix [icon]="'exit-to-app'">
+        </i>Leave group</span>
+  </mz-dropdown-item>
+</mz-dropdown>
