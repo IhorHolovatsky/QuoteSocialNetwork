@@ -4,7 +4,7 @@
   <div>
   </div>  
   <div>
-    <div class="quote-line" *ngFor="let quote of quotes">
+    <div [@fadeIn]="''" class="quote-line" *ngFor="let quote of quotes" [ngClass]="{ 'external' : quote.userId === currentUser.uid}">
         <div class="user-block">
             <img class="circle avatar" [src]="quote.user.photoUrl ? quote.user.photoUrl : defaultImageUrl">
         </div>
@@ -14,9 +14,9 @@
             </div>
             <div class="quote-time">
               <span>{{quote.createdAt | date: 'dd/MM/yyyy HH:mm' }}</span>
-              <a class="quote-remove-link" (click)="removeQuote(quote)">Видалити</a>            
+              <a *ngIf="quote.userId === currentUser.uid" class="quote-remove-link" (click)="removeQuote(quote)">Видалити</a>            
             </div>
-            <div class="quote-share">
+            <div *ngIf="quote.userId === currentUser.uid" class="quote-share">
                 <i style="color: #3b5998 !important" class="fa fa-facebook"></i>
                 <i style="color: #55acee !important" class="fa fa-twitter"></i>
                 <i style="color: #dd4b39 !important" class="fa fa-google"></i>                  

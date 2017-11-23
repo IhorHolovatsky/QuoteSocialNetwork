@@ -4,10 +4,10 @@
 
 .quote-block {
     display: inline-block;
-    width: 80%;
+    width: 65%;
     position: relative;
     border-radius: 15px;
-    background-color: rgba(33, 150, 243, 0.09);
+    background-color: rgba(109, 109, 109, 0.09);
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.22);
     padding: 10px;
     text-align: left;
@@ -43,6 +43,22 @@
     .quote-remove-link {
         padding-left: 10px;
         cursor: pointer;
+    }
+}
+
+.external {
+    width: 100%;
+    display: table;
+
+    .quote-block {          
+        float: right;
+        margin-left: 0px;
+        margin-right: 15px;
+        background-color: rgba(33, 150, 243, 0.09);
+    }
+
+    .user-block {
+        float: right;
     }
 }
 

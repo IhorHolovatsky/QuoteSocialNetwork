@@ -25,6 +25,7 @@ export class GroupListComponent implements OnInit {
     this.groupService.getUserGroups()
                      .then(g => {
                        this.groups = g;
+                       this.groupService.initSignalR(this.groups);
                      });
   }
 

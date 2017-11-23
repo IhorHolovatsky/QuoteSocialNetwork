@@ -14,8 +14,8 @@
     </button>
   </div>
 
-  <div class="group-content-container">
-    <div *ngIf="group.quotes.length === 0" class="no-quotes">{{ group.quotes.length > 0 ? group.quotes[0].text : 'Поки що немає цитат...' }}</div>
+  <div #quotesContainer class="group-content-container">
+    <div *ngIf="group.quotes.length === 0" class="no-quotes">Поки що немає цитат...</div>
 
     <app-quotes-list [quotes]="group.quotes"
                      (quoteDeleteEvent)="quoteDeletedHandler($event)"></app-quotes-list>
@@ -23,8 +23,8 @@
   </div>
   <div class="group-quote-container">
     <mz-textarea-container>
-      <textarea mz-textarea [(ngModel)]="quoteText" placeholder="Напишіть вашу цитату" length="1024" (keydown)="postQuote($event)"></textarea>
-      <i mz-icon-mdi mz-textarea-prefix [icon]="'send'">
+      <textarea mz-textarea [(ngModel)]="quoteText" placeholder="Напишіть вашу цитату" length="1024" (keydown.enter)="postQuote($event);false"></textarea>
+      <i mz-icon-mdi mz-textarea-prefix [icon]="'send'" (click)="saveQuote(quoteText);" style="cursor: pointer">
       </i>
     </mz-textarea-container>
   </div>
