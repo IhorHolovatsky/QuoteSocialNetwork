@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { QuoteService } from '../../../services/quote.service';
 import { MzToastService } from 'ng2-materialize';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -11,6 +11,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 export class QuotesListComponent implements OnInit {
 
   @Input() quotes;
+  @Output() quoteDeleteEvent: EventEmitter<any> = new EventEmitter<any>();
 
   currentUser;
   defaultImageUrl: String = 'assets/images/userPlaceholder.png';
@@ -42,6 +43,7 @@ export class QuotesListComponent implements OnInit {
                      .then(q => {
                         this.quotes = this.quotes.filter(f => f.id !== quote.id);
                         this.toastService.show('Цитата була успішно видалена!', 4000, 'green');
+                        this.quoteDeleteEvent.emit(q);
                      });
   }
 

@@ -68,6 +68,10 @@ export class GroupComponent implements OnInit {
                      });
   }
 
+  quoteDeletedHandler(quote) {
+    this.group.quotes = this.group.quotes.filter(q => q.id !== quote.id);
+  }
+
   deleteGroup() {
     this.groupService.deleteGroup(this.groupId)
                      .then(result => {

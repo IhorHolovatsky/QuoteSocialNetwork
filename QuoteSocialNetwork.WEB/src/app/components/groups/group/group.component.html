@@ -17,7 +17,8 @@
   <div class="group-content-container">
     <div *ngIf="group.quotes.length === 0" class="no-quotes">{{ group.quotes.length > 0 ? group.quotes[0].text : 'Поки що немає цитат...' }}</div>
 
-    <app-quotes-list [quotes]="group.quotes"></app-quotes-list>
+    <app-quotes-list [quotes]="group.quotes"
+                     (quoteDeleteEvent)="quoteDeletedHandler($event)"></app-quotes-list>
 
   </div>
   <div class="group-quote-container">
