@@ -10,6 +10,10 @@
     <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.0-alpha2-final" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.0" />
+
+    <!-- For Prod -->
+    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.0.1"/>
+    <PackageReference Include="Microsoft.AspNetCore.Server.IISIntegration" Version="2.0.1"/>
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
@@ -19,5 +23,8 @@
     <ProjectReference Include="..\QuoteSocialNetwork.BLL\QuoteSocialNetwork.BLL.csproj" />
     <ProjectReference Include="..\QuoteSocialNetwork.Data\QuoteSocialNetwork.Data.csproj" />
     <ProjectReference Include="..\QuoteSocialNetwork.UTIL\QuoteSocialNetwork.UTIL.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+     <None Include="web.config" CopyToPublishDirectory="Always" />
   </ItemGroup>
 </Project>

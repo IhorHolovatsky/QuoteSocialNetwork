@@ -4,7 +4,7 @@
   <div>
   </div>  
   <div>
-    <div [@fadeIn]="''" class="quote-line" *ngFor="let quote of quotes" [ngClass]="{ 'external' : quote.userId === currentUser.uid}">
+    <div [@fadeIn]="''" class="quote-line" *ngFor="let quote of quotes" [ngClass]="{ 'external' : quote.userId === currentUser.uid && hasInputQuotes}">
         <div class="user-block">
             <img class="circle avatar" [src]="quote.user.photoUrl ? quote.user.photoUrl : defaultImageUrl">
         </div>
