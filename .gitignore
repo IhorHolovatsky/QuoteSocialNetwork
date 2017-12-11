@@ -22,3 +22,5 @@ QuoteSocialNetwork.API/[Ll]og/
 QuoteSocialNetwork.API/.vscode/
 QuoteSocialNetwork.API/QuoteSocialNetwork.API/bin
 QuoteSocialNetwork.API/QuoteSocialNetwork.API/obj
+*.cache
+QuoteSocialNetwork.API/QuoteSocialNetwork.UTIL/obj/Debug/netstandard2.0/QuoteSocialNetwork.UTIL.csproj.CoreCompileInputs.cache
