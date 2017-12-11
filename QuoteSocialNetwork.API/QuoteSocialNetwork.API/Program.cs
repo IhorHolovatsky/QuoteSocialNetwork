@@ -14,8 +14,8 @@ namespace QuoteSocialNetworkAPI
     {
         public static void Main(string[] args)
         {
-            //BuildWebHost(args).Run();
-            BuildProdWebHost(args).Run();
+            BuildWebHost(args).Run();
+            //BuildProdWebHost(args).Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
