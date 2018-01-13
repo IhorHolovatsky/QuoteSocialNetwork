@@ -108,10 +108,10 @@ namespace QuoteSocialNetwork.API.Controllers
         [Route("leave/{groupId}")]
         public object Leave(Guid groupId)
         {
-            var group = _dbContext.Groups.Include(g => g.UserGroups).First(g => g.Id == groupId);
-            var userGroup = group.UserGroups.FirstOrDefault(ug => ug.UserId == UserId);
+            var userGroup = _dbContext.UserGroups.FirstOrDefault(ug => ug.UserId == UserId
+                                                                       && ug.GroupId == groupId);
 
-            if (group == null)
+            if (userGroup == null)
             {
                 return new
                 {
@@ -128,9 +128,17 @@ namespace QuoteSocialNetwork.API.Controllers
         // DELETE api/group/5
         [Authorize] 
         [HttpDelete("{groupId}")]
-        public Group Delete(Guid groupId)
+        public object Delete(Guid groupId)
         {
-            var deletedQuote = _dbContext.Groups.Remove(Get(groupId));
+            var group = Get(groupId);
+
+            if (group == null){
+                return new {
+                    error = "Group was not found"
+                };
+            }
+
+            var deletedQuote = _dbContext.Groups.Remove(group);
             _dbContext.SaveChanges();
             return deletedQuote.Entity;
         }
