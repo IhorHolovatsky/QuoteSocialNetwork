@@ -27,6 +27,10 @@
   }
 }
 
+:host /deep/ #nav-mobile {
+  display: block !important;
+}
+
 :host #{'/deep/'} {
   a {
     i.caret {
