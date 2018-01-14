@@ -11,6 +11,7 @@ import { GroupComponent } from './group/group.component';
 import { QuotesModule } from '../quotes/quotes.module';
 import { QuotesListComponent } from '../quotes/quotes-list/quotes-list.component';
 import { QuoteService } from '../../services/quote.service';
+import { AuthGuard } from '../../auth.guard';
 
 @NgModule({
   imports: [
@@ -22,15 +23,18 @@ import { QuoteService } from '../../services/quote.service';
     RouterModule.forChild([
       {
         path: 'groups',
-        component: GroupListComponent
+        component: GroupListComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'groups/create',
-        component: GroupCreateComponent
+        component: GroupCreateComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'groups/:groupId',
-        component: GroupComponent
+        component: GroupComponent,
+        canActivate: [AuthGuard]
       }])
   ],
   declarations: [GroupCreateComponent, GroupListComponent, GroupComponent],

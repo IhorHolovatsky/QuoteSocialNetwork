@@ -4,9 +4,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MaterializeModule } from 'ng2-materialize';
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireAuthModule , AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { RestangularModule } from 'ngx-restangular';
 
@@ -24,7 +25,6 @@ import { AccountDetailsComponent } from './components/account/account-details.co
 import { QuotesModule } from './components/quotes/quotes.module';
 import { RestangularConfigFactory } from './shared/restangular-config';
 import { GroupsModule } from './components/groups/groups.module';
-
 
 @NgModule({
   declarations: [
@@ -44,7 +44,7 @@ import { GroupsModule } from './components/groups/groups.module';
     AngularFireDatabaseModule,
     QuotesModule,
     GroupsModule,
-    RestangularModule.forRoot(RestangularConfigFactory),
+    RestangularModule.forRoot([Router, AngularFireAuth], RestangularConfigFactory),
   ],
   providers: [{ provide: APP_BASE_HREF, useValue: '/' },
               UserService,

@@ -27,7 +27,7 @@ export class QuotesListComponent implements OnInit, OnDestroy {
   @Input() quotes;
   @Output() quoteDeleteEvent: EventEmitter<any> = new EventEmitter<any>();
 
-  currentUser;
+  currentUser = { uid: ''};
   defaultImageUrl: String = 'assets/images/userPlaceholder.png';
 
   private subscriptions: Subscription[] = [];

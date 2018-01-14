@@ -8,6 +8,7 @@ import { QuotesListComponent } from './quotes-list/quotes-list.component';
 import { QuoteCreateComponent } from './quote-create/quote-create.component';
 import { QuotesComponent } from './quotes.component';
 import { QuoteService } from '../../services/quote.service';
+import { AuthGuard } from '../../auth.guard';
 
 @NgModule({
   imports: [
@@ -17,11 +18,13 @@ import { QuoteService } from '../../services/quote.service';
     RouterModule.forChild([
       {
         path: 'quotes',
-        component: QuotesListComponent
+        component: QuotesListComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'quotes/create',
-        component: QuoteCreateComponent
+        component: QuoteCreateComponent,
+        canActivate: [AuthGuard]
       }])
   ],
   providers: [QuoteService],

@@ -34,7 +34,7 @@
 <mz-dropdown class="group-menu-container" [id]="'group-menu'" [align]="'left'" [belowOrigin]="true" [dropdownButtonId]="'btn-group-menu'" [gutter]="true"
   [inDuration]="300" [outDuration]="300" [stopPropagation]="true">
   <mz-dropdown-item>
-    <span>
+    <span (click)="copyInviteLink()">
         <i class="menu-icon" mz-icon-mdi mz-textarea-prefix [icon]="'content-copy'">
         </i>Copy invite link</span>
   </mz-dropdown-item>
@@ -44,7 +44,7 @@
         </i>Delete group</span>
   </mz-dropdown-item>
   <mz-dropdown-item>
-    <span style="color:gray">
+    <span style="color:gray" (click)="leaveGroup()">
         <i class="menu-icon" mz-icon-mdi mz-textarea-prefix [icon]="'exit-to-app'">
         </i>Leave group</span>
   </mz-dropdown-item>

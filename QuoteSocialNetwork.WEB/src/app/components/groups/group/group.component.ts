@@ -122,6 +122,29 @@ export class GroupComponent implements OnInit, OnDestroy, AfterViewInit {
                      });
   }
 
+  copyInviteLink() {
+    const inviteLink = window.location.protocol + '//' +
+                       window.location.host + '/group/join/' + this.groupId;
+
+    const textarea = document.createElement('textarea');
+    document.body.appendChild(textarea);
+
+    textarea.value = inviteLink;
+    textarea.select();
+
+    try {
+      document.execCommand('Copy');
+    } catch (error) {
+      console.log('Unable to copy invite link');
+    }
+
+    textarea.remove();
+  }
+
+  leaveGroup() {
+
+  }
+
   scrollQuotesContainerToBottom(): void {
     try {
         this.quotesContainer.nativeElement.scrollTop = this.quotesContainer.nativeElement.scrollHeight;

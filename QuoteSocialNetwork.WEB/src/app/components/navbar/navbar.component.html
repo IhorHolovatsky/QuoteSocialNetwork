@@ -2,13 +2,13 @@
   <mz-navbar [navbarClass]="'light-blue lighten-1'">
         <mz-navbar-item-container [align]="'left'">
             <mz-navbar-item *ngIf="isLoggedIn">
-                <button class="SideNav-CollapseButton" 
-                        mz-button
-                        [id]="'btn-sidenav'"
-                        [float]="true"
-                        [flat]="true">
-                <i mz-icon class="black-text" [icon]="'menu'"></i>
-                </button>    
+                <a  [id]="'btn-sidenav'">
+                        <!-- class="SideNav-CollapseButton"  -->
+                        <!-- [float]="true"
+                        [flat]="true" -->
+                        Меню
+                <!-- <i mz-icon class="black-text" [icon]="'menu'"></i> -->
+                        </a> 
                 <mz-sidenav [id]="'sidenav'" [collapseButtonId]="'btn-sidenav'" [closeOnClick]="true">
                         <mz-sidenav-header>
                           <div class="user-view">
@@ -38,6 +38,9 @@
                          <a (click)="logout()" class="waves-effect">Вийти</a>
                         </mz-sidenav-link>
                 </mz-sidenav>
+            </mz-navbar-item>
+            <mz-navbar-item *ngIf="isLoggedIn">
+                <a [routerLink]="['quotes/create']">Написати цитату</a>
             </mz-navbar-item>
         </mz-navbar-item-container>
         <a href="#" class="brand-logo center"><a [routerLink]="['home']">Лого</a></a>
