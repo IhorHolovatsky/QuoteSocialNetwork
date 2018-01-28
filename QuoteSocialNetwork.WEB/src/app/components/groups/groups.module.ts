@@ -23,22 +23,22 @@ import { AuthGuard } from '../../auth.guard';
     MaterializeModule.forRoot(),
     RouterModule.forChild([
       {
-        path: '',
+        path: 'groups',
         component: GroupListComponent,
         canActivate: [AuthGuard]
       },
       {
-        path: 'create',
+        path: 'groups/create',
         component: GroupCreateComponent,
         canActivate: [AuthGuard]
       },
       {
-        path: ':groupId',
+        path: 'groups/:groupId',
         component: GroupComponent,
         canActivate: [AuthGuard]
       },
       {
-        path: 'join/:groupId',
+        path: 'groups/join/:groupId',
         component: GroupJoinComponent,
         canActivate: [AuthGuard]
       }])

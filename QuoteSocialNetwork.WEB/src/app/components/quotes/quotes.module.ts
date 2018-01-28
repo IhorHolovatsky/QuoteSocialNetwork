@@ -17,12 +17,12 @@ import { AuthGuard } from '../../auth.guard';
     MaterializeModule.forRoot(),
     RouterModule.forChild([
       {
-        path: '',
+        path: 'quotes',
         component: QuotesListComponent,
         canActivate: [AuthGuard]
       },
       {
-        path: 'create',
+        path: 'quotes/create',
         component: QuoteCreateComponent,
         canActivate: [AuthGuard]
       }])
