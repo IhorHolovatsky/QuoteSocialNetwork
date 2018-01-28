@@ -124,7 +124,7 @@ export class GroupComponent implements OnInit, OnDestroy, AfterViewInit {
 
   copyInviteLink() {
     const inviteLink = window.location.protocol + '//' +
-                       window.location.host + '/group/join/' + this.groupId;
+                       window.location.host + '/groups/join/' + this.groupId;
 
     const textarea = document.createElement('textarea');
     document.body.appendChild(textarea);

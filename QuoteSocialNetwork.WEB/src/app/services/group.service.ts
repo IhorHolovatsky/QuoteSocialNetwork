@@ -61,8 +61,14 @@ export class GroupService {
                          });
   }
 
-  public joinToGroup(groupId) {
-
+  public joinToGroup(groupId): Promise<any> {
+    return this.groupRest.all('join')
+                         .one(groupId)
+                         .post()
+                         .toPromise()
+                         .then((result) => {
+                           return result;
+                         });
   }
 
   public leaveGroup(groupId) {

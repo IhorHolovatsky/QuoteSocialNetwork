@@ -13,7 +13,9 @@ const appRoutes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'login', component: LoginComponent },
     { path: 'account/details', component: AccountDetailsComponent, canActivate: [AuthGuard]},
-    { path: 'register', component: RegistrationFormComponent }
+    { path: 'register', component: RegistrationFormComponent },
+    { path: 'quotes', loadChildren: 'app/components/quotes/quotes.module#QuotesModule'},
+    { path: 'groups', loadChildren: 'app/components/groups/groups.module#GroupsModule'}
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
