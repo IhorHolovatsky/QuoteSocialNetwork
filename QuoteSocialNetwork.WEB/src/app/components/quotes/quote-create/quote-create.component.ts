@@ -1,21 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { QuoteService } from '../../../services/quote.service';
 import { MzToastService } from 'ng2-materialize';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-quote-create',
   templateUrl: './quote-create.component.html',
   styleUrls: ['./quote-create.component.scss']
 })
-export class QuoteCreateComponent implements OnInit {
+export class QuoteCreateComponent implements OnInit, OnDestroy {
   createQuoteForm: FormGroup;
   createQuoteModel = {
-    Text: ''
+    Text: '',
+    Date: new Date(),
+    Author: '',
+    Location: ''
   };
   currentUser;
+
+  private subscriptions: Subscription[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,10 +34,27 @@ export class QuoteCreateComponent implements OnInit {
   ngOnInit() {
     this.createQuoteForm = this.formBuilder.group(
       {
-        Text: [this.createQuoteModel.Text, Validators.compose([Validators.required])]
+        Text: [this.createQuoteModel.Text, Validators.compose([Validators.required])],
+        Date: [this.createQuoteModel.Date, Validators.compose([Validators.required])],
+        Author: [this.createQuoteModel.Author, Validators.compose([Validators.required])],
+        Location: [this.createQuoteModel.Location]
       }
     );
-    this.currentUser = this.firebase.auth.currentUser;
+    this.subscriptions.push(
+      this.firebase.authState.subscribe(
+        user => {
+          this.currentUser = user;
+
+          if (user) {
+            this.createQuoteForm.controls['Author'].patchValue(user.displayName);
+          }
+        }));
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(subscription => {
+      subscription.unsubscribe();
+    });
   }
 
   createQuote() {
@@ -39,11 +62,11 @@ export class QuoteCreateComponent implements OnInit {
     quote.UserId = this.currentUser.uid;
 
     this.quoteService.postQuote(quote)
-                     .then(data => {
-                        this.router.navigate(['/quotes']);
-                     })
-                     .catch(err => {
-                     });
+      .then(data => {
+        this.router.navigate(['/quotes']);
+      })
+      .catch(err => {
+      });
   }
 
 }
