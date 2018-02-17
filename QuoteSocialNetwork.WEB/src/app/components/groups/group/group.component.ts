@@ -142,7 +142,15 @@ export class GroupComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   leaveGroup() {
+    if (this.group.users.length === 1) {
+      this.deleteGroup();
+      return;
+    }
 
+    this.groupService.leaveGroup(this.groupId)
+                     .then(result => {
+                       this.router.navigate(['/groups']);
+                     });
   }
 
   scrollQuotesContainerToBottom(): void {

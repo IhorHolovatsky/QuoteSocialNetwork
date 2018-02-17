@@ -82,13 +82,22 @@ namespace QuoteSocialNetwork.API.Controllers
         [Route("join/{groupId}")]
         public object Join(Guid groupId)
         {
-            var group = _dbContext.Groups.FirstOrDefault(g => g.Id == groupId);
+            var group = _dbContext.Groups.Include(g => g.UserGroups)
+                                         .FirstOrDefault(g => g.Id == groupId);
 
             if (group == null)
             {
                 return new
                 {
                     error = "No group found!"
+                };
+            }
+
+            if (group.UserGroups.Any(ug => ug.UserId.Equals(UserId, StringComparison.CurrentCultureIgnoreCase)))
+            {
+                return new 
+                {
+                    error = "User is already in group!"
                 };
             }
 
@@ -99,7 +108,7 @@ namespace QuoteSocialNetwork.API.Controllers
             var userGroup = _dbContext.UserGroups.Add(groupSubscription);
             _dbContext.SaveChanges();
 
-            return userGroup;
+            return groupSubscription;
         }
 
         // POST api/group/leave/5

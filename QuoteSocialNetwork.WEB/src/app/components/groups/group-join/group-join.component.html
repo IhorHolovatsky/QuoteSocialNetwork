@@ -1,3 +1,30 @@
-<p>
-  group-join works!
-</p>
+<div class="return-back">
+  <button mz-button class="return-back-button" [routerLink]="['/groups']">
+    <i mz-icon [icon]="'keyboard_backspace'" [align]="'left'"></i>
+    Повернутись до списку груп
+  </button>
+</div>
+<div class="group-container">
+  <div class="group-title-container">
+    <img class="group-image" [src]="defaultImageUrl">
+    <div class="title">{{group.name}}</div>
+    <div class="members-count">Кількість учасників: {{group.users.length}}</div>
+  </div>
+
+  <div *ngIf="!isUserAlreadyInGroup" class="group-content-container">
+      <button mz-button class="join-group-button" (click)="confirmJoinToGroup()">
+        <i mz-icon [icon]="'check_circle'" [align]="'left'"></i>
+        Приєднатись до групи
+      </button>
+  </div>
+
+  <div *ngIf="isUserAlreadyInGroup" class="group-content-container">
+    <h3 style="text-align: center">
+      Ви вже є членом цієї групи! 
+    </h3>
+    <button mz-button class="join-group-button" [routerLink]="['/groups/' + this.groupId]">
+      <i mz-icon [icon]="'check_circle'" [align]="'left'"></i>
+      Перейти до цитат групи...
+    </button>
+  </div>
+</div>

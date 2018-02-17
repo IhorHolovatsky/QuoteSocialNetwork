@@ -67,12 +67,26 @@ export class GroupService {
                          .post()
                          .toPromise()
                          .then((result) => {
+                           if (result.error) {
+                             throw result.error;
+                           }
+
                            return result;
                          });
   }
 
   public leaveGroup(groupId) {
+    return this.groupRest.all('leave')
+                         .one(groupId)
+                         .post()
+                         .toPromise()
+                         .then((result) => {
+                           if (result.error) {
+                             throw result.error;
+                           }
 
+                          return result;
+                         });
   }
 
   public pushGroupQuoteToHub(quote, groupId): Promise<any> {
