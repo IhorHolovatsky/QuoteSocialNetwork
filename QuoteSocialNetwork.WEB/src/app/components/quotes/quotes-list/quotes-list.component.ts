@@ -78,4 +78,16 @@ export class QuotesListComponent implements OnInit, OnDestroy {
   get hasInputQuotes() {
     return this.quotes;
   }
+
+  private getUserShortName(name: String) {
+    if (!name || name.trim() === '') {
+      return name;
+    }
+
+    const parts = name.split(' ');
+
+    if (parts.length < 2) { return name; }
+
+    return `${parts[0]} ${parts[1].slice(0, 1)}.`;
+  }
 }
