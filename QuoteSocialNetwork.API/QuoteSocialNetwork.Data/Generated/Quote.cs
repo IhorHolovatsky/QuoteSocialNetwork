@@ -9,6 +9,15 @@ namespace QuoteSocialNetwork.Data.Generated
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
+
+        [Required]
+        public string Author { get; set; }
+
+        public string Location { get; set; }
+
+        [Required]
+        public DateTime Date { get; set; }
+
         public string Text { get; set; }
 
         public string UserId { get; set; }
