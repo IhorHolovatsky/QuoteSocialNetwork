@@ -93,8 +93,7 @@ export class GroupService {
     return this.hubConnection.invoke('Send', quote, groupId);
   }
 
-  public initSignalR(groups) {
-
+  public initSignalR(groups: any[]) {
     // if connection was not started --> start it, and subscribe to groups
     if (!this.isSignalRInited) {
       this.isSignalRInited = true;
@@ -107,6 +106,7 @@ export class GroupService {
 
       this.hubConnection.start()
                         .then(() => {
+                            this.groups = groups;
                             this.subscribeToListenGroup(groups);
                             console.log('Hub connection started');
                         })
@@ -116,10 +116,15 @@ export class GroupService {
       return;
     }
 
-    this.subscribeToListenGroup(groups);
+    // if connection was started, but there is a need to listen new group
+    const newGroups = groups.filter(g => !this.groups.some(gg => gg.id === g.id));
+    this.groups = this.groups.concat(newGroups);
+
+    this.subscribeToListenGroup(newGroups);
   }
 
   private subscribeToListenGroup(groups) {
+
     groups.forEach(group => {
       this.hubConnection.invoke('JoinToGroup', group.id);
     });

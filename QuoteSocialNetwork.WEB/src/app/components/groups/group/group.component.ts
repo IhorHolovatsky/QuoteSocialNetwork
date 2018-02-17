@@ -39,6 +39,13 @@ export class GroupComponent implements OnInit, OnDestroy, AfterViewInit {
       this.groupService.getGroup(this.groupId)
                        .then(group => {
                           this.group = group;
+
+                          // if group no exists - don't do anyhting
+                          if (!this.group) {
+                            return;
+                          }
+
+                          this.groupService.initSignalR([this.group]);
                        });
 
       // subscribe to group quotes
@@ -46,7 +53,7 @@ export class GroupComponent implements OnInit, OnDestroy, AfterViewInit {
         this.groupService.groupQuoteAdded$.subscribe(quote => {
           // if quote related to current group, and it's not quote of current user, then display it
           // current user new quotes have been added via saveQuote method
-          if (quote
+          if (quote && this.currentUser
               && quote.groupId === this.groupId
               && quote.userId !== this.currentUser.uid) {
             this.group.quotes.push(quote);

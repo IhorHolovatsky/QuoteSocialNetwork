@@ -4,7 +4,7 @@
     Повернутись до списку груп
   </button>
 </div>
-<div class="group-container">
+<div *ngIf="group" class="group-container">
   <div class="group-title-container">
     <img class="group-image" [src]="defaultImageUrl">
     <div class="title">{{group.name}}</div>
@@ -29,6 +29,10 @@
     </mz-textarea-container>
   </div>
 
+</div>
+
+<div *ngIf="!group" class="group-container">
+  <h3 class="group-title-container" style="text-align: center">Група не існує або була видалена.</h3>
 </div>
 
 <mz-dropdown class="group-menu-container" [id]="'group-menu'" [align]="'left'" [belowOrigin]="true" [dropdownButtonId]="'btn-group-menu'" [gutter]="true"
