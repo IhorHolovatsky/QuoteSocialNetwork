@@ -52,7 +52,7 @@ export class GroupJoinComponent implements OnInit, OnDestroy {
     );
 
     this.dataLoaded$.subscribe(val => {
-      if (this.currentUser) {
+      if (this.currentUser && this.group) {
         this.isUserAlreadyInGroup = this.group.users.some(u => this.currentUser.uid === u.id);
 
         if (this.isUserAlreadyInGroup) {

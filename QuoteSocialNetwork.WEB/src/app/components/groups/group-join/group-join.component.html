@@ -4,7 +4,7 @@
     Повернутись до списку груп
   </button>
 </div>
-<div class="group-container">
+<div *ngIf="group" class="group-container">
   <div class="group-title-container">
     <img class="group-image" [src]="defaultImageUrl">
     <div class="title">{{group.name}}</div>
@@ -27,4 +27,8 @@
       Перейти до цитат групи...
     </button>
   </div>
+</div>
+
+<div *ngIf="!group" class="group-container">
+  <h3 class="group-title-container" style="text-align: center">Група не існує або була видалена.</h3>
 </div>
