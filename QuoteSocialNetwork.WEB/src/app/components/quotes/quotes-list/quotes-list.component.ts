@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy, Inject } from '@angular/core';
 import { QuoteService } from '../../../services/quote.service';
 import { MzToastService } from 'ng2-materialize';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -75,6 +75,31 @@ export class QuotesListComponent implements OnInit, OnDestroy {
                      });
   }
 
+  shareFacebook(quote) {
+    window['FB'].ui(
+    {
+      method: 'share',
+      hashtag: '#quote',
+      quote: this.getQuoteText(quote),
+      href: 'https://quotesocialnetwork.firebaseapp.com'
+    }, function(response){});
+  }
+
+  getTwitterShareParameters(quote) {
+    let params = 'text=' + this.getQuoteText(quote);
+    params += '&url=' + 'https://quotesocialnetwork.firebaseapp.com';
+    params += '&hashtags=' + 'quote';
+
+    return encodeURI(params);
+  }
+
+  getQuoteText(quote) {
+    return  `${quote.text.replace(/<br>/ig, '\n')}
+    \nАвтор: ©${quote.author}
+    \nМісце: ${quote.location}
+    \nДата: ${new Date(quote.date).toLocaleDateString()} ${new Date(quote.date).toLocaleTimeString()}`;
+  }
+
   get hasInputQuotes() {
     return this.quotes;
   }
@@ -83,7 +108,6 @@ export class QuotesListComponent implements OnInit, OnDestroy {
     if (!name || name.trim() === '') {
       return name;
     }
-
     const parts = name.split(' ');
 
     if (parts.length < 2) { return name; }

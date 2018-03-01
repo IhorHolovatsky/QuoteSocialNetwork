@@ -20,6 +20,21 @@
         word-wrap: break-word;
     }
 
+    .quote-copyright {
+        font-size: 14px;
+        margin-bottom: 0px !important;
+    }
+    
+    .quote-location {
+        margin-left: -3px;
+        margin-bottom: 10px !important;
+    }
+    
+    .quote-date {
+        font-size: 12px;
+        margin-bottom: 15px;
+    }
+
     .quote-time {
         font-size: 12px;
         color: rgba(0, 0, 0, 0.4);

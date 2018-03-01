@@ -23,12 +23,44 @@
   </div>
   <div class="group-quote-container">
     <mz-textarea-container>
-      <textarea mz-textarea [(ngModel)]="quoteText" placeholder="Напишіть вашу цитату" length="1024" (keydown.enter)="postQuote($event);false"></textarea>
-      <i mz-icon-mdi mz-textarea-prefix [icon]="'send'" (click)="saveQuote(quoteText);" style="cursor: pointer">
+      <i mz-icon-mdi mz-textarea-prefix [icon]="'message-reply-text'"></i>
+      <textarea mz-textarea [(ngModel)]="quote.Text" placeholder="Напишіть вашу цитату" length="1024" (keydown.enter)="postQuote($event);false"></textarea>
+      <i mz-icon-mdi mz-textarea-prefix [icon]="'send'" (click)="saveQuote(quote);" style="cursor: pointer">
       </i>
     </mz-textarea-container>
-  </div>
 
+    <div class="row" [style.margin-top]="'35px'" [style.margin-left]="'-0.5%'">
+      <mz-input-container [inline]="true">
+          <i mz-icon-mdi mz-input-prefix [icon]="'account'">
+          </i>
+          <input mz-input
+          [(ngModel)]="quote.Author"
+            [label]="'Хто сказав?'"
+            placeholder="Впишіть ім'я людини яка сказала цитату"
+            style="width: 310px;margin-right: 25px;"
+            type="text">
+        </mz-input-container>
+        <mz-input-container [inline]="true">
+            <i mz-icon-mdi mz-input-prefix [icon]="'map-marker'">
+            </i>
+            <input mz-input
+            [(ngModel)]="quote.Location"
+              [label]="'Де сказали цитату?'"
+              style="margin-right: 25px;"
+              placeholder="Місце де це сталося"
+              type="text">
+          </mz-input-container>
+          <mz-datepicker-container [inline]="true">
+              <i mz-icon-mdi mz-input-prefix
+                [icon]="'calendar'">
+              </i>
+              <input mz-datepicker
+              [(ngModel)]="quote.Date"
+                [label]="'Коли було сказано?'"
+                style="margin-right: 25px;"
+                type="tel" />
+            </mz-datepicker-container>
+  </div>
 </div>
 
 <div *ngIf="!group" class="group-container">
