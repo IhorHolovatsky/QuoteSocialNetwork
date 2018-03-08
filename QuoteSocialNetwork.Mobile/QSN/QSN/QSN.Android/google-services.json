@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "15943729790",
+    "firebase_url": "https://quotesocialnetwork.firebaseio.com",
+    "project_id": "quotesocialnetwork",
+    "storage_bucket": "quotesocialnetwork.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:15943729790:android:41fe8b995cc2d1dc",
+        "android_client_info": {
+          "package_name": "com.firebaseauth.forms"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "15943729790-r62ked4gulntd7i95og7eetjkot0ufpe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.firebaseauth.forms",
+            "certificate_hash": "76abcf2d9ca4cb93e09e8038e613e04234527bc3"
+          }
+        },
+        {
+          "client_id": "15943729790-5jc1vl8ttvmi5a7jqn6a7h08fp2ilns3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_lN29YMo_Rj_zKXL-2ho1uoFU470GYIM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "15943729790-5jc1vl8ttvmi5a7jqn6a7h08fp2ilns3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

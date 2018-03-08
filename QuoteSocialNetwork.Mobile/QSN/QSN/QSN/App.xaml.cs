@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 
 using Xamarin.Forms;
+using QSN.Helpers;
 
 namespace QSN
 {
@@ -14,11 +15,20 @@ namespace QSN
         {
             InitializeComponent();
 
-            MainPage = new MasterDetailPage()
+            if (!string.IsNullOrEmpty(Settings.UserToken))
             {
-                Master = new MasterPage() { Title = "Main Page" },
-                Detail = new NavigationPage(new QuotesPage())
-            };
+                MainPage = new MasterDetailPage()
+                {
+                    Master = new MasterPage() { Title = "Main Page" },
+                    Detail = new NavigationPage(new QuotesPage())
+                };
+            }
+            else
+            {
+                MainPage = new AuthPage();
+            }
+
+           
         }
 
         protected override void OnStart()

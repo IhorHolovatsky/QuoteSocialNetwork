@@ -4,9 +4,31 @@
              x:Class="QSN.View.QuotesPage">
 
     <ContentPage.Content>
-        <Label Text="Quotes" 
-           VerticalOptions="Center" 
-           HorizontalOptions="Center" />
+
+    <ListView x:Name="QuotesList"  
+                  ItemsSource="{Binding Sources}" 
+                  IsPullToRefreshEnabled="True"
+                  Refreshing="Quotes_Refreshing"
+                  IsRefreshing="{Binding IsBusy, Mode=OneWay}">
+                  
+                  
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ImageCell Text="{Binding AuthorName}" TextColor="{StaticResource PrimaryText}" 
+                               Detail="{Binding Title}" DetailColor="{StaticResource SecondaryText}"
+                               ImageSource="{Binding ImageSource}" >
+                        <ImageCell.ContextActions>
+                            <MenuItem Clicked="OnEdit" CommandParameter="{Binding Id}"
+                                Text="Edit" />
+                            <MenuItem Clicked="OnDelete" CommandParameter="{Binding Id}"
+                                Text="Delete" IsDestructive="True" />
+                        </ImageCell.ContextActions>
+
+                    </ImageCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
     </ContentPage.Content>
     
 </ContentPage>

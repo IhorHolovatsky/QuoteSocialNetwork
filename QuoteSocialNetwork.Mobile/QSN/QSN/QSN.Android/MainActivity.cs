@@ -1,12 +1,15 @@
-﻿using System;
-
+﻿
 using Android.App;
+using Android.Content;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
+using Firebase;
+using Firebase.Auth;
 using ImageCircle.Forms.Plugin.Droid;
+using Plugin.CurrentActivity;
+using QSN.Droid.Auth;
+using Xamarin.Forms.Platform.Android;
+using QSN;
 
 namespace QSN.Droid
 {
@@ -26,8 +29,29 @@ namespace QSN.Droid
             FormsPlugin.Iconize.Droid.IconControls.Init();
 
             ImageCircleRenderer.Init();
-            
-            LoadApplication(new App());
+            Xamarin.Forms.DependencyService.Register<GoogleAuthentificator>();
+
+            LoadApplication(new QSN.App());
+
+            FirebaseApp.InitializeApp((FormsAppCompatActivity)CrossCurrentActivity.Current.Activity);
+
+            AndroidAuthHelper.CurrentFirebaseInstance = FirebaseAuth.GetInstance(FirebaseApp.Instance);
+
+        }
+
+        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+        {
+            if (requestCode == 9001)
+            {
+                AndroidAuthHelper.AuthWithGoogle(data);
+            }
+            //else
+            //{
+            //    AndroidAuthHelper.CallbackManager.OnActivityResult(requestCode, (int)resultCode, data);
+            //}
+
+
+            base.OnActivityResult(requestCode, resultCode, data);
         }
     }
 }

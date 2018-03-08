@@ -1,3 +1,12 @@
+QuoteSocialNetwork.Mobile/QSN/packages
+QuoteSocialNetwork.Mobile/QSN/QSN/QSN.iOS
+QuoteSocialNetwork.Mobile/QSN/QSN/QSN.Android/bin
+QuoteSocialNetwork.Mobile/QSN/QSN/QSN.Android/obj
+QuoteSocialNetwork.Mobile/QSN/QSN/QSN/bin
+QuoteSocialNetwork.Mobile/QSN/QSN/QSN/obj
+
+
+
 QuoteSocialNetwork.API/[Dd]ebug/
 QuoteSocialNetwork.API/[Dd]ebugPublic/
 QuoteSocialNetwork.API/[Rr]elease/
