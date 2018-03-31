@@ -69,7 +69,7 @@ export class UserService extends BaseService {
     return this.firebase.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
                              .then(signInResult => {
                                 this.saveUserToLocalDb(signInResult.user);
-                                localStorage.setItem('token', signInResult.credential.accessToken);
+                                localStorage.setItem('token', signInResult.user.He);
                                 return true;
                              });
   }
@@ -88,7 +88,7 @@ export class UserService extends BaseService {
     return this.firebase.auth.signInWithPopup(new firebase.auth.TwitterAuthProvider())
                              .then(signInResult => {
                                 this.saveUserToLocalDb(signInResult.user);
-                                localStorage.setItem('token', signInResult.credential.accessToken);
+                                localStorage.setItem('token', signInResult.user.He);
                                 return true;
                              });
   }
@@ -107,7 +107,7 @@ export class UserService extends BaseService {
     return this.firebase.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
                              .then(signInResult => {
                                 this.saveUserToLocalDb(signInResult.user);
-                                localStorage.setItem('token', signInResult.credential.accessToken);
+                                localStorage.setItem('token', signInResult.user.He);
                                 return true;
                              })
                              .catch(error => {

@@ -7,6 +7,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 
 import { UserService } from '../../services/user.service';
 import { Constants } from '../../shared/constants';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     templateUrl: './login.component.html'
@@ -20,13 +21,17 @@ export class LoginComponent implements OnInit {
     private subscription: Subscription;
     private brandNew: boolean;
 
+    private REGISTER_LOGIN_MESSAGE;
+    private LOGIN_SUCCESS_MESSAGE;
+
     constructor(
         private userService: UserService,
         private router: Router,
         private activatedRouter: ActivatedRoute,
         private formBuilder: FormBuilder,
         private toastService: MzToastService,
-        private firebase: AngularFireAuth
+        private firebase: AngularFireAuth,
+        private translateService: TranslateService
     ) {
     }
 
@@ -36,6 +41,11 @@ export class LoginComponent implements OnInit {
             this.loginModel.email = param['email'];
         });
 
+      this.translateService.get(['alerts.registerSuccessLogin', 'alerts.login']).subscribe(t => {
+          this.REGISTER_LOGIN_MESSAGE = t['alerts.registerSuccessLogin'];
+          this.LOGIN_SUCCESS_MESSAGE = t['alerts.login'];
+      });
+
         this.loginForm = this.formBuilder.group({
             email: [this.loginModel.email, Validators.compose([Validators.required])],
             password: [this.loginModel.password, Validators.compose([Validators.required])]
@@ -43,7 +53,7 @@ export class LoginComponent implements OnInit {
 
         if (this.brandNew) {
             this.toastService.show(
-                'Все готово! Увійдіть будь-ласка в свій аккаунт.',
+                this.REGISTER_LOGIN_MESSAGE,
                 4000,
                 'green');
         }
@@ -100,7 +110,7 @@ export class LoginComponent implements OnInit {
         if (success) {
             this.router.navigate(['/home']);
             this.toastService.show(
-                'Ви успішно ввійшли в сисетему!',
+                this.LOGIN_SUCCESS_MESSAGE,
                 4000,
                 'green');
         }

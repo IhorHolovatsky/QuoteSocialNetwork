@@ -37,6 +37,7 @@ namespace QuoteSocialNetworkAPI
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddJwtBearer(options =>
                     {
+                        options.IncludeErrorDetails = true;
                         options.Authority = "https://securetoken.google.com/quotesocialnetwork";
                         options.TokenValidationParameters = new TokenValidationParameters
                            {

@@ -3,16 +3,16 @@
     <div class="col s6">
       <form [formGroup]="createGroupForm" (ngSubmit)="createGroup()" novalidate>
         <div class="section">
-          <h5>Напишіть назву нової групи:</h5>
+          <h5>{{'newGroup.title' | translate}}</h5>
           <div class="row" [style.margin-top]="'35px'">
             <mz-input-container class="col s12 m9">
               <i mz-icon-mdi mz-textarea-prefix [icon]="'message-reply-text'">
               </i>
-              <input mz-input mz-validation required formControlName="Name" type="text" [label]="'Назва групи'" placeholder="Напишіть назву групи"/>
+              <input mz-input mz-validation required formControlName="Name" type="text" [label]="'inputs.groupName' | translate" placeholder="{{'placeHolders.group' | translate}}"/>
             </mz-input-container>
           </div>
         </div>
-        <button mz-button [disabled]="!createGroupForm.valid" type="submit">Створити</button>
+        <button mz-button [disabled]="!createGroupForm.valid" type="submit">{{'newGroup.createText' | translate}}</button>
         <br/>
         <br/>
       </form>

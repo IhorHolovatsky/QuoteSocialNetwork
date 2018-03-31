@@ -1,0 +1,93 @@
+{
+    "navbar" : {
+        "menu" : "Меню",
+        "writeQuote" : "Написати цитату",
+        "newGroup": "Створити групу",
+        "myQuotes": "Мої цитати",
+        "myGroups" : "Мої групи",
+        "logo" : "Лого",
+        "greetingTemplate" : "Привіт {{fullName}}!",
+        "logout" : "Вийти",
+        "login": "Ввійти",
+        "register": "Зареєструватись"
+    },
+
+    "login" : {
+        "loginText" : "Авторизуйтесь",
+        "loginButton" : "Увійти",
+        "socialLoginText" : "Через соціальні мережі:",
+        "fbLogin" : "Увійти через Facebook",
+        "twitterLogin": "Увійти через Twitter",
+        "googleLogin" : "Увійти через Google"
+    },
+
+    "registration" : {
+        "registerText" : "Реєстрація",
+        "registerButton" : "Зареєструватись"
+    },
+    
+    "profile" : {
+        "noAccountText1": "У вас ще не створенний аккаунт в QuoteSocialNetwork.",
+        "noAccountText2": "Заповніть дані нижче, щоб створити внутрішній логін.",
+        "title" : "Ваш профіль",
+        "photo" : "Фото",
+        "selectPhoto" : "Обрати",
+        "saveText" : "Зберегти",
+        "socials" : "Соціальні мережі:",
+        "linkFacebook" : "Прив'язати Facebook",
+        "linkTwitter" : "Прив'язати Twiter",
+        "linkGoogle" : "Прив'язати Google",
+        "isLinkedText" : "акаунт під'єднаний"
+    },
+
+    "newQuote" : {
+        "title": "Створення нової цитати:",
+        "publishText" :"Опублікувати"
+    },
+
+    "newGroup" : {
+        "title": "Напишіть назву нової групи:",
+        "createText" :"Створити"
+    },
+
+    "groups" : { 
+        "title": "Групи:",
+        "backToListText": "Повернутись до списку груп",
+        "countOfMembersText": "Кількість учасників:",
+        "noQuotes" : "Поки що немає цитат...",
+        "actions": {
+            "inviteLink" : "Скопіювати invite-лінк",
+            "delete" : "Видалити групу",
+            "leave" : "Покинути групу"
+        }
+    },
+
+    "inputs" : { 
+        "fullName" : "Повне ім'я",
+        "email" : "Імейл",
+        "password": "Пароль",
+        "confirmPassword" : "Підтвердження паролю",
+        "author" : "Хто сказав?",
+        "location" : "Де сказали цитату?",
+        "quoteDate":"Коли було сказано?",
+        "quoteTitle" : "Що такого було сказано, що це аж цитата?",
+        "groupName": "Назва групи"
+    },
+
+    "placeHolders" : {
+        "location": "Місце де це сталось",
+        "quote": "Впишіть те що сказала людина",
+        "author": "Впишіть ім'я людини яка сказала цитату",
+        "group": "Впишіть назву групи"
+    },
+
+    "alerts": {
+        "login": "Ви успішно ввійшли в сисетему!",
+		"savedChanges": "Зміни були успішно обновлені!",
+		"registerSuccessLogin": "Все готово! Увійдіть будь-ласка в свій аккаунт.",
+		"registerSuccess": "Аккаунт був успішно створений!",
+		"joinGroupSuccess": "Ви успішно приєднались до групи",
+		"deleteQuoteSuccess": "Цитата була успішно видалена!",
+		"newQuoteAlert" : "Хтось опублікував нову цитату"
+    }
+}

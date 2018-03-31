@@ -2,7 +2,7 @@
         <div class="row">
             <div class="col s6">
                 <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
-                    <h5>Авторизуйтесь</h5>
+                    <h5>{{ 'login.loginText' | translate }}</h5>
                     <div class="row">
                         <mz-input-container class="col s12 m8">
                                 <i mz-icon-mdi mz-input-prefix
@@ -13,7 +13,7 @@
                                    type="text" 
                                    [errorMessageResource]="errorMessageResources.email"
                                    id="input-email"                        
-                                   [label]="'Імейл'" />
+                                   [label]="'inputs.email' | translate" />
                         </mz-input-container> 
                     </div>
                     <div class="row">
@@ -26,29 +26,29 @@
                                    formControlName="password" 
                                    type="password" 
                                    [errorMessageResource]="errorMessageResources.password"
-                                   [label]="'Пароль'" />
+                                   [label]="'inputs.password' | translate" />
                         </mz-input-container>
                     </div>
-                    <button mz-button [disabled]="!loginForm.valid" type="submit">Увійти</button>
+                    <button mz-button [disabled]="!loginForm.valid" type="submit">{{ 'login.loginButton' | translate }}</button>
                     <br/><br/>
                 </form>
             </div>
             <div class="col s4">
-                <h5 style="margin-left: -11.250px; margin-bottom: 20px;">Через соціальні мережі:</h5>
+                <h5 style="margin-left: -11.250px; margin-bottom: 20px;">{{ 'login.socialLoginText' | translate }}</h5>
                 <div class="row">
                    <a class="waves-effect waves-light btn-large social facebook"
                       (click)="loginFb()">
-                   <i class="fa fa-facebook"></i> Увійти через Facebook</a>
+                   <i class="fa fa-facebook"></i> {{ 'login.fbLogin' | translate }}</a>
                 </div>
                 <div class="row">
                     <a class="waves-effect waves-light btn-large social twitter"
                        (click)="loginTwitter()">
-                    <i class="fa fa-twitter"></i> Увійти через Twitter</a>
+                    <i class="fa fa-twitter"></i> {{ 'login.twitterLogin' | translate }}</a>
                 </div>
                 <div class="row">
                    <a class="waves-effect waves-light btn-large social google"
                       (click)="loginGoogle()">
-                   <i class="fa fa-google"></i> Увійти через Google</a>
+                   <i class="fa fa-google"></i> {{ 'login.googleLogin' | translate }}</a>
                 </div>               
             </div>
         </div>

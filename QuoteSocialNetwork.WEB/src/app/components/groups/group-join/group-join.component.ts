@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { GroupService } from '../../../services/group.service';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-group-join',
@@ -25,12 +26,15 @@ export class GroupJoinComponent implements OnInit, OnDestroy {
 
   private dataLoaded$: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
 
+  private JOIN_SUCCESS_MESSAGE;
+
   constructor(
     private groupService: GroupService,
     private toastService: MzToastService,
     private firebase: AngularFireAuth,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private translateService: TranslateService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -48,6 +52,9 @@ export class GroupJoinComponent implements OnInit, OnDestroy {
       this.firebase.authState.subscribe(user => {
         this.currentUser = user;
         this.dataLoaded$.next(true);
+      }),
+      this.translateService.get('alerts.joinGroupSuccess').subscribe(t => {
+        this.JOIN_SUCCESS_MESSAGE = t;
       })
     );
 
@@ -72,7 +79,7 @@ export class GroupJoinComponent implements OnInit, OnDestroy {
     this.groupService.joinToGroup(this.groupId)
                      .then(result => {
                         this.toastService.show(
-                        'Ви успішно приєднались до групи ' + this.group.name + '!',
+                        `${this.JOIN_SUCCESS_MESSAGE} ` + this.group.name + '!',
                         4000,
                         'green');
                         this.router.navigate(['groups', this.groupId]);

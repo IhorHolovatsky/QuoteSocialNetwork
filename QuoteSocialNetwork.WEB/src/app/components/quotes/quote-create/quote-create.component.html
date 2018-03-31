@@ -3,16 +3,16 @@
     <div class="col s6">
       <form [formGroup]="createQuoteForm" (ngSubmit)="createQuote()" novalidate>
         <div class="section">
-          <h5>Створення нової цитати:</h5>
+          <h5>{{'newQuote.title' | translate}}</h5>
           
           <div class="row" [style.margin-top]="'35px'">
               <mz-input-container>
                   <i mz-icon-mdi mz-input-prefix [icon]="'account'">
                   </i>
                   <input mz-input
-                    [label]="'Хто сказав?'"
+                    [label]="'inputs.author' | translate"
                     formControlName="Author"
-                    placeholder="Впишіть ім'я людини яка сказала цитату"
+                    placeholder="{{'placeHolders.author' | translate}}"
                     type="text">
                 </mz-input-container>
           </div>
@@ -22,9 +22,9 @@
                   <i mz-icon-mdi mz-input-prefix [icon]="'map-marker'">
                   </i>
                   <input mz-input
-                    [label]="'Де сказали цитату?'"
+                    [label]="'inputs.location' | translate"
                     formControlName="Location"
-                    placeholder="Місце де це сталося"
+                    placeholder="{{'placeHolders.location' | translate}}"
                     type="text">
                 </mz-input-container>
           </div>
@@ -36,7 +36,7 @@
                   </i>
                   <input mz-datepicker
                     formControlName="Date"
-                    [label]="'Коли було сказано?'"
+                    [label]="'inputs.quoteDate' | translate"
                     type="tel" />
                 </mz-datepicker-container>
           </div>
@@ -46,12 +46,12 @@
             <mz-textarea-container>
               <i mz-icon-mdi mz-textarea-prefix [icon]="'message-reply-text'">
               </i>
-              <textarea mz-textarea [label]="'Що такого було сказано, що це аж цитата?!'" id="quote-textarea" formControlName="Text"  placeholder="Впишіть те що сказала людина">
+              <textarea mz-textarea [label]="'inputs.quoteTitle' | translate" id="quote-textarea" formControlName="Text"  placeholder="{{'placeHolders.quote' | translate}}">
               </textarea>
             </mz-textarea-container>
           </div>
         </div>
-        <button mz-button [disabled]="!createQuoteForm.valid" type="submit">Опублікувати</button>
+        <button mz-button [disabled]="!createQuoteForm.valid" type="submit">{{'newQuote.publishText' | translate}}</button>
         <br/><br/>
       </form>
     </div>

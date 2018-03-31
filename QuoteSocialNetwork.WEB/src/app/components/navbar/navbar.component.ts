@@ -6,6 +6,7 @@ import * as firebase from 'firebase/app';
 import { UserService } from '../../services/user.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Constants } from '../../shared/constants';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-navbar',
@@ -23,7 +24,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   constructor(
     private userService: UserService,
     private router: Router,
-    private firebase: AngularFireAuth
+    private firebase: AngularFireAuth,
+    private translateService: TranslateService
   ) {
   }
 
@@ -46,5 +48,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
                     .then(x => {
                         this.router.navigate(['/login']);
                     });
+  }
+
+  changeLang(lang: string) {
+    this.translateService.use(lang);
   }
 }
