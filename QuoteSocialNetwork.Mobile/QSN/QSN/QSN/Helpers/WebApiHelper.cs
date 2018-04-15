@@ -29,11 +29,11 @@ namespace QSN.Helpers
             Thread.Sleep(2000);
 
             return new List<QuoteCellModel> { new QuoteCellModel() {
-            Title = "Test 1", AuthorName = "A 1", ImageSource = "profile.jpg", Id="1"},
+            Title = "Test 1", AuthorName = "A 1", ImageSource = "profile.jpg", Id="1", Groupe= new GroupModel(){ GroupId = "1" , Name = "Groupe A"} },
             new QuoteCellModel() {
-            Title = "Test 2", AuthorName = "A 2", ImageSource = "profile.jpg", Id="2"},
+            Title = "Test 2", AuthorName = "A 2", ImageSource = "profile.jpg", Id="2", Groupe= new GroupModel(){ GroupId = "1" , Name = "Groupe A"}},
             new QuoteCellModel() {
-            Title = "Test 3", AuthorName = "A 3", ImageSource = "profile.jpg", Id="3"}};
+            Title = "Test 3", AuthorName = "A 3", ImageSource = "profile.jpg", Id="3", Groupe= new GroupModel(){ GroupId = "2" , Name = "Groupe B"} } };
         }
 
         public static async Task<QuoteModel> GetQuoteById(string id)

@@ -25,7 +25,7 @@ namespace QSN
             }
             else
             {
-                MainPage = new AuthPage();
+                MainPage = new NavigationPage(new AuthPage());
             }
 
            

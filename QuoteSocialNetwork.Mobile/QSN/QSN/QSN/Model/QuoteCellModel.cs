@@ -12,5 +12,6 @@ namespace QSN.Model
         public string Title { get; set; }
         public string AuthorName { get; set; }
         public string ImageSource { get; set; }
+        public GroupModel Groupe { get; set; }
     }
 }

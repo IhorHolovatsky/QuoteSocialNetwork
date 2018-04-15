@@ -38,15 +38,19 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\FacebookButton.cs" />
+    <Compile Include="Interfaces\IFacebookAuthentificator.cs" />
     <Compile Include="Interfaces\IGoogleAuthentificator.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Helpers\WebApiHelper.cs" />
     <Compile Include="InternalEntities\Constants.cs" />
+    <Compile Include="Model\GroupModel.cs" />
     <Compile Include="Model\QuoteCellModel.cs" />
     <Compile Include="Model\QuoteModel.cs" />
     <Compile Include="ViewModel\AuthPageViewModel.cs" />
     <Compile Include="ViewModel\MasterViewModel.cs" />
     <Compile Include="ViewModel\QuoteDetailPageViewModel.cs" />
+    <Compile Include="ViewModel\GroupsViewModel.cs" />
     <Compile Include="ViewModel\QuotesViewModel.cs" />
     <Compile Include="View\AuthPage.xaml.cs">
       <DependentUpon>AuthPage.xaml</DependentUpon>
@@ -66,6 +70,9 @@
     </Compile>
     <Compile Include="View\QuotesPage.xaml.cs">
       <DependentUpon>QuotesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SignUpPage.xaml.cs">
+      <DependentUpon>SignUpPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -141,6 +148,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\AuthPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="View\SignUpPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

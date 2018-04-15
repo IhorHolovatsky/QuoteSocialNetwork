@@ -23,16 +23,11 @@ namespace QSN.ViewModel
         {
 
             Sources = new ObservableRangeCollection<QuoteCellModel>();
-            //{
-            //    new QuoteCellModel() {
-            //    Title = " ", AuthorName = " ", ImageSource = " "}
-            //};
             
         }
 
         Command _refreshCommand;
-
-        // </summary>
+        
         public Command RefreshCommand =>
             _refreshCommand ?? (_refreshCommand = new Command(() => Task.Run(ExecuteRefreshCommandAsync)));
 

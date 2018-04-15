@@ -2,11 +2,50 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="QSN.View.GroupsPage">
-    
+
     <ContentPage.Content>
-        <Label Text="Groups" 
-           VerticalOptions="Center" 
-           HorizontalOptions="Center" />
+
+        <ListView x:Name="GroupedQuotesList"  
+                  ItemsSource="{Binding VisibleGroups}" 
+                  IsPullToRefreshEnabled="True"
+                  Refreshing="Quotes_Refreshing"
+                  IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                  
+                  IsGroupingEnabled="true" 
+                  HasUnevenRows="True"
+                  GroupDisplayBinding="{Binding Key}">
+
+            <ListView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <ViewCell>
+
+                        <StackLayout Orientation="Horizontal" Padding="5,5,5,5">
+                            <Button Text="{Binding Key.Group}" BackgroundColor="Transparent" BorderColor="Transparent" BorderWidth="0" Clicked="HeaderClicked" CommandParameter="{Binding .}"/>
+                            
+                        </StackLayout>
+                        
+                        
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.GroupHeaderTemplate>
+
+            <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ImageCell Text="{Binding AuthorName}" TextColor="{StaticResource PrimaryText}" 
+                               Detail="{Binding Title}" DetailColor="{StaticResource SecondaryText}"
+                               ImageSource="{Binding ImageSource}" >
+                            <ImageCell.ContextActions>
+                                <MenuItem Clicked="OnEdit" CommandParameter="{Binding Id}"
+                                Text="Edit" />
+                                <MenuItem Clicked="OnDelete" CommandParameter="{Binding Id}"
+                                Text="Delete" IsDestructive="True" />
+                            </ImageCell.ContextActions>
+
+                        </ImageCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
     </ContentPage.Content>
 
 </ContentPage>

@@ -13,6 +13,7 @@ namespace QSN.ViewModel
     public class AuthPageViewModel: BaseViewModel
     {
         Command googleAuthCommand;
+        Command facebookAuthCommand;
 
         public Command GoogleAuthCommand =>
         googleAuthCommand ?? (googleAuthCommand = new Command(() => Task.Run(ExecuteGoogleAuthCommandAsync)));
@@ -29,5 +30,22 @@ namespace QSN.ViewModel
             IsBusy = false;
             return true;
         }
+
+        public Command FacebookAuthCommand =>
+        facebookAuthCommand ?? (facebookAuthCommand = new Command(() => Task.Run(ExecuteFacebookAuthCommandAsync)));
+
+        private async Task<bool> ExecuteFacebookAuthCommandAsync()
+        {
+            if (IsBusy)
+                return true;
+
+            IsBusy = true;
+
+            DependencyService.Get<IFacebookAuthentificator>().AuthWithFacebook();
+
+            IsBusy = false;
+            return true;
+        }
+
     }
 }

@@ -30,6 +30,7 @@ namespace QSN.Droid
 
             ImageCircleRenderer.Init();
             Xamarin.Forms.DependencyService.Register<GoogleAuthentificator>();
+            Xamarin.Forms.DependencyService.Register<FacebookAuthentificator>();
 
             LoadApplication(new QSN.App());
 
@@ -45,10 +46,10 @@ namespace QSN.Droid
             {
                 AndroidAuthHelper.AuthWithGoogle(data);
             }
-            //else
-            //{
-            //    AndroidAuthHelper.CallbackManager.OnActivityResult(requestCode, (int)resultCode, data);
-            //}
+            else
+            {
+                AndroidAuthHelper.CallbackManager.OnActivityResult(requestCode, (int)resultCode, data);
+            }
 
 
             base.OnActivityResult(requestCode, resultCode, data);

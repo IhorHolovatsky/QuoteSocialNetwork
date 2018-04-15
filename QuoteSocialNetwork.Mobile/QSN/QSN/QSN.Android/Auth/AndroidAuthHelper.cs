@@ -12,59 +12,47 @@ using Android.Widget;
 using Firebase.Auth;
 using Android.Gms.Auth.Api.SignIn;
 using QSN.View;
+using Xamarin.Facebook;
+using Org.Json;
+using Newtonsoft.Json;
 
 namespace QSN.Droid.Auth
 {
     public static class AndroidAuthHelper
     {
 
-      //  public static ICallbackManager CallbackManager;
+        public static ICallbackManager CallbackManager;
         public static FirebaseAuth CurrentFirebaseInstance;
 
 
-        //public static async Task AuthWithFacebook(AccessToken token)
-        //{
-        //    var credential = FacebookAuthProvider.GetCredential(token.Token);
+        public static void AuthWithFacebook(AccessToken token)
+        {
+            var credential = FacebookAuthProvider.GetCredential(token.Token);
 
-        //    await CurrentFirebaseInstance.SignInWithCredential(credential);
-        //    var user = CurrentFirebaseInstance.CurrentUser;
+            CurrentFirebaseInstance.SignInWithCredential(credential);
+            var user = CurrentFirebaseInstance.CurrentUser;
+            
+            //QSN.Helpers.Settings.UserToken = user.Uid;
+            
+            QSN.Helpers.Settings.UserImage = user.ProviderData.FirstOrDefault((x) => x.ProviderId == "facebook.com").PhotoUrl.ToString();
+            QSN.Helpers.Settings.UserName = user.DisplayName;
 
-        //    //GraphRequest request = GraphRequest.newMeRequest(
-        //    //            accessToken,
-        //    //        new GraphRequest.GraphJSONObjectCallback() {
-        //    //            @Override
-        //    //            public void onCompleted(
-        //    //                   JSONObject object,
-        //    //                   GraphResponse response)
-        //    //        {
-        //    //            // Application code
-        //    //        }
-        //    //    });
-        //    //Bundle parameters = new Bundle();
-        //    //    parameters.putString("fields", "id,name,link");
-        //    //request.setParameters(parameters);
-        //    //request.executeAsync();
+            Xamarin.Forms.Application.Current.MainPage = new Xamarin.Forms.MasterDetailPage()
+            {
+                Master = new MasterPage() { Title = "Main Page" },
+                Detail = new Xamarin.Forms.NavigationPage(new QuotesPage())
+            };
 
-        //    Bundle parameters = new Bundle();
-        //    parameters.PutString("fields", "email");
+            //Use, if email needed 
 
-        //    var graphCallBack = new RequestCallback();
+            //GraphRequest request = GraphRequest.NewMeRequest(token, new GraphJsonCallback());
 
-        //    var requestTest = new GraphRequest(token, "/me", parameters, HttpMethod.Get, graphCallBack).ExecuteAsync();
+            //Bundle parameters = new Bundle();
+            //request.Parameters.PutString("fields", "id,name,link,email");
+            //request.ExecuteAsync();
 
-        //    //var userModel = new UserModel()
-        //    //{
-        //    //    Email = user.Email,
-        //    //    FirebaseId = user.Uid,
-        //    //    Name = user.DisplayName,
-        //    //    PhotoUrl = user.PhotoUrl.ToString(),
-        //    //    ProviderId = user.ProviderId,
-        //    //    AuthToken = token.Token
-        //    //};
 
-        //    //FormsAuthHelper.AuthUserWithFacebook(userModel,token.Token);
-
-        //}
+        }
 
         public static void AuthWithGoogle(Intent data)
         {
@@ -72,8 +60,19 @@ namespace QSN.Droid.Auth
             
             var credential = GoogleAuthProvider.GetCredential(result.SignInAccount.IdToken, null);
 
-            //QSN.Helpers.Settings.UserToken = result.SignInAccount.IdToken;
+            CurrentFirebaseInstance.SignInWithCredential(credential);
+            var user = CurrentFirebaseInstance.CurrentUser;
 
+            //QSN.Helpers.Settings.UserToken = user.Uid;
+
+            QSN.Helpers.Settings.UserImage = result.SignInAccount.PhotoUrl.ToString();
+            QSN.Helpers.Settings.UserName = result.SignInAccount.DisplayName;
+
+            Xamarin.Forms.Application.Current.MainPage = new Xamarin.Forms.MasterDetailPage()
+            {
+                Master = new MasterPage() { Title = "Main Page" },
+                Detail = new Xamarin.Forms.NavigationPage(new QuotesPage())
+            };
 
 
             // Get info from Google if needed ?
@@ -91,25 +90,15 @@ namespace QSN.Droid.Auth
 
             //};
             #endregion
-
-            QSN.Helpers.Settings.UserImage = result.SignInAccount.PhotoUrl.ToString();
-            QSN.Helpers.Settings.UserName = result.SignInAccount.DisplayName;
-
-            Xamarin.Forms.Application.Current.MainPage = new Xamarin.Forms.MasterDetailPage()
-            {
-                Master = new MasterPage() { Title = "Main Page" },
-                Detail = new Xamarin.Forms.NavigationPage(new QuotesPage())
-            };
         }
     }
 
-    //class RequestCallback : Java.Lang.Object, GraphRequest.ICallback
+    //class GraphJsonCallback : Java.Lang.Object, GraphRequest.IGraphJSONObjectCallback
     //{
-
-    //    public void OnCompleted(GraphResponse response)
+    //    public void OnCompleted(JSONObject @object, GraphResponse response)
     //    {
-    //        var lolkekek = response;
+    //        dynamic userInfo = JsonConvert.DeserializeObject(response.RawResponse);
+            
     //    }
-
     //}
 }

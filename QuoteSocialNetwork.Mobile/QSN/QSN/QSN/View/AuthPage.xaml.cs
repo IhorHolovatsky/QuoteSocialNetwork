@@ -18,6 +18,18 @@ namespace QSN.View
         {
             InitializeComponent();
             BindingContext = new AuthPageViewModel();
+            Title = "Hello there ^_^";
+            SignUpButton.Clicked += SignUpButton_Clicked;
+        }
+
+        private void SignUpButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new SignUpPage());
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
         }
     }
 }

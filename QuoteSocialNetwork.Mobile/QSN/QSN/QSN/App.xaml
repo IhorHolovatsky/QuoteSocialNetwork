@@ -5,10 +5,10 @@
 	<Application.Resources>
 
         <ResourceDictionary>
-            <OnPlatform x:TypeArguments="Color" Android="#4CAF50" iOS="#4CAF50" x:Key="Primary"/>
-            <OnPlatform x:TypeArguments="Color" Android="#388E3C" iOS="#388E3C" x:Key="PrimaryDark"/>
-            <OnPlatform x:TypeArguments="Color" Android="#C8E6C9" iOS="#C8E6C9" x:Key="PrimaryLight"/>
-            <OnPlatform x:TypeArguments="Color" Android="#FFC107" iOS="#FFC107" x:Key="Accent"/>
+            <OnPlatform x:TypeArguments="Color" Android="#ff9800" iOS="#ff9800" x:Key="Primary"/>
+            <OnPlatform x:TypeArguments="Color" Android="#c66900" iOS="#c66900" x:Key="PrimaryDark"/>
+            <OnPlatform x:TypeArguments="Color" Android="#ffc947" iOS="#ffc947" x:Key="PrimaryLight"/>
+            <OnPlatform x:TypeArguments="Color" Android="#ffc947" iOS="#ffc947" x:Key="Accent"/>
             <OnPlatform x:TypeArguments="Color" Android="#212121" iOS="#212121" x:Key="PrimaryText"/>
             <OnPlatform x:TypeArguments="Color" Android="#757575" iOS="#757575" x:Key="SecondaryText"/>
             <OnPlatform x:TypeArguments="Color" Android="#A0A0A0" iOS="#A0A0A0" x:Key="Placeholder"/>

@@ -1,23 +1,89 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:QSN.CustomControls"
              x:Class="QSN.View.AuthPage">
 
 
 
-    <StackLayout Orientation="Vertical" Spacing="20">
-        <Label Text="Sign in"></Label>
+    <StackLayout Orientation="Vertical" Spacing="20" Padding="20">
 
+        <StackLayout
+        Orientation="Horizontal"
+        HorizontalOptions="CenterAndExpand">
+            <BoxView
+          BackgroundColor="#dbdfe2"
+          VerticalOptions="CenterAndExpand"
+          HorizontalOptions="End"
+          HeightRequest="1"/>
+            <Label
+          Text="Sign in with your social account"
+          HorizontalTextAlignment="Center"
+          VerticalOptions="Center"
+          HorizontalOptions="Center"
+          FontSize="Large" 
+          />
+            <BoxView
+          BackgroundColor="#dbdfe2"
+          VerticalOptions="CenterAndExpand"
+          HorizontalOptions="Start"
+          HeightRequest="1"/>
+        </StackLayout>
+
+        <Button Text="Sign in with Google" FontSize="Large" TextColor="White" BackgroundColor="#d62d20" Command="{Binding GoogleAuthCommand}"></Button>
+        <local:FacebookButton Text="Sign in with Facebook" FontSize="Large" TextColor="White" BackgroundColor="#3b5998" Command="{Binding FacebookAuthCommand}"></local:FacebookButton>
+        
+        <StackLayout
+        Orientation="Horizontal"
+        HorizontalOptions="CenterAndExpand">
+            <BoxView
+          BackgroundColor="#dbdfe2"
+          VerticalOptions="CenterAndExpand"
+          HorizontalOptions="End"
+          HeightRequest="1"/>
+            <Label
+          Text="Sign in with your local account"
+          HorizontalTextAlignment="Center"
+          VerticalOptions="Center"
+          HorizontalOptions="Center"
+          FontSize="Large" 
+          />
+            <BoxView
+          BackgroundColor="#dbdfe2"
+          VerticalOptions="CenterAndExpand"
+          HorizontalOptions="Start"
+          HeightRequest="1"/>
+        </StackLayout>
+        
         <Entry Placeholder="Login"></Entry>
         <Entry Placeholder="Password" IsPassword="True"></Entry>
-        
-        <Label Text="Use your social account"></Label>
 
-        <Button Text="Sign in with Google" Command="{Binding GoogleAuthCommand}"></Button>
-        <Button Text="Sign in with Facebook"></Button>
+        <Button Text="Sign in" FontSize="Large" TextColor="White" BackgroundColor="{x:StaticResource Primary}"></Button>
 
-        <Label Text="Sign up"></Label>
-        
+        <StackLayout
+        Orientation="Horizontal"
+        HorizontalOptions="CenterAndExpand">
+            <BoxView
+          BackgroundColor="#dbdfe2"
+          VerticalOptions="CenterAndExpand"
+          HorizontalOptions="End"
+          HeightRequest="1"/>
+            <Label
+          Text="Also, you can sign up"
+          HorizontalTextAlignment="Center"
+          VerticalOptions="Center"
+          HorizontalOptions="Center"
+          FontSize="Large" 
+          />
+            <BoxView
+          BackgroundColor="#dbdfe2"
+          VerticalOptions="CenterAndExpand"
+          HorizontalOptions="Start"
+          HeightRequest="1"/>
+        </StackLayout>
+
+        <Button x:Name="SignUpButton" Text="Sign Up" FontSize="Large" TextColor="White" BackgroundColor="{x:StaticResource PrimaryDark}"></Button>
+
     </StackLayout>
     
     
