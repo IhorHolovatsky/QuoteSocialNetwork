@@ -61,7 +61,8 @@ namespace QSN.View
 
         private void HeaderClicked(object sender, EventArgs e)
         {
-            int selectedIndex = _vm.Sources.IndexOf((Grouping<SelectGroupViewModel, QuoteCellModel>)((Button)sender).CommandParameter);
+            var groupIdentifier = (string)((Button)sender).CommandParameter;
+            int selectedIndex = _vm.Sources.IndexOf(_vm.Sources.FirstOrDefault(x => x.Key.Group == groupIdentifier));
             _vm.Sources[selectedIndex].Key.Selected = !_vm.Sources[selectedIndex].Key.Selected;
             _vm.UpdateHeaders();
         }

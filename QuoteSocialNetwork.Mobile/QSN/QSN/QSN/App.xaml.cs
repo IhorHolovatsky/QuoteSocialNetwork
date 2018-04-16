@@ -15,18 +15,24 @@ namespace QSN
         {
             InitializeComponent();
 
-            if (!string.IsNullOrEmpty(Settings.UserToken))
+            MainPage = new MasterDetailPage()
             {
-                MainPage = new MasterDetailPage()
-                {
-                    Master = new MasterPage() { Title = "Main Page" },
-                    Detail = new NavigationPage(new QuotesPage())
-                };
-            }
-            else
-            {
-                MainPage = new NavigationPage(new AuthPage());
-            }
+                Master = new MasterPage() { Title = "Main Page" },
+                Detail = new NavigationPage(new QuotesPage())
+            };
+
+            //if (!string.IsNullOrEmpty(Settings.UserToken))
+            //{
+            //    MainPage = new MasterDetailPage()
+            //    {
+            //        Master = new MasterPage() { Title = "Main Page" },
+            //        Detail = new NavigationPage(new QuotesPage())
+            //    };
+            //}
+            //else
+            //{
+            //    MainPage = new NavigationPage(new AuthPage());
+            //}
 
            
         }

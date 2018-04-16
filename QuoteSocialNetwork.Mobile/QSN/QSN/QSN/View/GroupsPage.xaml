@@ -20,7 +20,7 @@
                     <ViewCell>
 
                         <StackLayout Orientation="Horizontal" Padding="5,5,5,5">
-                            <Button Text="{Binding Key.Group}" BackgroundColor="Transparent" BorderColor="Transparent" BorderWidth="0" Clicked="HeaderClicked" CommandParameter="{Binding .}"/>
+                            <Button Text="{Binding Key.Group}" BackgroundColor="Transparent" BorderColor="Transparent" BorderWidth="0" Clicked="HeaderClicked" CommandParameter="{Binding Key.Group}"/>
                             
                         </StackLayout>
                         
