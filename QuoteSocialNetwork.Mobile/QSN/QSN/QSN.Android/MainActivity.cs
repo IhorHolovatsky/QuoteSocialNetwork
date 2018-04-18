@@ -10,6 +10,7 @@ using Plugin.CurrentActivity;
 using QSN.Droid.Auth;
 using Xamarin.Forms.Platform.Android;
 using QSN;
+using Plugin.Permissions;
 
 namespace QSN.Droid
 {
@@ -27,7 +28,9 @@ namespace QSN.Droid
 
             Plugin.Iconize.Iconize.With(new Plugin.Iconize.Fonts.FontAwesomeModule());
             FormsPlugin.Iconize.Droid.IconControls.Init();
+            
 
+            
             ImageCircleRenderer.Init();
             Xamarin.Forms.DependencyService.Register<GoogleAuthentificator>();
             Xamarin.Forms.DependencyService.Register<FacebookAuthentificator>();
@@ -38,6 +41,11 @@ namespace QSN.Droid
 
             AndroidAuthHelper.CurrentFirebaseInstance = FirebaseAuth.GetInstance(FirebaseApp.Instance);
 
+        }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
+        {
+            PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
@@ -54,6 +62,10 @@ namespace QSN.Droid
 
             base.OnActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    internal class FFImageLoading
+    {
     }
 }
 

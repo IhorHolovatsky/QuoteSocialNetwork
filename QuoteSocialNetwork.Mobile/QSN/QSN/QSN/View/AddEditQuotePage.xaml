@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="QSN.View.AddEditQuotePage"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             Title="Add Quote">
+
+    <Grid Style="{StaticResource innerGridStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+
+        <Entry
+            x:Name="titleEntry"
+            Placeholder="Type title"
+            HorizontalOptions="Fill"
+            Text="{Binding QuoteTitle, Mode=TwoWay}"
+            Grid.Row="1"
+            Grid.Column="1" />
+
+        <Editor
+            x:Name="textEntry"
+            Text="{Binding Text, Mode=TwoWay}"
+            HorizontalOptions="Fill"
+            Grid.Row="2"
+            Grid.Column="1" />
+
+        <Entry
+            x:Name="authorEntry"
+            IsPassword="true"
+            Text="{Binding Password, Mode=TwoWay}"
+            Placeholder="Type author"   
+            HorizontalOptions="Fill"
+            Grid.Row="3"
+            Grid.Column="1" />
+    </Grid>
+
+
+    <RelativeLayout 
+            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0}" 
+            HeightRequest="60" 
+            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}" >
+        <StackLayout
+                            WidthRequest="80"
+                            HeightRequest="80">
+            <ffimageloading:CachedImage
+              x:Name="Avatar"
+              HorizontalOptions="Start"
+              WidthRequest="80"
+              HeightRequest="80"
+              Aspect="AspectFill"
+              Source="{Binding AvatarSource}"
+              FinishCommand="{Binding FinishedLoadingImageCommand}"
+              IsVisible="{Binding IsTakingPhoto, Converter={StaticResource Inverter}}"
+              ErrorPlaceholder="user.png">
+                <ffimageloading:CachedImage.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding TakePhotoCommand}"/>
+                </ffimageloading:CachedImage.GestureRecognizers>
+            </ffimageloading:CachedImage>
+            <ActivityIndicator
+                            x:Name="ImageLoadingSpinner"
+                            IsRunning="{Binding IsTakingPhoto}"
+                            IsVisible="{Binding IsTakingPhoto}"
+                            VerticalOptions="CenterAndExpand"
+                            HorizontalOptions="CenterAndExpand"/>
+        </StackLayout>
+        <Label 
+                    x:Name="ChooseAvatar"
+                    Text="Choose Avatar"
+                    IsEnabled="{Binding IsTakingPhoto, Converter={StaticResource Inverter}}"
+                    RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0, Constant=25}" 
+                    RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Factor=0, Constant=90}">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding TakePhotoCommand}"/>
+            </Label.GestureRecognizers>
+        </Label>
+    </RelativeLayout>
+
+    <StackLayout Style="{StaticResource innerStackLayoutStyle}">
+        <Button 
+                    Text="Sign Up" 
+                    Command="{Binding RegisterCommand}" 
+                    IsEnabled="{Binding IsTakingPhoto, Converter={StaticResource Inverter}}"/>
+    </StackLayout>
+
+</ContentPage>

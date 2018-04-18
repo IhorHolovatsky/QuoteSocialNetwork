@@ -21,6 +21,10 @@ namespace QSN.View
         {
             InitializeComponent();
             BindingContext = new QuotesViewModel();
+            FloatingActionButtonAdd.Clicked = async (sender, args) =>
+            {
+                await Navigation.PushAsync(new AddEditQuotePage());
+            };
             this.Title = "Quotes";
         }
 
@@ -29,7 +33,9 @@ namespace QSN.View
             base.OnAppearing();
             ViewModel.RefreshCommand.Execute(null);
             QuotesList.ItemTapped += QuotesList_ItemTappedAsync;
+            
         }
+        
 
         private async void QuotesList_ItemTappedAsync(object sender, ItemTappedEventArgs e)
         {
