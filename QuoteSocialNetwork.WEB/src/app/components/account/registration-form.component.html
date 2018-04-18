@@ -1,6 +1,6 @@
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
   <div class="section">
-      <h5>Реєстрація</h5>
+      <h5>{{'registration.registerText' | translate}}</h5>
       <div class="row">
             <mz-input-container class="col s12 m4">
                     <input mz-input mz-validation required 
@@ -8,7 +8,7 @@
                            type="text" 
                            [errorMessageResource]="errorMessageResources.displayName"
                            id="input-displayName" 
-                           [label]="'Повне ім\'я'" />
+                           [label]="'inputs.fullName' | translate" />
             </mz-input-container>
       </div>
       <div class="row">
@@ -18,7 +18,7 @@
                            type="text" 
                            [errorMessageResource]="errorMessageResources.email"
                            id="input-email" 
-                           [label]="'Імейл'" />
+                           [label]="'inputs.email' | translate" />
             </mz-input-container>
       </div>
       <div class="row">
@@ -28,7 +28,7 @@
                            formControlName="password" 
                            type="password" 
                            [errorMessageResource]="errorMessageResources.password"
-                           [label]="'Пароль'" />
+                           [label]="'inputs.password' | translate" />
             </mz-input-container>
       </div>
       <div class="row">
@@ -38,11 +38,11 @@
                            formControlName="confirmPassword" 
                            type="password" 
                            [errorMessageResource]="errorMessageResources.confirmPassword"
-                           [label]="'Підтвердження паролю'" />
+                           [label]="'inputs.confirmPassword' | translate" />
             </mz-input-container>
       </div>
   </div>
   
-  <button mz-button [disabled]="!registerForm.valid" type="submit">Зареєструватись</button>
+  <button mz-button [disabled]="!registerForm.valid" type="submit">{{'registration.registerButton' | translate}}</button>
   <br/><br/>
 </form>

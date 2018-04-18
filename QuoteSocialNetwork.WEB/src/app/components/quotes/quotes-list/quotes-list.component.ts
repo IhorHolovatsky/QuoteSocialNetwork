@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy, Inject } from '@angular/core';
 import { QuoteService } from '../../../services/quote.service';
 import { MzToastService } from 'ng2-materialize';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Subscription } from 'rxjs/Subscription';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-quotes-list',
@@ -32,10 +33,13 @@ export class QuotesListComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription[] = [];
 
+  private QUOTE_DELETE_SUCCESS_MESSAGE;
+
   constructor(
     private quoteService: QuoteService,
     private toastService: MzToastService,
-    private firebase: AngularFireAuth
+    private firebase: AngularFireAuth,
+    private translateService: TranslateService
   ) { }
 
   ngOnInit() {
@@ -55,6 +59,9 @@ export class QuotesListComponent implements OnInit, OnDestroy {
                             // here we are showing only quotes which are related to user (not to group)
                             this.quotes = q.filter(quote => !quote.groupId);
                            });
+        }),
+        this.translateService.get('alerts.deleteQuoteSuccess').subscribe(t => {
+          this.QUOTE_DELETE_SUCCESS_MESSAGE = t;
         })
     );
 
@@ -70,9 +77,34 @@ export class QuotesListComponent implements OnInit, OnDestroy {
     this.quoteService.deteleQuote(quote.id)
                      .then(q => {
                         this.quotes = this.quotes.filter(f => f.id !== quote.id);
-                        this.toastService.show('Цитата була успішно видалена!', 4000, 'green');
+                        this.toastService.show(this.QUOTE_DELETE_SUCCESS_MESSAGE, 4000, 'green');
                         this.quoteDeleteEvent.emit(q);
                      });
+  }
+
+  shareFacebook(quote) {
+    window['FB'].ui(
+    {
+      method: 'share',
+      hashtag: '#quote',
+      quote: this.getQuoteText(quote),
+      href: 'https://quotesocialnetwork.firebaseapp.com'
+    }, function(response){});
+  }
+
+  getTwitterShareParameters(quote) {
+    let params = 'text=' + this.getQuoteText(quote);
+    params += '&url=' + 'https://quotesocialnetwork.firebaseapp.com';
+    params += '&hashtags=' + 'quote';
+
+    return encodeURI(params);
+  }
+
+  getQuoteText(quote) {
+    return  `${quote.text.replace(/<br>/ig, '\n')}
+    \nАвтор: ©${quote.author}
+    \nМісце: ${quote.location}
+    \nДата: ${new Date(quote.date).toLocaleDateString()} ${new Date(quote.date).toLocaleTimeString()}`;
   }
 
   get hasInputQuotes() {
@@ -83,7 +115,6 @@ export class QuotesListComponent implements OnInit, OnDestroy {
     if (!name || name.trim() === '') {
       return name;
     }
-
     const parts = name.split(' ');
 
     if (parts.length < 2) { return name; }

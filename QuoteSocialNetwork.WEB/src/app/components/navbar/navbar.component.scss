@@ -31,6 +31,12 @@
   display: block !important;
 }
 
+:host /deep/ .select-wrapper {
+  margin-top: 4%;
+  width: 30%;
+}
+
+
 :host #{'/deep/'} {
   a {
     i.caret {

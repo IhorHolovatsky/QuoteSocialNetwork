@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { MzToastService } from 'ng2-materialize';
 import { Restangular } from 'ngx-restangular/dist/esm/src/ngx-restangular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class QuoteService {
@@ -17,12 +18,18 @@ export class QuoteService {
   private isSignalRInited: boolean;
   private quoteRest: any;
 
+  private QUOTE_ALERT_MESSAGE;
+
   constructor(
     private firebase: AngularFireAuth,
     private toastService: MzToastService,
-    private rest: Restangular
+    private rest: Restangular,
+    private translateService: TranslateService
   ) {
     this.quoteRest = this.rest.all('quote');
+    this.translateService.get('alerts.newQuoteAlert').subscribe(t => {
+      this.QUOTE_ALERT_MESSAGE = t;
+    });
   }
 
   public postQuote(quote): Promise<any> {
@@ -68,7 +75,7 @@ export class QuoteService {
     this.hubConnection = new HubConnection(environment.baseApiUrl + '/quotes');
 
     this.hubConnection.on('Send', (data: any) => {
-      this.toastService.show(`Хтось опублікував нову цитату: ${data}`,
+      this.toastService.show(`${this.QUOTE_ALERT_MESSAGE}: ${data}`,
                              4000,
                              'orange');
       this.quotes.push(data);

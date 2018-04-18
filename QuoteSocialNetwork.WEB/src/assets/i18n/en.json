@@ -1,0 +1,94 @@
+{
+    "navbar" : {
+        "menu" : "Menu",
+        "writeQuote" : "Write new quote",
+        "newGroup": "Create group",
+        "myQuotes": "My quotes",
+        "myGroups" : "My groups",
+        "logo" : "Logo",
+        "greetingTemplate" : "Hello {{fullName}}!",
+        "logout" : "Logout",
+        "login": "Login",
+        "register": "Register"
+    },
+
+    "login" : {
+        "loginText" : "Log in, please:",
+        "loginButton" : "Login",
+        "socialLoginText" : "Social account:",
+        "fbLogin" : "Login via Facebook",
+        "twitterLogin": "Login via Twitter",
+        "googleLogin" : "Login via Google"
+    },
+
+    "registration" : {
+        "registerText" : "Registration",
+        "registerButton" : "Register"
+    },
+   
+    "profile" : {
+        "noAccountText1": "You don't have account in QuoteSocialNetwork.",
+        "noAccountText2": "Fill data below to create internal acocunt.",
+        "title" : "My Profile",
+        "photo" : "Photo",
+        "createAccount": "Create account",
+        "selectPhoto" : "Select",
+        "saveText" : "Save",
+        "socials" : "Social Networks:",
+        "linkFacebook" : "Link Facebook",
+        "linkTwitter" : "Link Twiter",
+        "linkGoogle" : "Link Google",
+        "isLinkedText" : "account is linked"
+    },
+
+    "newQuote" : {
+        "title": "Create new quote:",
+        "publishText" :"Publish"
+    },
+
+    "newGroup" : {
+        "title": "Enter name of new group:",
+        "createText" :"Create"
+    },
+
+    "groups" : { 
+        "title": "Groups:",
+        "backToListText": "Back to group list",
+        "countOfMembersText": "Members count:",
+        "noQuotes" : "No quotes yet...",
+        "actions": {
+            "inviteLink" : "Copy invite link",
+            "delete" : "Delete group",
+            "leave" : "Leave group"
+        }
+    },
+
+    "inputs" : { 
+        "fullName" : "Full Name",
+        "email" : "Email",
+        "password": "Password",
+        "confirmPassword" : "Confim password",
+        "author" : "Who said?",
+        "location" : "Where it was?",
+        "quoteDate":"When it was?",
+        "quoteTitle" : "What was said?",
+        "groupName": "Group name"
+    },
+
+    "placeHolders" : {
+        "location": "Place where it was",
+        "quote": "Enter quote",
+        "author": "Enter full name of author",
+        "group": "Enter group name"
+    },
+
+    "alerts": {
+        "login": "You have been successfully logged in!",
+		"savedChanges": "Changes were saved successfully!",
+		"registerSuccessLogin": "Ready! Log in to your account, please.",
+		"registerSuccess": "You was successfully registered!",
+		"joinGroupSuccess": "You successfully joined to group",
+		"deleteQuoteSuccess": "Quote was deleted successfully!",
+		"newQuoteAlert" : "Someone published new quote"
+    }
+}

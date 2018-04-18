@@ -9,12 +9,14 @@ import { QuoteCreateComponent } from './quote-create/quote-create.component';
 import { QuotesComponent } from './quotes.component';
 import { QuoteService } from '../../services/quote.service';
 import { AuthGuard } from '../../auth.guard';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
     MaterializeModule.forRoot(),
+    TranslateModule.forRoot(),
     RouterModule.forChild([
       {
         path: 'quotes',

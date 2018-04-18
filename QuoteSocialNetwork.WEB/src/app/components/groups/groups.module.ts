@@ -13,6 +13,7 @@ import { QuotesModule } from '../quotes/quotes.module';
 import { QuotesListComponent } from '../quotes/quotes-list/quotes-list.component';
 import { QuoteService } from '../../services/quote.service';
 import { AuthGuard } from '../../auth.guard';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { AuthGuard } from '../../auth.guard';
     FormsModule,
     QuotesModule,
     MaterializeModule.forRoot(),
+    TranslateModule.forRoot(),
     RouterModule.forChild([
       {
         path: 'groups',

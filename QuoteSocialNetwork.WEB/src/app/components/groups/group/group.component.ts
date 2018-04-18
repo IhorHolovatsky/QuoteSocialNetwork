@@ -17,9 +17,14 @@ export class GroupComponent implements OnInit, OnDestroy, AfterViewInit {
   groupId;
   group = { quotes: [], users: []};
   defaultImageUrl: String = 'assets/images/groupPlaceholder.png';
-  currentUser;
+  currentUser: firebase.User;
 
-  quoteText: String = '';
+  quote = {
+    Text: null,
+    Author: null,
+    Location: null,
+    Date: new Date()
+  };
 
   private subscriptions: Subscription[] = [];
 
@@ -70,6 +75,7 @@ export class GroupComponent implements OnInit, OnDestroy, AfterViewInit {
       this.firebase.authState.subscribe(
         user => {
           this.currentUser = user;
+          this.quote.Author = this.currentUser.displayName;
         })
     );
   }
@@ -87,26 +93,29 @@ export class GroupComponent implements OnInit, OnDestroy, AfterViewInit {
   postQuote(event) {
     // enter code
     if (event.keyCode === 13) {
-      this.saveQuote(this.quoteText);
+      this.saveQuote(this.quote);
       event.stopPropagation();
       event.preventDefault();
     }
   }
 
-  saveQuote(text) {
-    if (!this.quoteText.trim()) {
+  saveQuote(quote) {
+    if (!this.quote.Text.trim()) {
       return;
     }
 
-    const quote = {
-      Text: text,
-      UserId: this.currentUser.uid,
-      GroupId: this.groupId
-    };
+    quote.UserId = this.currentUser.uid;
+    quote.GroupId = this.groupId;
 
     this.quoteService.postQuote(quote)
                      .then(data => {
-                       this.quoteText = '';
+                       this.quote = {
+                        Text: null,
+                        Author: this.currentUser.displayName,
+                        Location: null,
+                        Date: new Date()
+                       };
+
                        this.groupService.pushGroupQuoteToHub(data, this.groupId);
                        this.group.quotes.push(data);
 

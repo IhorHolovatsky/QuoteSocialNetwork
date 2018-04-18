@@ -3,8 +3,8 @@
           <div class="col s6">
               <form [formGroup]="userProfileForm" (ngSubmit)="saveUserProfile()" novalidate>
                   <div class="section">
-                      <h5>Ваш профіль</h5>
-                      <div class="alertText" *ngIf="hasNotInternalAccount">У вас ще не створенний аккаунт в QuoteSocialNetwork. <br> Заповніть дані нижче, щоб створити внутрішній логін.</div>
+                      <h5>{{ 'profile.title' | translate }}</h5>
+                      <div class="alertText" *ngIf="hasNotInternalAccount">{{'profile.noAccountText1' | translate}} <br> {{'profile.noAccountText2' | translate}}</div>
                       <div class="row" *ngIf="!hasNotInternalAccount">
                             <mz-input-container class="col s12 m9">
                                     <input mz-input mz-validation required 
@@ -12,15 +12,15 @@
                                            type="text" 
                                            [errorMessageResource]="errorMessageResources.displayName"
                                            id="input-displayName" 
-                                           [label]="'Повне ім\'я'" />
+                                           [label]="'inputs.fullName' | translate" />
                             </mz-input-container>
                       </div>
                       <div class="row" *ngIf="!hasNotInternalAccount">
                             <mz-input-container class="col s12 m9">
-                                    <span class="profile-photoLabel">Фото: </span>
+                                    <span class="profile-photoLabel">{{'profile.photo' | translate}}: </span>
                                     <div class="profile-photoLabelContainer">
                                         <img class="profile-photoPreview" [src]="userProfileModel.photoURL">
-                                        <button class="profile-photoSelectButton" mz-button (click)="photoInput.click()" type="button">Обрати</button>
+                                        <button class="profile-photoSelectButton" mz-button (click)="photoInput.click()" type="button">{{'profile.selectPhoto' | translate}}</button>
                                     </div>
                                     <input [style.display]="'none'"
                                            formControlName="photo"
@@ -33,26 +33,26 @@
                       </div>
                   </div>
                   
-                  <button *ngIf="!hasNotInternalAccount" mz-button [disabled]="!userProfileForm.valid" type="submit">Зберегти</button>
-                  <button *ngIf="hasNotInternalAccount" mz-button type="button" [routerLink]="['/register']">Створити аккаунт</button>
+                  <button *ngIf="!hasNotInternalAccount" mz-button [disabled]="!userProfileForm.valid" type="submit">{{'profile.saveText' | translate}}</button>
+                  <button *ngIf="hasNotInternalAccount" mz-button type="button" [routerLink]="['/register']">{{'profile.createAccount' | translate}}</button>
                   <br/><br/>
                 </form>
           </div>
           
           <div class="col s4">
-              <h5 style="margin-left: -11.250px; margin-bottom: 20px;">Соціальні мережі:</h5>
+              <h5 style="margin-left: -11.250px; margin-bottom: 20px;">{{'profile.socials' | translate}}</h5>
               <div class="row">
                  <div *ngIf="!hasMappedSocialAccount('facebook.com')">
                     <a class="waves-effect waves-light btn-large social facebook"
                        (click)="linkFb()">
-                    <i class="fa fa-facebook"></i> Прив'язати Facebook</a>
+                    <i class="fa fa-facebook"></i> {{'profile.linkFacebook' | translate}}</a>
                  </div>
                  <div *ngIf="hasMappedSocialAccount('facebook.com')">
                     <div class="col s12 m8 social-account-linked">
                         <i mz-icon-mdi mz-input-prefix
                             [icon]="'check'">
                         </i>
-                        <span>Facebook аккаунт під'єднаний</span>
+                        <span>Facebook {{'profile.isLinkedText' | translate}}</span>
                     </div>     
                  </div>
               </div>
@@ -60,14 +60,14 @@
                  <div *ngIf="!hasMappedSocialAccount('twitter.com')">
                      <a class="waves-effect waves-light btn-large social twitter"
                         (click)="linkTwitter()">
-                     <i class="fa fa-twitter"></i> Прив'язати Twitter</a>
+                     <i class="fa fa-twitter"></i> {{'profile.linkTwitter' | translate}}</a>
                  </div> 
                  <div *ngIf="hasMappedSocialAccount('twitter.com')">
                     <div class="col s12 m8 social-account-linked">
                         <i mz-icon-mdi mz-input-prefix
                             [icon]="'check'">
                         </i>
-                        <span>Twitter аккаунт під'єднаний</span>
+                        <span>Twitter {{'profile.isLinkedText' | translate}}</span>
                     </div>     
                  </div>                     
               </div>
@@ -75,14 +75,14 @@
                  <div *ngIf="!hasMappedSocialAccount('google.com')">
                      <a class="waves-effect waves-light btn-large social google"
                         (click)="linkGoogle()">
-                     <i class="fa fa-google"></i> Прив'язати Google</a>
+                     <i class="fa fa-google"></i> {{'profile.linkGoogle' | translate}}</a>
                  </div>  
                  <div *ngIf="hasMappedSocialAccount('google.com')">
                     <div class="col s12 m8 social-account-linked">
                         <i mz-icon-mdi mz-input-prefix
                             [icon]="'check'">
                         </i>
-                        <span>Google аккаунт під'єднаний</span>
+                        <span>Google {{'profile.isLinkedText' | translate}}</span>
                     </div>                     
                  </div>               
               </div>               

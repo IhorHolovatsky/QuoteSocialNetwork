@@ -7,6 +7,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 
 import { UserService } from '../../services/user.service';
 import { Constants } from '../../shared/constants';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-account-details',
@@ -33,12 +34,14 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
   private user: firebase.User;
   private subscriptions: Subscription[] = new Array<Subscription>();
   private firebaseStorage;
+  private SAVED_CHANGES_MESSAGE;
 
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
     private firebase: AngularFireAuth,
-    private toastService: MzToastService
+    private toastService: MzToastService,
+    private translateService: TranslateService
   ) {
   }
 
@@ -55,7 +58,10 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
           this.userProfile = this.firebase.auth.currentUser.providerData.find(provider => provider.providerId === 'password');
           this.mapUserProfile(this.userProfile);
         }
-      )
+      ),
+      this.translateService.get('alerts.savedChanges').subscribe(t => {
+          this.SAVED_CHANGES_MESSAGE = t;
+      })
     );
     console.dir(this.user);
     this.buildForm();
@@ -104,7 +110,7 @@ export class AccountDetailsComponent implements OnInit, OnDestroy {
           }
           this.user.updateProfile(this.userProfileModel)
                     .then(result => {
-                      this.toastService.show('Зміни були успішно обновлені!',
+                      this.toastService.show(this.SAVED_CHANGES_MESSAGE,
                                             4000,
                                             'green');
                     })

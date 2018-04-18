@@ -8,6 +8,7 @@ import { UserService } from '../../services/user.service';
 import { Constants } from '../../shared/constants';
 import { Subscription } from 'rxjs/Subscription';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-registration-form',
@@ -22,13 +23,16 @@ export class RegistrationFormComponent implements OnInit, OnDestroy {
   isRequesting: boolean;
   errors: string;
 
+  private REGISTER_SUCCESS_MESSAGE;
+
   constructor(
     private formBuilder: FormBuilder,
     private firebase: AngularFireAuth,
     private renderer: Renderer,
     private userService: UserService,
     private toastService: MzToastService,
-    private router: Router
+    private router: Router,
+    private translateService: TranslateService
     ) {
   }
 
@@ -36,6 +40,10 @@ export class RegistrationFormComponent implements OnInit, OnDestroy {
     if (this.firebase.auth.currentUser) {
       Object.assign(this.registerModel, this.firebase.auth.currentUser.providerData[0]);
     }
+
+    this.translateService.get('alerts.registerSuccess').subscribe(t => {
+      this.REGISTER_SUCCESS_MESSAGE = t;
+  });
 
     this.buildForm();
   }
@@ -66,7 +74,7 @@ export class RegistrationFormComponent implements OnInit, OnDestroy {
       this.userService.createLogin(this.registerModel.email, this.registerModel.password)
                       .then(result => {
                         if (result) {
-                          this.toastService.show('Аккаунт був успішно створений!',
+                          this.toastService.show(this.REGISTER_SUCCESS_MESSAGE,
                                                  4000,
                                                  'green');
                           this.router.navigate(['/account/details']);

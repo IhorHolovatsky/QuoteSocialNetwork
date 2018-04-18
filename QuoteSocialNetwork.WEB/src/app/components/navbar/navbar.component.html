@@ -6,7 +6,7 @@
                         <!-- class="SideNav-CollapseButton"  -->
                         <!-- [float]="true"
                         [flat]="true" -->
-                        Меню
+                        {{ 'navbar.menu' | translate }}
                 <!-- <i mz-icon class="black-text" [icon]="'menu'"></i> -->
                         </a> 
                 <mz-sidenav [id]="'sidenav'" [collapseButtonId]="'btn-sidenav'" [closeOnClick]="true">
@@ -21,34 +21,43 @@
                         </mz-sidenav-header>
                         <mz-sidenav-subheader>Дії</mz-sidenav-subheader>
                         <mz-sidenav-link>
-                            <a [routerLink]="['quotes/create']" class="waves-effect">Написати цитату</a>
+                            <a [routerLink]="['quotes/create']" class="waves-effect">{{ 'navbar.writeQuote' | translate}}</a>
                         </mz-sidenav-link>
                         <mz-sidenav-link>
-                            <a [routerLink]="['groups/create']" class="waves-effect">Створити групу</a>
-                        </mz-sidenav-link>
-                        <mz-sidenav-divider></mz-sidenav-divider>
-                        <mz-sidenav-link>
-                            <a [routerLink]="['quotes']" class="waves-effect">Мої цитати</a>
-                        </mz-sidenav-link>
-                        <mz-sidenav-link>
-                            <a [routerLink]="['groups']" class="waves-effect">Мої групи</a>
+                            <a [routerLink]="['groups/create']" class="waves-effect">{{ 'navbar.newGroup' | translate }}</a>
                         </mz-sidenav-link>
                         <mz-sidenav-divider></mz-sidenav-divider>
                         <mz-sidenav-link>
-                         <a (click)="logout()" class="waves-effect">Вийти</a>
+                            <a [routerLink]="['quotes']" class="waves-effect">{{ 'navbar.myQuotes' | translate }}</a>
+                        </mz-sidenav-link>
+                        <mz-sidenav-link>
+                            <a [routerLink]="['groups']" class="waves-effect">{{ 'navbar.myGroups' | translate }}</a>
+                        </mz-sidenav-link>
+                        <mz-sidenav-divider></mz-sidenav-divider>
+                        <mz-sidenav-link>
+                         <a (click)="logout()" class="waves-effect">{{ 'navbar.logout' | translate }}</a>
                         </mz-sidenav-link>
                 </mz-sidenav>
             </mz-navbar-item>
             <mz-navbar-item *ngIf="isLoggedIn">
-                <a [routerLink]="['quotes/create']">Написати цитату</a>
+                <a [routerLink]="['quotes/create']">{{ 'navbar.writeQuote' | translate}}</a>
             </mz-navbar-item>
         </mz-navbar-item-container>
-        <a href="#" class="brand-logo center"><a [routerLink]="['home']">Лого</a></a>
+        <a href="#" class="brand-logo center"><a [routerLink]="['home']">{{ 'navbar.logo' | translate }}</a></a>
         <mz-navbar-item-container [align]="'right'">
-        <mz-navbar-item *ngIf="isLoggedIn"><a [routerLink]="['account/details']">Привіт {{userProfile.displayName}}!</a></mz-navbar-item>
-        <mz-navbar-item *ngIf="!isLoggedIn"><a [routerLink]="['login']">Ввійти</a></mz-navbar-item>
-        <mz-navbar-item *ngIf="!isLoggedIn"><a [routerLink]="['register']">Зареєструватись</a></mz-navbar-item>
-        <mz-navbar-item *ngIf="isLoggedIn"><a (click)="logout()">Вийти</a></mz-navbar-item>
+        <mz-navbar-item>
+            <mz-select-container>
+            <select mz-select (change)="changeLang($event.target.value)"
+              id="options-select">
+              <option value="en">Eng</option>
+              <option value="uk">Укр</option>
+            </select>
+          </mz-select-container>
+        </mz-navbar-item>
+        <mz-navbar-item *ngIf="isLoggedIn"><a [routerLink]="['account/details']">{{'navbar.greetingTemplate' | translate:{fullName: userProfile.displayName} }}</a></mz-navbar-item>
+        <mz-navbar-item *ngIf="!isLoggedIn"><a [routerLink]="['login']">{{ 'navbar.login' | translate }}</a></mz-navbar-item>
+        <mz-navbar-item *ngIf="!isLoggedIn"><a [routerLink]="['register']">{{ 'navbar.register' | translate }}</a></mz-navbar-item>
+        <mz-navbar-item *ngIf="isLoggedIn"><a (click)="logout()">{{ 'navbar.logout' | translate }}</a></mz-navbar-item>
         </mz-navbar-item-container>
     </mz-navbar>
 </div>
