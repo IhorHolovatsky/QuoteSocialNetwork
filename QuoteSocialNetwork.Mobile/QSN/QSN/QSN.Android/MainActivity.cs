@@ -11,6 +11,7 @@ using QSN.Droid.Auth;
 using Xamarin.Forms.Platform.Android;
 using QSN;
 using Plugin.Permissions;
+using FFImageLoading.Forms.Droid;
 
 namespace QSN.Droid
 {
@@ -28,8 +29,8 @@ namespace QSN.Droid
 
             Plugin.Iconize.Iconize.With(new Plugin.Iconize.Fonts.FontAwesomeModule());
             FormsPlugin.Iconize.Droid.IconControls.Init();
-            
 
+            CachedImageRenderer.Init(true);
             
             ImageCircleRenderer.Init();
             Xamarin.Forms.DependencyService.Register<GoogleAuthentificator>();
@@ -52,7 +53,7 @@ namespace QSN.Droid
         {
             if (requestCode == 9001)
             {
-                AndroidAuthHelper.AuthWithGoogle(data);
+                AndroidAuthHelper.AuthWithGoogleAsync(data);
             }
             else
             {

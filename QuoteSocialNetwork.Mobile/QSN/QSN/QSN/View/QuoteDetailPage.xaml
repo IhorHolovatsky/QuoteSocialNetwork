@@ -7,17 +7,25 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Image Source="{Binding ImageSource}" Grid.Row="0"></Image>
 
-        <Label Text="{Binding QuoteTitle}" Grid.Row="1"></Label>
+        <Label Text="{Binding Text}" Grid.Row="1" TextColor="{StaticResource PrimaryText}" FontSize="Medium"></Label>
 
-        <Label Text="{Binding Text}" Grid.Row="2"></Label>
+        <Label Text="{Binding DateString}" Grid.Row="2" TextColor="{StaticResource PrimaryText}" FontSize="Medium"></Label>
 
-        <Label Text="{Binding AuthorName}" Grid.Row="3" HorizontalTextAlignment="End"></Label>
+        <Label Text="{Binding Location}" Grid.Row="3" TextColor="{StaticResource Primary}" HorizontalTextAlignment="Center" FontSize="Large"></Label>
+
+        <Label Text="{Binding AuthorName}" Grid.Row="4" HorizontalTextAlignment="End" TextColor="{StaticResource Primary}" FontSize="Large"></Label>
+
+        <Button
+            x:Name="Share"
+            Text="Share">
+        </Button>
         
     </Grid>
 </ContentPage>

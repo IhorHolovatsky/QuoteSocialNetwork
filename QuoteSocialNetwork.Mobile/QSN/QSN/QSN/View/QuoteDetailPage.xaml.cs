@@ -1,4 +1,5 @@
-﻿using QSN.ViewModel;
+﻿using Plugin.Share;
+using QSN.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,6 +34,16 @@ namespace QSN.View
         {
             base.OnAppearing();
             ViewModel.InitCommand.Execute(_id);
+            Share.Clicked += Share_Clicked;
+        }
+
+        private async void Share_Clicked(object sender, EventArgs e)
+        {
+            await CrossShare.Current.Share(new Plugin.Share.Abstractions.ShareMessage()
+            {
+                Text = ViewModel.Text,
+                Title = ViewModel.AuthorName
+            });
         }
     }
 

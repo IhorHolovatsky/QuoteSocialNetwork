@@ -1,5 +1,4 @@
-﻿using Java.Lang;
-using MvvmHelpers;
+﻿using MvvmHelpers;
 using QSN.Model;
 using QSN.View;
 using System;
@@ -43,9 +42,9 @@ namespace QSN.ViewModel
 
             var quotes = await Helpers.WebApiHelper.GetAllQuotesForCurrentUser();
 
-            if (quotes != null && quotes.Any())
+            if (quotes != null && quotes.Item.Any())
             {
-                Sources.ReplaceRange(quotes);
+                Sources.ReplaceRange(quotes.Item);
             }
             
             IsBusy = false;

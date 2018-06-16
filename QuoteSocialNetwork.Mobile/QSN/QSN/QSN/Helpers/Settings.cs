@@ -27,6 +27,7 @@ namespace QSN.Helpers
         private const string UserTokenKey = "user_token";
         private const string UserImageKey = "user_image_token";
         private const string UserNameKey = "user_name_token";
+        private const string UserIdKey = "user_id_token";
         private const string UserImageDefault = "profile.jpg";
         #endregion
 
@@ -64,6 +65,18 @@ namespace QSN.Helpers
             set
             {
                 AppSettings.AddOrUpdateValue(UserNameKey, value);
+            }
+        }
+
+        public static string UserId
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault(UserIdKey, null);
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue(UserIdKey, value);
             }
         }
 

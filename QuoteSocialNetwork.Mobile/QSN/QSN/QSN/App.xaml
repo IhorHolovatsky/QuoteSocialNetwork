@@ -1,10 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:QSN.Converters;assembly=QSN"
              x:Class="QSN.App">
 	<Application.Resources>
 
         <ResourceDictionary>
+
+            <converters:Inverter x:Key="Inverter"/>
+
             <OnPlatform x:TypeArguments="Color" Android="#ff9800" iOS="#ff9800" x:Key="Primary"/>
             <OnPlatform x:TypeArguments="Color" Android="#c66900" iOS="#c66900" x:Key="PrimaryDark"/>
             <OnPlatform x:TypeArguments="Color" Android="#ffc947" iOS="#ffc947" x:Key="PrimaryLight"/>

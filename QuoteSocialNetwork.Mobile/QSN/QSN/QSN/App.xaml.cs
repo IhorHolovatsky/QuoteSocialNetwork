@@ -15,11 +15,12 @@ namespace QSN
         {
             InitializeComponent();
 
-            MainPage = new MasterDetailPage()
-            {
-                Master = new MasterPage() { Title = "Main Page" },
-                Detail = new NavigationPage(new QuotesPage())
-            };
+            MainPage = new NavigationPage(new AuthPage());
+            //MainPage = new MasterDetailPage()
+            //{
+            //    Master = new MasterPage() { Title = "Main Page" },
+            //    Detail = new NavigationPage(new QuotesPage())
+            //};
 
             //if (!string.IsNullOrEmpty(Settings.UserToken))
             //{
@@ -34,7 +35,7 @@ namespace QSN
             //    MainPage = new NavigationPage(new AuthPage());
             //}
 
-           
+
         }
 
         protected override void OnStart()

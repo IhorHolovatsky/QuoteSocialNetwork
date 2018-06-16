@@ -51,15 +51,17 @@ namespace QSN.View
         public void OnEdit(object sender, EventArgs e)
         {
             var mi = ((MenuItem)sender);
-            // navigate to AddEditPage with id parametr
+            DisplayAlert("Sorry!", "Sorry, not developed yet :_:","OK");
         }
 
         public async void OnDelete(object sender, EventArgs e)
         {
+            var test = e;
             var mi = ((MenuItem)sender);
             if(await DisplayAlert("Delete", "Are you sure?", "OK", "No"))
             {
-                // call delete logic from ViewModel
+               await Helpers.WebApiHelper.DeleteQuote(mi.CommandParameter.ToString());
+               ViewModel.RefreshCommand.Execute(null);
             }
 
         }

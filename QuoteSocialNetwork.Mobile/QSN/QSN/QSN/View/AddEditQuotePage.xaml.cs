@@ -29,6 +29,12 @@ namespace QSN.View
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            AddButton.Clicked += AddButton_ClickedAsync;
+        }
+
+        private async void AddButton_ClickedAsync(object sender, EventArgs e)
+        {
+            await Helpers.WebApiHelper.CreateQuote(ViewModel.QuoteModel);
         }
     }
 

@@ -1,4 +1,5 @@
 ﻿using MvvmHelpers;
+using QSN.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,7 +18,20 @@ namespace QSN.ViewModel
         {
             InitCommand = new Command((quoteId) => Task.Run(() => ExecuteInitCommandAsync(quoteId)));
         }
-        
+
+        private string dateString;
+        public string DateString
+        {
+            get
+            {
+                return dateString;
+            }
+            set
+            {
+                dateString = value; OnPropertyChanged();
+            }
+        }
+
         private string id;
         public string Id
         {
@@ -31,15 +45,15 @@ namespace QSN.ViewModel
             }
         }
 
-        private string quoteTitle;
-        public string QuoteTitle {
+        private string location;
+        public string Location {
             get
             {
-                return quoteTitle;
+                return location;
             }
             set
             {
-                quoteTitle = value; OnPropertyChanged();
+                location = value; OnPropertyChanged();
             }
         }
 
@@ -92,12 +106,13 @@ namespace QSN.ViewModel
             IsBusy = true;
 
             var quote = await Helpers.WebApiHelper.GetQuoteById((string)quoteId);
-
-            ImageSource = quote.ImageSource;
-            AuthorName = quote.AuthorName;
-            QuoteTitle = quote.Title;
-            Id = quote.Id;
-            Text = quote.Text;
+            
+            ImageSource = quote.Item.ImageSource;
+            AuthorName = quote.Item.AuthorName;
+            Id = quote.Item.Id;
+            Text = quote.Item.Text;
+            DateString = quote.Item.Date.ToString();
+            Location = quote.Item.Location;
 
             IsBusy = false;
             return true;

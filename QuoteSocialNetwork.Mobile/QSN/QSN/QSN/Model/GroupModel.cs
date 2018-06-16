@@ -10,5 +10,7 @@ namespace QSN.Model
     {
         public string GroupId { get; set; }
         public string Name { get; set; }
+        public List<string> Quotes { get; set; }
+        public List<string> UserLogins { get; set; }
     }
 }

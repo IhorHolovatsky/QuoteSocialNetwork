@@ -1,4 +1,4 @@
-﻿using Java.Lang;
+﻿
 using MvvmHelpers;
 using QSN.Model;
 using QSN.View;
@@ -64,10 +64,10 @@ namespace QSN.ViewModel
 
             var quotes = await Helpers.WebApiHelper.GetAllQuotesForCurrentUser();
 
-            if (quotes != null && quotes.Any())
+            if (quotes != null && quotes.Item.Any())
             {
 
-                var groups = quotes.GroupBy(p => p.Groupe.Name).Select(g => new Grouping<SelectGroupViewModel, QuoteCellModel>(
+                var groups = quotes.Item.GroupBy(p => p.Groupe.Name).Select(g => new Grouping<SelectGroupViewModel, QuoteCellModel>(
                     new SelectGroupViewModel()
                     {
                         Group = g.Key,

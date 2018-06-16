@@ -39,7 +39,7 @@ namespace QSN.Droid.Auth
         {
             var loginResult = (LoginResult)obj;
 
-            HandleFacebookAccessToken(loginResult.AccessToken);
+            HandleFacebookAccessTokenAsync(loginResult.AccessToken);
 
         }
 
@@ -58,9 +58,9 @@ namespace QSN.Droid.Auth
             throw new NotImplementedException();
         }
 
-        void HandleFacebookAccessToken(AccessToken token)
+        void HandleFacebookAccessTokenAsync(AccessToken token)
         {
-            AndroidAuthHelper.AuthWithFacebook(token);
+            AndroidAuthHelper.AuthWithFacebookAsync(token);
         }
     }
 }

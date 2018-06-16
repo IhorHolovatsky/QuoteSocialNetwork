@@ -4,49 +4,48 @@
              x:Class="QSN.View.AddEditQuotePage"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              Title="Add Quote">
+    <!--Style="{StaticResource innerGridStyle}"-->
 
-    <Grid Style="{StaticResource innerGridStyle}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-
-
+    <StackLayout Margin="20" Padding="20">
+        
         <Entry
             x:Name="titleEntry"
-            Placeholder="Type title"
+            Placeholder="Type author name"
             HorizontalOptions="Fill"
-            Text="{Binding QuoteTitle, Mode=TwoWay}"
-            Grid.Row="1"
-            Grid.Column="1" />
+            Text="{Binding QuoteTitle, Mode=TwoWay}"/>
 
         <Editor
             x:Name="textEntry"
             Text="{Binding Text, Mode=TwoWay}"
-            HorizontalOptions="Fill"
-            Grid.Row="2"
-            Grid.Column="1" />
+            HorizontalOptions="Fill"/>
 
+        <DatePicker
+            x:Name="dateEntry"
+            Date="{Binding Date, Mode=TwoWay}"
+        HorizontalOptions="Fill"/>
+        
         <Entry
+            x:Name="groupEntry"
+            Placeholder="Type location"
+            HorizontalOptions="Fill"
+            Text="{Binding Group, Mode=TwoWay}"/>
+        
+        <!--<Entry
             x:Name="authorEntry"
             IsPassword="true"
             Text="{Binding Password, Mode=TwoWay}"
             Placeholder="Type author"   
             HorizontalOptions="Fill"
             Grid.Row="3"
-            Grid.Column="1" />
-    </Grid>
+            Grid.Column="1" />-->
 
+        <Button 
+            x:Name="AddButton"
+            Text="Add"
+                BackgroundColor="{StaticResource Primary}"/>
 
-    <RelativeLayout 
+    </StackLayout>
+    <!--<RelativeLayout 
             RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y, Factor=0}" 
             HeightRequest="60" 
             RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}" >
@@ -84,13 +83,13 @@
                 <TapGestureRecognizer Command="{Binding TakePhotoCommand}"/>
             </Label.GestureRecognizers>
         </Label>
-    </RelativeLayout>
+    </RelativeLayout>-->
 
-    <StackLayout Style="{StaticResource innerStackLayoutStyle}">
+    <!--<StackLayout>
         <Button 
-                    Text="Sign Up" 
+                    Text="Add" 
                     Command="{Binding RegisterCommand}" 
                     IsEnabled="{Binding IsTakingPhoto, Converter={StaticResource Inverter}}"/>
-    </StackLayout>
+    </StackLayout>-->
 
 </ContentPage>
