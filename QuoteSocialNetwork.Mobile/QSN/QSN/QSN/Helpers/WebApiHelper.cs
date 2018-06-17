@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using QSN.InternalEntities;
 using QSN.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -71,7 +72,7 @@ namespace QSN.Helpers
 
             //Constants.API_URL + Constants.ACCOUNT_INFO_URL;
             client.DefaultRequestHeaders.Remove("Authorization");
-            client.DefaultRequestHeaders.Add("Authorization", $"Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjdhM2QxOTA0ZjE4ZTI1Nzk0ODgzMWVhYjgwM2UxMmI3OTcxZTEzYWIifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcXVvdGVzb2NpYWxuZXR3b3JrIiwibmFtZSI6ImFuZHJpb2xleHNpdSIsInBpY3R1cmUiOiJodHRwczovL2xoNS5nb29nbGV1c2VyY29udGVudC5jb20vLXgyV2s3QTMzTjJnL0FBQUFBQUFBQUFJL0FBQUFBQUFBQUVZL3AzbzRHZUMtR0E0L3M5Ni1jL3Bob3RvLmpwZyIsImF1ZCI6InF1b3Rlc29jaWFsbmV0d29yayIsImF1dGhfdGltZSI6MTUyOTE3MzU1NCwidXNlcl9pZCI6IkFoeWRoME42RlFiaVhkdVd3Q1BmZDJidmlyMzMiLCJzdWIiOiJBaHlkaDBONkZRYmlYZHVXd0NQZmQyYnZpcjMzIiwiaWF0IjoxNTI5MTczNTU0LCJleHAiOjE1MjkxNzcxNTQsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZ29vZ2xlLmNvbSI6WyIxMTgxNDEwNjEyNDAwOTkwMzIyMjciXX0sInNpZ25faW5fcHJvdmlkZXIiOiJnb29nbGUuY29tIn19.RjX0jBzZL78U2ROiH8aYulNbYu8B4eIhJmgawgBcxcRK_pUIQQVkli4Lu4LlN1YSHa6DXCgq-rbUusiHHpqpOE415_6qFYWiPBpGXPa0x6LsS7a8MJPauq5GLx7tORyEqBuV9qy0ewY4ZJxQ_cTcXodCTyVY11-yx_a6fE6tEjGj9J3kbbNiIeyEMymI5zrgDtytFGELheNzfvazw-vPkhxmSJZYQIQQFCifFIzneNLPTJQjt1I2QGdCtvPJy3sIoSvJ0wL5kkSx6dPU3OCywuc9VkxWvgNWRSBQAD5ILbmO0TaPRtkfhR75I321dhupcXprddpKrQ6O44QNCr-PLw");
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {QSN.Helpers.Settings.UserToken}");
 
             var response = await client.GetAsync(url);
 
@@ -99,8 +100,7 @@ namespace QSN.Helpers
             return viewResult;
 
         }
-
-
+        
         public static async Task<ResponseWrapper<QuoteModel>> GetQuoteById(string id)
         {
             var client = GetClient();
@@ -108,7 +108,7 @@ namespace QSN.Helpers
 
             //Constants.API_URL + Constants.ACCOUNT_INFO_URL;
             client.DefaultRequestHeaders.Remove("Authorization");
-            client.DefaultRequestHeaders.Add("Authorization", $"Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjdhM2QxOTA0ZjE4ZTI1Nzk0ODgzMWVhYjgwM2UxMmI3OTcxZTEzYWIifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcXVvdGVzb2NpYWxuZXR3b3JrIiwibmFtZSI6ImFuZHJpb2xleHNpdSIsInBpY3R1cmUiOiJodHRwczovL2xoNS5nb29nbGV1c2VyY29udGVudC5jb20vLXgyV2s3QTMzTjJnL0FBQUFBQUFBQUFJL0FBQUFBQUFBQUVZL3AzbzRHZUMtR0E0L3M5Ni1jL3Bob3RvLmpwZyIsImF1ZCI6InF1b3Rlc29jaWFsbmV0d29yayIsImF1dGhfdGltZSI6MTUyOTE3MzU1NCwidXNlcl9pZCI6IkFoeWRoME42RlFiaVhkdVd3Q1BmZDJidmlyMzMiLCJzdWIiOiJBaHlkaDBONkZRYmlYZHVXd0NQZmQyYnZpcjMzIiwiaWF0IjoxNTI5MTczNTU0LCJleHAiOjE1MjkxNzcxNTQsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZ29vZ2xlLmNvbSI6WyIxMTgxNDEwNjEyNDAwOTkwMzIyMjciXX0sInNpZ25faW5fcHJvdmlkZXIiOiJnb29nbGUuY29tIn19.RjX0jBzZL78U2ROiH8aYulNbYu8B4eIhJmgawgBcxcRK_pUIQQVkli4Lu4LlN1YSHa6DXCgq-rbUusiHHpqpOE415_6qFYWiPBpGXPa0x6LsS7a8MJPauq5GLx7tORyEqBuV9qy0ewY4ZJxQ_cTcXodCTyVY11-yx_a6fE6tEjGj9J3kbbNiIeyEMymI5zrgDtytFGELheNzfvazw-vPkhxmSJZYQIQQFCifFIzneNLPTJQjt1I2QGdCtvPJy3sIoSvJ0wL5kkSx6dPU3OCywuc9VkxWvgNWRSBQAD5ILbmO0TaPRtkfhR75I321dhupcXprddpKrQ6O44QNCr-PLw");
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {QSN.Helpers.Settings.UserToken}");
 
             var response = await client.GetAsync(url);
 
@@ -143,12 +143,16 @@ namespace QSN.Helpers
                 UserId = "Ahydh0N6FQbiXduWwCPfd2bvir33"
             };
 
+            if(model.Group?.GroupId != "Без групи" && !string.IsNullOrEmpty(model.Group?.GroupId))
+            {
+                apiModel.GroupId = new Guid(model.Group.GroupId);
+            }
             var client = GetClient();
             var url = "https://quotesocialnetwork.azurewebsites.net/api/Quote";
 
             //Constants.API_URL + Constants.ACCOUNT_INFO_URL;
             client.DefaultRequestHeaders.Remove("Authorization");
-            client.DefaultRequestHeaders.Add("Authorization", $"Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjdhM2QxOTA0ZjE4ZTI1Nzk0ODgzMWVhYjgwM2UxMmI3OTcxZTEzYWIifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcXVvdGVzb2NpYWxuZXR3b3JrIiwibmFtZSI6ImFuZHJpb2xleHNpdSIsInBpY3R1cmUiOiJodHRwczovL2xoNS5nb29nbGV1c2VyY29udGVudC5jb20vLXgyV2s3QTMzTjJnL0FBQUFBQUFBQUFJL0FBQUFBQUFBQUVZL3AzbzRHZUMtR0E0L3M5Ni1jL3Bob3RvLmpwZyIsImF1ZCI6InF1b3Rlc29jaWFsbmV0d29yayIsImF1dGhfdGltZSI6MTUyOTE3MzU1NCwidXNlcl9pZCI6IkFoeWRoME42RlFiaVhkdVd3Q1BmZDJidmlyMzMiLCJzdWIiOiJBaHlkaDBONkZRYmlYZHVXd0NQZmQyYnZpcjMzIiwiaWF0IjoxNTI5MTczNTU0LCJleHAiOjE1MjkxNzcxNTQsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZ29vZ2xlLmNvbSI6WyIxMTgxNDEwNjEyNDAwOTkwMzIyMjciXX0sInNpZ25faW5fcHJvdmlkZXIiOiJnb29nbGUuY29tIn19.RjX0jBzZL78U2ROiH8aYulNbYu8B4eIhJmgawgBcxcRK_pUIQQVkli4Lu4LlN1YSHa6DXCgq-rbUusiHHpqpOE415_6qFYWiPBpGXPa0x6LsS7a8MJPauq5GLx7tORyEqBuV9qy0ewY4ZJxQ_cTcXodCTyVY11-yx_a6fE6tEjGj9J3kbbNiIeyEMymI5zrgDtytFGELheNzfvazw-vPkhxmSJZYQIQQFCifFIzneNLPTJQjt1I2QGdCtvPJy3sIoSvJ0wL5kkSx6dPU3OCywuc9VkxWvgNWRSBQAD5ILbmO0TaPRtkfhR75I321dhupcXprddpKrQ6O44QNCr-PLw");
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {QSN.Helpers.Settings.UserToken}");
             client.DefaultRequestHeaders.Add("Accept", "application/json");
 
             var content = new StringContent(JsonConvert.SerializeObject(apiModel), Encoding.UTF8, "application/json");
@@ -188,15 +192,98 @@ namespace QSN.Helpers
 
         //}
 
-        //public static async Task<ResponseWrapper<GroupModel>> GetGroupById(string id)
-        //{
-        //    return null;
-        //}
+        public static async Task<ResponseWrapper<List<GroupModel>>> GetGroups()
+        {
+            var client = GetClient();
+            var url = "https://quotesocialnetwork.azurewebsites.net/api/Group/user/";
 
-        //public static async Task<ResponseWrapper<GroupModel>> CreateGroup(GroupModel model)
-        //{
-        //    return null;
-        //}
+            //Constants.API_URL + Constants.ACCOUNT_INFO_URL;
+            client.DefaultRequestHeaders.Remove("Authorization");
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {QSN.Helpers.Settings.UserToken}");
+            //$"Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjdhM2QxOTA0ZjE4ZTI1Nzk0ODgzMWVhYjgwM2UxMmI3OTcxZTEzYWIifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcXVvdGVzb2NpYWxuZXR3b3JrIiwibmFtZSI6ImFuZHJpb2xleHNpdSIsInBpY3R1cmUiOiJodHRwczovL2xoNS5nb29nbGV1c2VyY29udGVudC5jb20vLXgyV2s3QTMzTjJnL0FBQUFBQUFBQUFJL0FBQUFBQUFBQUVZL3AzbzRHZUMtR0E0L3M5Ni1jL3Bob3RvLmpwZyIsImF1ZCI6InF1b3Rlc29jaWFsbmV0d29yayIsImF1dGhfdGltZSI6MTUyOTE3MzU1NCwidXNlcl9pZCI6IkFoeWRoME42RlFiaVhkdVd3Q1BmZDJidmlyMzMiLCJzdWIiOiJBaHlkaDBONkZRYmlYZHVXd0NQZmQyYnZpcjMzIiwiaWF0IjoxNTI5MTczNTU0LCJleHAiOjE1MjkxNzcxNTQsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZ29vZ2xlLmNvbSI6WyIxMTgxNDEwNjEyNDAwOTkwMzIyMjciXX0sInNpZ25faW5fcHJvdmlkZXIiOiJnb29nbGUuY29tIn19.RjX0jBzZL78U2ROiH8aYulNbYu8B4eIhJmgawgBcxcRK_pUIQQVkli4Lu4LlN1YSHa6DXCgq-rbUusiHHpqpOE415_6qFYWiPBpGXPa0x6LsS7a8MJPauq5GLx7tORyEqBuV9qy0ewY4ZJxQ_cTcXodCTyVY11-yx_a6fE6tEjGj9J3kbbNiIeyEMymI5zrgDtytFGELheNzfvazw-vPkhxmSJZYQIQQFCifFIzneNLPTJQjt1I2QGdCtvPJy3sIoSvJ0wL5kkSx6dPU3OCywuc9VkxWvgNWRSBQAD5ILbmO0TaPRtkfhR75I321dhupcXprddpKrQ6O44QNCr-PLw");
+            var response = await client.GetAsync(url);
+
+            var result = await response.Content.ReadAsStringAsync();
+
+            var parsedResult = JsonConvert.DeserializeObject<List<Group>>(result);
+
+            var listItems = parsedResult.Select(g => new GroupModel()
+            {
+                GroupId = g.Id.ToString(),
+                Name = g.Name
+            }).ToList();
+
+            return new ResponseWrapper<List<GroupModel>>()
+            {
+                Item = listItems
+            };
+        }
+
+        public static async Task<ResponseWrapper<List<Group>>> GetGroupsModel()
+        {
+            var client = GetClient();
+            var url = "https://quotesocialnetwork.azurewebsites.net/api/Group/user/";
+
+            //Constants.API_URL + Constants.ACCOUNT_INFO_URL;
+            client.DefaultRequestHeaders.Remove("Authorization");
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {QSN.Helpers.Settings.UserToken}");
+            //$"Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjdhM2QxOTA0ZjE4ZTI1Nzk0ODgzMWVhYjgwM2UxMmI3OTcxZTEzYWIifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcXVvdGVzb2NpYWxuZXR3b3JrIiwibmFtZSI6ImFuZHJpb2xleHNpdSIsInBpY3R1cmUiOiJodHRwczovL2xoNS5nb29nbGV1c2VyY29udGVudC5jb20vLXgyV2s3QTMzTjJnL0FBQUFBQUFBQUFJL0FBQUFBQUFBQUVZL3AzbzRHZUMtR0E0L3M5Ni1jL3Bob3RvLmpwZyIsImF1ZCI6InF1b3Rlc29jaWFsbmV0d29yayIsImF1dGhfdGltZSI6MTUyOTE3MzU1NCwidXNlcl9pZCI6IkFoeWRoME42RlFiaVhkdVd3Q1BmZDJidmlyMzMiLCJzdWIiOiJBaHlkaDBONkZRYmlYZHVXd0NQZmQyYnZpcjMzIiwiaWF0IjoxNTI5MTczNTU0LCJleHAiOjE1MjkxNzcxNTQsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZ29vZ2xlLmNvbSI6WyIxMTgxNDEwNjEyNDAwOTkwMzIyMjciXX0sInNpZ25faW5fcHJvdmlkZXIiOiJnb29nbGUuY29tIn19.RjX0jBzZL78U2ROiH8aYulNbYu8B4eIhJmgawgBcxcRK_pUIQQVkli4Lu4LlN1YSHa6DXCgq-rbUusiHHpqpOE415_6qFYWiPBpGXPa0x6LsS7a8MJPauq5GLx7tORyEqBuV9qy0ewY4ZJxQ_cTcXodCTyVY11-yx_a6fE6tEjGj9J3kbbNiIeyEMymI5zrgDtytFGELheNzfvazw-vPkhxmSJZYQIQQFCifFIzneNLPTJQjt1I2QGdCtvPJy3sIoSvJ0wL5kkSx6dPU3OCywuc9VkxWvgNWRSBQAD5ILbmO0TaPRtkfhR75I321dhupcXprddpKrQ6O44QNCr-PLw");
+            var response = await client.GetAsync(url);
+
+            var result = await response.Content.ReadAsStringAsync();
+
+            var parsedResult = JsonConvert.DeserializeObject<List<Group>>(result);
+            
+
+            return new ResponseWrapper<List<Group>>()
+            {
+                Item = parsedResult
+            };
+        }
+
+        public static async Task<ResponseWrapper<GroupModel>> CreateGroup(string name)
+        {
+            //var apiModel = new Quote()
+            //{
+            //    Author = model.AuthorName,
+            //    Location = model.Location,
+            //    Text = model.Text,
+            //    Date = model.Date,
+            //    UserId = "Ahydh0N6FQbiXduWwCPfd2bvir33"
+            //};
+
+            var apiModel = new Group()
+            {
+                Name = name
+            };
+
+            var client = GetClient();
+            var url = "https://quotesocialnetwork.azurewebsites.net/api/Group";
+
+            //Constants.API_URL + Constants.ACCOUNT_INFO_URL;
+            client.DefaultRequestHeaders.Remove("Authorization");
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {QSN.Helpers.Settings.UserToken}");
+            client.DefaultRequestHeaders.Add("Accept", "application/json");
+
+            var content = new StringContent(JsonConvert.SerializeObject(apiModel), Encoding.UTF8, "application/json");
+
+            var responseMessage = await client.PostAsync(url, content);
+
+            var result = await responseMessage.Content.ReadAsStringAsync();
+            
+            var group = JsonConvert.DeserializeObject<Group>(result);
+
+            url = "https://quotesocialnetwork.azurewebsites.net/api/Group/join/" + group.Id;
+
+            client.DefaultRequestHeaders.Remove("Accept");
+
+            var addResponse = await client.PostAsync(url,null);
+
+            return new ResponseWrapper<GroupModel>()
+            {
+                IsError = false
+            };
+        }
 
         //public static async Task<ResponseWrapper<GroupModel>> EditGroup(GroupModel model)
         //{

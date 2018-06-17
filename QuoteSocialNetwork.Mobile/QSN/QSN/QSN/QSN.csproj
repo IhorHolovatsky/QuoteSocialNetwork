@@ -50,6 +50,8 @@
     <Compile Include="Model\API\Quote.cs" />
     <Compile Include="Model\API\User.cs" />
     <Compile Include="Model\API\UserGroup.cs" />
+    <Compile Include="Model\Custom\Group.cs" />
+    <Compile Include="Model\Custom\User.cs" />
     <Compile Include="Model\GroupModel.cs" />
     <Compile Include="Model\QuoteCellModel.cs" />
     <Compile Include="Model\QuoteModel.cs" />
@@ -61,6 +63,9 @@
     <Compile Include="ViewModel\QuotesViewModel.cs" />
     <Compile Include="View\AuthPage.xaml.cs">
       <DependentUpon>AuthPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CreateGroup.xaml.cs">
+      <DependentUpon>CreateGroup.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\GroupsPage.xaml.cs">
       <DependentUpon>GroupsPage.xaml</DependentUpon>
@@ -199,6 +204,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\AddEditQuotePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="View\CreateGroup.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

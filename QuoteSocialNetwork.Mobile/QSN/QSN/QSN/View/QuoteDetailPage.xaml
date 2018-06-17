@@ -10,6 +10,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Image Source="{Binding ImageSource}" Grid.Row="0"></Image>
@@ -23,8 +24,10 @@
         <Label Text="{Binding AuthorName}" Grid.Row="4" HorizontalTextAlignment="End" TextColor="{StaticResource Primary}" FontSize="Large"></Label>
 
         <Button
+            Grid.Row="5"
             x:Name="Share"
-            Text="Share">
+            Text="Share"
+             BackgroundColor="{StaticResource Primary}">
         </Button>
         
     </Grid>

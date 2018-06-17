@@ -6,7 +6,7 @@
              Title="Add Quote">
     <!--Style="{StaticResource innerGridStyle}"-->
 
-    <StackLayout Margin="20" Padding="20">
+    <StackLayout Orientation="Vertical" Spacing="20" Padding="20">
         
         <Entry
             x:Name="titleEntry"
@@ -29,15 +29,13 @@
             Placeholder="Type location"
             HorizontalOptions="Fill"
             Text="{Binding Group, Mode=TwoWay}"/>
-        
-        <!--<Entry
-            x:Name="authorEntry"
-            IsPassword="true"
-            Text="{Binding Password, Mode=TwoWay}"
-            Placeholder="Type author"   
-            HorizontalOptions="Fill"
-            Grid.Row="3"
-            Grid.Column="1" />-->
+
+        <Picker
+            Title="Group"
+            x:Name="GroupsPicker"
+            SelectedItem="{Binding GroupId, Mode=TwoWay}">
+            
+        </Picker>
 
         <Button 
             x:Name="AddButton"

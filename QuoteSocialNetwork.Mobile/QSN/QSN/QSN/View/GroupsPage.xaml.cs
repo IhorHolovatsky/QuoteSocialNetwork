@@ -30,6 +30,13 @@ namespace QSN.View
             base.OnAppearing();
             ViewModel.RefreshCommand.Execute(null);
             GroupedQuotesList.ItemTapped += QuotesList_ItemTappedAsync;
+            FloatingActionButtonAdd.Clicked += CreateGroup;
+            
+        }
+
+        async void CreateGroup(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new CreateGroup());
         }
 
         private async void QuotesList_ItemTappedAsync(object sender, ItemTappedEventArgs e)

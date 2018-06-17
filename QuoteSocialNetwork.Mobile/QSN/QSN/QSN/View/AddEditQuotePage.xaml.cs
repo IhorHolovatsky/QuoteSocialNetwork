@@ -24,17 +24,29 @@ namespace QSN.View
         {
             BindingContext = new AddEditQuotePageViewModel();
             InitializeComponent();
+            
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
+
+            var groups = await Helpers.WebApiHelper.GetGroups();
+            ViewModel.Groups = groups.Item;
+            GroupsPicker.Items.Add("Без групи");
+            foreach (var item in groups.Item)
+            {
+                GroupsPicker.Items.Add(item.Name);
+            }
+
             base.OnAppearing();
             AddButton.Clicked += AddButton_ClickedAsync;
+
         }
 
         private async void AddButton_ClickedAsync(object sender, EventArgs e)
         {
             await Helpers.WebApiHelper.CreateQuote(ViewModel.QuoteModel);
+            await Navigation.PopAsync();
         }
     }
 

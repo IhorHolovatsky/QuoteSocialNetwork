@@ -62,17 +62,25 @@ namespace QSN.ViewModel
 
             RefreshCommand.ChangeCanExecute();
 
-            var quotes = await Helpers.WebApiHelper.GetAllQuotesForCurrentUser();
+            var quotes = await Helpers.WebApiHelper.GetGroupsModel();
+                //GetAllQuotesForCurrentUser();
 
             if (quotes != null && quotes.Item.Any())
             {
 
-                var groups = quotes.Item.GroupBy(p => p.Groupe.Name).Select(g => new Grouping<SelectGroupViewModel, QuoteCellModel>(
+                var groups = quotes.Item.GroupBy(p => p.Name).Select(g => new Grouping<SelectGroupViewModel, QuoteCellModel>(
                     new SelectGroupViewModel()
                     {
                         Group = g.Key,
                         Selected = false
-                    }, g));
+                    }, g.SelectMany(x => x.Quotes).Select(q => new QuoteCellModel()
+                    {
+                        AuthorName = q.Author,
+                        Id = q.Id.ToString(),
+                        Title = q.Text.Length <= 10 ? q.Text : q.Text.Substring(0, 10) + "...",
+                        ImageSource = "profile.jpg"
+                    }))); 
+                    
 
                 Sources.ReplaceRange(groups);
                 UpdateHeaders();

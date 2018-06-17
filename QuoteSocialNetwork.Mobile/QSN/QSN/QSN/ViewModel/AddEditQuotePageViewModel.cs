@@ -15,9 +15,17 @@ namespace QSN.ViewModel
     {
         public AddEditQuotePageViewModel()
         {
-            //AvatarSource = ImageSource.FromFile("UserIcon.png");
+            
         }
 
+        public List<GroupModel> Groups { get; set; }
+
+        private string groupId;
+        public string GroupId
+        {
+            get { return groupId; }
+            set { SetProperty(ref groupId, value); }
+        }
 
         public QuoteModel QuoteModel
         {
@@ -28,7 +36,11 @@ namespace QSN.ViewModel
                     AuthorName = this.QuoteTitle,
                     Location = this.Group,
                     Text = this.Text,
-                    Date = this.Date
+                    Date = this.Date,
+                    Group = new GroupModel()
+                    {
+                        GroupId = this.Groups.FirstOrDefault(g => g.Name == GroupId).GroupId.ToString()
+                    }
                 };
             }
         }
