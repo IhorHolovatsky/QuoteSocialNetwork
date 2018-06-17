@@ -172,7 +172,7 @@ namespace QSN.Helpers
             var url = "https://quotesocialnetwork.azurewebsites.net/api/Quote/" + id;
 
             client.DefaultRequestHeaders.Remove("Authorization");
-            client.DefaultRequestHeaders.Add("Authorization", $"Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjdhM2QxOTA0ZjE4ZTI1Nzk0ODgzMWVhYjgwM2UxMmI3OTcxZTEzYWIifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcXVvdGVzb2NpYWxuZXR3b3JrIiwibmFtZSI6ImFuZHJpb2xleHNpdSIsInBpY3R1cmUiOiJodHRwczovL2xoNS5nb29nbGV1c2VyY29udGVudC5jb20vLXgyV2s3QTMzTjJnL0FBQUFBQUFBQUFJL0FBQUFBQUFBQUVZL3AzbzRHZUMtR0E0L3M5Ni1jL3Bob3RvLmpwZyIsImF1ZCI6InF1b3Rlc29jaWFsbmV0d29yayIsImF1dGhfdGltZSI6MTUyOTE3MzU1NCwidXNlcl9pZCI6IkFoeWRoME42RlFiaVhkdVd3Q1BmZDJidmlyMzMiLCJzdWIiOiJBaHlkaDBONkZRYmlYZHVXd0NQZmQyYnZpcjMzIiwiaWF0IjoxNTI5MTczNTU0LCJleHAiOjE1MjkxNzcxNTQsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZ29vZ2xlLmNvbSI6WyIxMTgxNDEwNjEyNDAwOTkwMzIyMjciXX0sInNpZ25faW5fcHJvdmlkZXIiOiJnb29nbGUuY29tIn19.RjX0jBzZL78U2ROiH8aYulNbYu8B4eIhJmgawgBcxcRK_pUIQQVkli4Lu4LlN1YSHa6DXCgq-rbUusiHHpqpOE415_6qFYWiPBpGXPa0x6LsS7a8MJPauq5GLx7tORyEqBuV9qy0ewY4ZJxQ_cTcXodCTyVY11-yx_a6fE6tEjGj9J3kbbNiIeyEMymI5zrgDtytFGELheNzfvazw-vPkhxmSJZYQIQQFCifFIzneNLPTJQjt1I2QGdCtvPJy3sIoSvJ0wL5kkSx6dPU3OCywuc9VkxWvgNWRSBQAD5ILbmO0TaPRtkfhR75I321dhupcXprddpKrQ6O44QNCr-PLw");
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {QSN.Helpers.Settings.UserToken}");
 
             var result = await client.DeleteAsync(url);
 
@@ -233,11 +233,22 @@ namespace QSN.Helpers
             var result = await response.Content.ReadAsStringAsync();
 
             var parsedResult = JsonConvert.DeserializeObject<List<Group>>(result);
-            
+
+            var resultItems = new List<Group>();
+
+            foreach(var item in parsedResult)
+            {
+                var gUrl = "https://quotesocialnetwork.azurewebsites.net/api/Group/" + item.Id;
+                var gResponse = await client.GetAsync(gUrl);
+
+                var gResult = await gResponse.Content.ReadAsStringAsync();
+
+                resultItems.Add(JsonConvert.DeserializeObject<Group>(gResult));
+            }
 
             return new ResponseWrapper<List<Group>>()
             {
-                Item = parsedResult
+                Item = resultItems
             };
         }
 

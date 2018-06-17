@@ -78,7 +78,7 @@ namespace QSN.ViewModel
                         AuthorName = q.Author,
                         Id = q.Id.ToString(),
                         Title = q.Text.Length <= 10 ? q.Text : q.Text.Substring(0, 10) + "...",
-                        ImageSource = "profile.jpg"
+                        ImageSource = q.User?.PhotoUrl
                     }))); 
                     
 
